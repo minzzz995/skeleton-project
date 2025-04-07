@@ -1,6 +1,11 @@
+정민지
+
 # skeleton-project
 
 This template should help get you started developing with Vue 3 in Vite.
+살려주세요.. 집에 갈래요..
+ㅇㅈ이요~
+가나다라
 
 ## Recommended IDE Setup
 
@@ -27,3 +32,5 @@ npm run dev
 ```sh
 npm run build
 ```
+
+seul PR test
