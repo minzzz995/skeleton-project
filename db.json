@@ -1,0 +1,32 @@
+{
+  "budget": [
+    {
+      "id": "1",
+      "type": "expense",
+      "category": "식비",
+      "detailcategory": "엽떡",
+      "amount": "10000",
+      "memo": "더치페이"
+    }
+  ],
+  "incomecategory": [
+    { "id": "1", "name": "월급" },
+    { "id": "2", "name": "용돈" },
+    { "id": "3", "name": "이자" }
+  ],
+  "expensecategory": [
+    { "id": "1", "name": "식비" },
+    { "id": "2", "name": "교통비" },
+    { "id": "3", "name": "유흥" },
+    { "id": "4", "name": "공과금" }
+  ],
+  "user": [
+    {
+      "id": "test",
+      "name": "name",
+      "password": "testtest",
+      "tel": "010-1234-5678",
+      "imagepath": ""
+    }
+  ]
+}
