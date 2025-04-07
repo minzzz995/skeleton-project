@@ -1,6 +1,7 @@
 # skeleton-project
 
 This template should help get you started developing with Vue 3 in Vite.
+살려주세요.. 집에 갈래요..
 
 ## Recommended IDE Setup
 
