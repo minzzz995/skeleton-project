@@ -1,7 +1,3 @@
-소스트리 수ㄹㅇ
-tnwjdwnddldpdy
-마지막 테스트
-
 # skeleton-project
 
 This template should help get you started developing with Vue 3 in Vite.
