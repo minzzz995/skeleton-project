@@ -87,7 +87,7 @@
   "user": [
     {
       "id": "test",
-      "name": "name",
+      "name": "가나다",
       "password": "testtest",
       "tel": "010-1234-5678",
       "imgpath": ""
