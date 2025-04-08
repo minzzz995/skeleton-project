@@ -3,6 +3,7 @@
     {
       "id": "1",
       "type": "expense",
+      "date": "2025-04-08",
       "category": "식비",
       "detailcategory": "엽떡",
       "amount": "10000",
