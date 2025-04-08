@@ -70,10 +70,10 @@
     { "id": "3", "name": "이자" }
   ],
   "expensecategory": [
-    { "id": "1", "name": "식비" },
-    { "id": "2", "name": "교통비" },
-    { "id": "3", "name": "유흥" },
-    { "id": "4", "name": "공과금" }
+    { "id": "1", "name": "식비", "imgpath": "" },
+    { "id": "2", "name": "교통비", "imgpath": "" },
+    { "id": "3", "name": "유흥", "imgpath": "" },
+    { "id": "4", "name": "공과금", "imgpath": "" }
   ],
   "user": [
     {
