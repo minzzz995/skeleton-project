@@ -43,8 +43,6 @@
         <BarChart :data="monthlySummary" />
       </div>
 
-     
-
       <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
       <button
         class="btn rounded-pill px-4 py-2 text-white d-flex align-items-center gap-2"
@@ -55,30 +53,27 @@
           z-index: 1000;
           background-color: #b3e5fc;
         "
-        @click="showModal = true"
+        data-bs-toggle="modal"
+        data-bs-target="#addModal"
       >
         <i class="fa-solid fa-pen-to-square"></i> 거래 추가
       </button>
-
-      <Teleport to="body">
-        <TransactionModal v-if="showModal" @close="showModal = false" />
-      </Teleport>
+      <TransactionModal />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import Sidebar from '@/components/Sidebar.vue';
-import BarChart from '@/components/BarChart.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import { formatDate } from '@/utils/formatDate';
-import { useTransactionStore } from '@/store/transactionStore';
+import { ref, onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+import Sidebar from "@/components/Sidebar.vue";
+import BarChart from "@/components/BarChart.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import { formatDate } from "@/utils/formatDate";
+import { useTransactionStore } from "@/store/transactionStore";
 
 const router = useRouter();
 const store = useTransactionStore();
-const showModal = ref(false);
 
 onMounted(() => store.fetchBudgets());
 
@@ -88,6 +83,6 @@ const monthlySummary = computed(() => store.monthlySummary);
 const latestTransactions = computed(() => store.latestFive);
 
 const goToTransactions = () => {
-  router.push('/transactions');
+  router.push("/transactions");
 };
 </script>
