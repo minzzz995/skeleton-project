@@ -1,34 +1,9 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
 @import './reset.css';
 
-body {
-  font-family: 'NanumDahaeng', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #222;
-}
-
-p,
-div,
-span,
-table,
-th,
-td,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-button {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: 1.5;
-}
-
-button {
-  font-weight: 600;
-  font-size: 1.1rem;
+.font-hakgyo {
+  font-family: 'HakgyoansimDunggeunmiso', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
 }

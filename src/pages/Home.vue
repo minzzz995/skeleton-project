@@ -1,14 +1,5 @@
 <template>
-  <div
-    class="d-flex"
-    style="
-      height: 100vh;
-      font-family: 'NanumDahaeng', sans-serif;
-      position: relative;
-    "
-  >
-    <Sidebar />
-
+  <div class="d-flex" style="height: 100vh; position: relative">
     <div class="flex-grow-1 bg-white p-5 overflow-auto">
       <!-- 해당 월 수입/지출/순이익 카드 -->
       <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
@@ -54,7 +45,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h6 class="fw-semibold">거래 내역</h6>
           <button
-            class="btn btn-sm rounded-pill px-3 py-1 text-white"
+            class="btn btn-sm rounded-pill px-3 py-1 text-black"
             style="background-color: #b3e5fc"
             @click="goToTransactions"
           >
@@ -79,7 +70,7 @@
                   'text-danger': item.type === 'expense',
                 }"
               >
-                {{ item.type === 'income' ? '+' : '-' }}
+                <i :class="item.type === 'income' ? '+' : '-'"></i>
                 {{ parseInt(item.amount).toLocaleString() }}
               </td>
 
@@ -92,7 +83,8 @@
 
       <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
       <button
-        class="btn rounded-pill px-4 py-2 text-white d-flex align-items-center gap-2"
+        type="button"
+        class="btn rounded-pill px-4 py-2 text-black d-flex align-items-center gap-2"
         style="
           position: fixed;
           bottom: 20px;
@@ -105,6 +97,7 @@
       >
         <i class="fa-solid fa-pen-to-square"></i> 거래 추가
       </button>
+
       <Teleport to="body">
         <TransactionModal
           @close="showModal = false"
@@ -116,10 +109,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import Sidebar from '@/components/Sidebar.vue';
 import BarChart from '@/components/Home_BarChart.vue';
+import Sidebar from '@/components/Sidebar.vue';
 import TransactionModal from '@/components/Transaction/TransactionModal.vue';
 import { formatDate } from '@/utils/formatDate';
 import { useTransactionStore } from '@/store/transactionStore';
