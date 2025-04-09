@@ -254,10 +254,10 @@
   ],
   "user": [
     {
-      "name": "정민지",
-      "password": "wjdalswl",
-      "tel": "010-2464-5678",
-      "imgpath": "http://localhost:5173/image/profile3.png",
+      "name": "김김나",
+      "password": "asdffgsfdg",
+      "tel": "010-2442-5678",
+      "imgpath": "http://localhost:5173/image/profile2.png",
       "id": "test"
     }
   ]
