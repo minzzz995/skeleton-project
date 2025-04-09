@@ -1,43 +1,45 @@
 <template>
-  <div class="d-flex vh-100">
-    <Sidebar :current="'dashboard'" />
-    <div class="flex-grow-1 p-4 bg-light overflow-auto">
-      <div class="profile-page">
-        <!-- 사용자 정보 -->
-        <section class="user-info">
-          <h2 class="section-title">나의 정보</h2>
-          <div class="profile-info">
-            <img src="@/assets/profile_default.png" alt="프로필 사진" />
-            <div class="text-info">
-              <p class="username">test0001</p>
-              <p class="tel">연락처 : 010-0000-0000</p>
+  <div
+    style="
+      height: 100vh;
+      font-family: 'NanumDahaeng', sans-serif;
+      position: relative;
+    "
+  >
+    <div class="d-flex vh-100">
+      <Sidebar :current="'dashboard'" />
+      <div class="flex-grow-1 p-4 bg-light overflow-auto">
+        <div class="profile-page">
+          <!-- 사용자 정보 -->
+          <section class="user-info">
+            <h2 class="section-title">나의 정보</h2>
+            <div class="profile-info">
+              <img src="@/assets/profile_default.png" alt="프로필 사진" />
+              <div class="text-info">
+                <p class="username">test0001</p>
+                <p class="tel">연락처 : 010-0000-0000</p>
+              </div>
             </div>
-          </div>
-          <div class="btn-wrapper">
-            <router-link to="/profile/edit" class="edit-btn">
-              회원 정보 수정
-            </router-link>
-          </div>
-        </section>
+            <div class="btn-wrapper">
+              <router-link to="/profile/edit" class="edit-btn">
+                회원 정보 수정
+              </router-link>
+            </div>
+          </section>
 
-        <!-- 소비 패턴 분석 -->
-        <section class="spending-analysis">
-          <h2>나의 소비 패턴 분석</h2>
+          <!-- 소비 패턴 분석 -->
+          <section class="spending-analysis">
+            <h2>나의 소비 패턴 분석</h2>
 
-          <!-- 카테고리별 지출 원형 그래프 -->
-          <CategoryChart />
-
-          <!-- 최근 3개월 상위 카테고리 소비 (막대 그래프) -->
-          <div class="top3-bar-chart">
-            <BarChart />
-          </div>
-
-          <!-- 절약/과소비 분석 카드, type별로 2개 보여줌. -->
-          <div class="comparison-cards">
-            <TopCategoryCard type="saved" />
-            <TopCategoryCard type="overspent" />
-          </div>
-        </section>
+            <!-- 카테고리별 지출 원형 그래프 -->
+            <CategoryChart />
+            <!-- 절약/과소비 분석 카드, type별로 2개 보여줌. -->
+            <div class="comparison-cards">
+              <TopCategoryCard type="saved" />
+              <TopCategoryCard type="overspent" />
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   </div>

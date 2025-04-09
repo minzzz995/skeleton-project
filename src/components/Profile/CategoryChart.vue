@@ -9,7 +9,7 @@
         '<strong>{{ topCategory }}</strong
         >' 항목이 가장 많아요
       </p>
-      <BarChart :chartData="barChartData" :options="barChartOptions" />
+      <!-- <BarChart :chartData="barChartData" :options="barChartOptions" /> -->
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useTransactionStore } from '@/store/transactionStore';
 import DoughnutChart from './Chart/DoughnutChart.vue';
-import BarChart from './Chart/BarChart.vue';
+import BarChart from './Chart/Profile_BarChart.vue';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -46,6 +46,17 @@ onMounted(async () => {
   }
 });
 
+//상위 카테고리 검출
+const topCategory = computed(() => {
+  const map = {};
+  monthlyExpenses.value.forEach((e) => {
+    map[e.category] = (map[e.category] || 0) + Number(e.amount);
+  });
+
+  const sorted = Object.entries(map).sort((a, b) => b[1] - a[1]);
+  return sorted.length > 0 ? sorted[0][0] : 'N/A';
+});
+
 // 차트 데이터 생성
 const chartData = computed(() => {
   const categoryMap = {};
@@ -56,38 +67,51 @@ const chartData = computed(() => {
   });
 
   const sorted = Object.entries(categoryMap).sort((a, b) => b[1] - a[1]);
-  const top = sorted.slice(0, 3);
-  const etcTotal = sorted.slice(3).reduce((acc, [, amt]) => acc + amt, 0);
+  const labels = sorted.map(([category]) => category);
+  const data = sorted.map(([, amount]) => amount);
 
-  const labels = top.map(([cat]) => cat).concat(etcTotal > 0 ? '기타' : []);
-  const data = top.map(([, amt]) => amt).concat(etcTotal > 0 ? etcTotal : []);
+  const colors = [
+    '#AEEEEE',
+    '#87CEFA',
+    '#ADD8E6',
+    '#B0E0E6',
+    '#AFEEEE',
+    '#E0FFFF',
+    '#B0C4DE',
+    '#D8BFD8',
+    '#DDA0DD',
+    '#EE82EE',
+    '#DA70D6',
+    '#FFB6C1',
+    '#FFC0CB',
+    '#F08080',
+    '#FA8072',
+    '#E9967A',
+    '#FFD700',
+    '#FFE4B5',
+    '#F0E68C',
+    '#E6E6FA',
+    '#98FB98',
+    '#90EE90',
+    '#00FA9A',
+    '#00CED1',
+    '#48D1CC',
+    '#40E0D0',
+    '#7FFFD4',
+    '#66CDAA',
+    '#20B2AA',
+    '#5F9EA0',
+  ];
 
   return {
     labels,
     datasets: [
       {
         data,
-        backgroundColor: [
-          '#AEEEEE', // 밝은 파랑
-          '#87CEFA', // 하늘 파랑
-          '#ADD8E6', // 연한 파랑
-          '#D3D3D3', // 기타
-        ],
+        backgroundColor: colors.slice(0, labels.length),
       },
     ],
   };
-});
-
-// 가장 많이 사용된 카테고리 추출
-const topCategory = computed(() => {
-  const sorted = Object.entries(
-    monthlyExpenses.value.reduce((acc, exp) => {
-      acc[exp.category] = (acc[exp.category] || 0) + Number(exp.amount);
-      return acc;
-    }, {})
-  ).sort((a, b) => b[1] - a[1]);
-
-  return sorted.length > 0 ? sorted[0][0] : 'N/A';
 });
 
 const chartOptions = {
@@ -114,19 +138,39 @@ const chartOptions = {
 
 .chart-left,
 .chart-right {
-  width: 48%;
+  width: 40%;
   flex: 1;
 }
 .chart-left {
   flex: 1;
-  width: 48%;
-  aspect-ratio: 1 / 1; /* 정사각형 비율 유지 */
+  aspect-ratio: 1 / 1;
   min-width: 200px;
+  margin-right: 1rem; /* 기본: 넓을 때 우측 마진 */
 }
+
 .chart-right {
+  margin-left: 1rem; /* 기본: 넓을 때 좌측 마진 */
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* ✅ 반응형 처리 */
+@media (max-width: 768px) {
+  .category-analysis {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chart-left {
+    margin-right: 0; /* 좌우 마진 제거 */
+    margin-bottom: 1rem; /* 아래쪽 마진 추가 */
+  }
+
+  .chart-right {
+    margin-left: 0; /* 좌우 마진 제거 */
+    margin-top: 1rem; /* 위쪽 마진 추가 */
+  }
 }
 
 .top-text {
