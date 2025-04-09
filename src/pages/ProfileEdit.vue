@@ -38,6 +38,7 @@
                 :type="showPw ? 'text' : 'password'"
                 class="form-control"
                 v-model="form.password"
+                @input="validatePassword(form.password)"
               />
               <span
                 class="input-group-text"
@@ -47,6 +48,19 @@
                 <i class="fa" :class="showPw ? 'fa-eye-slash' : 'fa-eye'"></i>
               </span>
             </div>
+            <ul class="password-checklist mt-2">
+              <li :class="{ pass: passwordConditions.length }">✅ 8자 이상</li>
+              <li :class="{ pass: passwordConditions.upper }">
+                ✅ 대문자 포함
+              </li>
+              <li :class="{ pass: passwordConditions.lower }">
+                ✅ 소문자 포함
+              </li>
+              <li :class="{ pass: passwordConditions.digit }">✅ 숫자 포함</li>
+              <li :class="{ pass: passwordConditions.special }">
+                ✅ 특수문자 포함
+              </li>
+            </ul>
           </div>
         </div>
         <hr />
@@ -160,6 +174,15 @@ import { useUserStore } from '@/store/userStore';
 
 const showPw = ref(false);
 const showPwConfirm = ref(false);
+const passwordValid = ref(false);
+
+const passwordConditions = ref({
+  length: false,
+  upper: false,
+  lower: false,
+  digit: false,
+  special: false,
+});
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -187,6 +210,8 @@ onMounted(async () => {
     form.value.phone2 = p2 || '';
     form.value.phone3 = p3 || '';
     form.value.profileImage = userStore.profileImage || predefinedImages[0];
+
+    validatePassword(form.value.password);
   } catch (e) {
     alert('사용자 정보를 불러오는 데 실패했습니다.');
   }
@@ -209,7 +234,10 @@ async function handleSubmit() {
     alert('올바른 휴대전화 번호를 입력해주세요.');
     return;
   }
-
+  if (!passwordValid.value) {
+    alert('비밀번호 형식을 확인해주세요.');
+    return;
+  }
   if (form.value.password !== form.value.passwordConfirm) {
     alert('비밀번호가 일치하지 않습니다.');
     return;
@@ -258,6 +286,19 @@ function normalize(url) {
   if (!url) return '';
   return url.split('/').slice(-2).join('/'); // "image/profile1.png"처럼 비교
 }
+
+function validatePassword(password) {
+  passwordConditions.value.length = password.length >= 8;
+  passwordConditions.value.upper = /[A-Z]/.test(password);
+  passwordConditions.value.lower = /[a-z]/.test(password);
+  passwordConditions.value.digit = /[0-9]/.test(password);
+  passwordConditions.value.special = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(
+    password
+  );
+
+  // 최종 유효 여부
+  passwordValid.value = Object.values(passwordConditions.value).every((v) => v);
+}
 </script>
 
 <style scoped>
@@ -277,5 +318,19 @@ function normalize(url) {
 .btn-blue:hover {
   background-color: #3ba1c7; /* 기존보다 어두운 푸른색 */
   color: white;
+}
+.password-checklist {
+  font-size: 0.9rem;
+  color: #888;
+  padding-left: 1rem;
+  list-style: none;
+  margin: 0;
+}
+.password-checklist li {
+  margin-bottom: 0.2rem;
+}
+.password-checklist li.pass {
+  color: green;
+  font-weight: bold;
 }
 </style>
