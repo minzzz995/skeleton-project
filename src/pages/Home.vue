@@ -71,7 +71,7 @@
                 }"
               >
                 {{ item.type === 'income' ? '+' : '-' }}
-                ₩ {{ parseInt(item.amount).toLocaleString() }}
+                {{ parseInt(item.amount).toLocaleString() }}
               </td>
 
               <td>{{ item.category }}</td>
