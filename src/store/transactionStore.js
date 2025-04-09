@@ -24,7 +24,7 @@ export const useTransactionStore = defineStore("transaction", {
       const idx = this.budgets.findIndex((t) => t.id === id);
       if (idx !== -1) this.budgets[idx] = updatedData;
     },
-    async deleteBudgets(id) {
+    async deleteBudget(id) {
       // 거래 삭제
       await remove(`budget/${id}`);
       this.budgets = this.budgets.filter((t) => t.id !== id);
