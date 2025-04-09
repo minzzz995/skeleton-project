@@ -7,7 +7,6 @@
     <SideBar class="d-none d-md-block" />
 
     <!-- 메인 콘텐츠 -->
-
     <main class="flex-fill font-hakgyo" style="overflow: hidden">
       <slot />
     </main>
