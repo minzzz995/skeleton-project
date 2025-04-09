@@ -77,7 +77,7 @@
                   'text-danger': item.type === 'expense',
                 }"
               >
-                {{ item.type === "income" ? "+" : "-" }}
+                {{ item.type === 'income' ? '+' : '-' }}
                 {{ parseInt(item.amount).toLocaleString() }}
               </td>
 
@@ -114,13 +114,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
-import Sidebar from "@/components/Sidebar.vue";
-import BarChart from "@/components/Home_BarChart.vue";
-import TransactionModal from "@/components/Transaction/TransactionModal.vue";
-import { formatDate } from "@/utils/formatDate";
-import { useTransactionStore } from "@/store/transactionStore";
+import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import Sidebar from '@/components/Sidebar.vue';
+import BarChart from '@/components/Home_BarChart.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import { formatDate } from '@/utils/formatDate';
+import { useTransactionStore } from '@/store/transactionStore';
 
 const router = useRouter();
 const store = useTransactionStore();
@@ -133,6 +133,6 @@ const monthlySummary = computed(() => store.monthlySummary);
 const latestTransactions = computed(() => store.latestFive);
 
 const goToTransactions = () => {
-  router.push("/transactions");
+  router.push('/transactions');
 };
 </script>
