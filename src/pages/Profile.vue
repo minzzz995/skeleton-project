@@ -6,19 +6,17 @@
       position: relative;
     "
   >
-    <div class="d-flex vh-100">
-      <Sidebar :current="'dashboard'" />
-      <div class="flex-grow-1 p-4 bg-light overflow-auto">
-        <div class="profile-page">
-          <!-- 사용자 정보 -->
-          <section class="user-info">
-            <h2 class="section-title">나의 정보</h2>
-            <div class="profile-info">
-              <img src="@/assets/profile_default.png" alt="프로필 사진" />
-              <div class="text-info">
-                <p class="username">test0001</p>
-                <p class="tel">연락처 : 010-0000-0000</p>
-              </div>
+  <div class="d-flex vh-100">
+    <div class="flex-grow-1 p-4 bg-light overflow-auto">
+      <div class="profile-page">
+        <!-- 사용자 정보 -->
+        <section class="user-info">
+          <h2 class="section-title">나의 정보</h2>
+          <div class="profile-info">
+            <img src="@/assets/profile_default.png" alt="프로필 사진" />
+            <div class="text-info">
+              <p class="username">test0001</p>
+              <p class="tel">연락처 : 010-0000-0000</p>
             </div>
             <div class="btn-wrapper">
               <router-link to="/profile/edit" class="edit-btn">
@@ -45,11 +43,11 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
-import CategoryChart from '@/components/Profile/CategoryChart.vue';
-import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
-import Sidebar from '@/components/Sidebar.vue';
-import TopCategoryChart from '@/components/Profile/TopCategoryChart.vue';
+import { ref, onMounted } from "vue";
+import CategoryChart from "@/components/Profile/CategoryChart.vue";
+import TopCategoryCard from "@/components/Profile/TopCategoryCard.vue";
+import Sidebar from "@/components/Sidebar.vue";
+import TopCategoryChart from "@/components/Profile/TopCategoryChart.vue";
 // import { userStore } from '@/store/userStore';
 // import { categoryStore } from '@/store/categoryStore';
 

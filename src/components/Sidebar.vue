@@ -1,43 +1,85 @@
-<
 <template>
   <div
-    class="d-flex flex-column bg-info text-white p-3"
-    style="width: 200px; min-height: 100vh"
+    class="d-none d-md-flex flex-column justify-content-between bg-sidebar text-dark"
+    style="width: 250px; height: 100vh"
   >
-    <h5 class="mb-4 fw-bold">폭싹 썼수다</h5>
-    <ul class="nav nav-pills flex-column">
-      <li class="nav-item" @click="$emit('navigate', 'dashboard')">
-        <a
-          :class="[
-            'nav-link',
-            current === 'dashboard' ? 'active' : 'text-white',
-          ]"
-          >📊 대시보드</a
-        >
-      </li>
-      <li class="nav-item" @click="$emit('navigate', 'transactions')">
-        <a
-          :class="[
-            'nav-link',
-            current === 'transactions' ? 'active' : 'text-white',
-          ]"
-          >📑 거래내역</a
-        >
-      </li>
-      <li class="nav-item" @click="$emit('navigate', 'profile')">
-        <a
-          :class="['nav-link', current === 'profile' ? 'active' : 'text-white']"
-          >👤 프로필</a
-        >
-      </li>
-    </ul>
-    <div class="mt-auto pt-4 d-flex align-items-center gap-2">
-      <span>정성훈</span>
+    <!-- 상단 메뉴 -->
+    <div>
+      <h5 class="mb-4 fw-bold px-3 pt-3">폭싹 썼수다</h5>
+      <ul class="list-unstyled px-3">
+        <li class="mb-3">
+          <router-link
+            to="/"
+            class="text-decoration-none text-dark d-flex align-items-center gap-2"
+            :class="{ 'bg-active': $route.path === '/' }"
+          >
+            <i class="fa-solid fa-house"></i>
+            <span>대시보드</span>
+          </router-link>
+        </li>
+        <li class="mb-3">
+          <router-link
+            to="/transaction"
+            class="text-decoration-none text-dark d-flex align-items-center gap-2"
+            :class="{ 'bg-active': $route.path === '/transaction' }"
+          >
+            <i class="fa-regular fa-money-bill-1"></i>
+            <span>거래내역</span>
+          </router-link>
+        </li>
+        <li class="mb-3">
+          <router-link
+            to="/profile"
+            class="text-decoration-none text-dark d-flex align-items-center gap-2"
+            :class="{ 'bg-active': $route.path === '/profile' }"
+          >
+            <i class="fa-regular fa-circle-user"></i>
+            <span>프로필</span>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 하단 프로필 -->
+    <div class="d-flex align-items-center p-3">
+      <img
+        :src="user?.imgpath || 'https://via.placeholder.com/40'"
+        alt="프로필"
+        class="rounded-circle"
+        style="width: 40px; height: 40px; object-fit: cover"
+      />
+      <div class="ms-2">{{ user?.name || "Guest" }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-const props = defineProps({ current: String });
+import { ref, onMounted } from "vue";
+import * as api from "../services/api";
+
+const user = ref();
+
+onMounted(async () => {
+  try {
+    const res = await api.get("user");
+    user.value = res[0];
+  } catch (err) {
+    console.error("사용자 정보를 불러오지 못했습니다.");
+  }
+});
 </script>
->
+<style scope>
+ul li > a {
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: block;
+  transition: background-color 0.2s ease-in-out;
+}
+.bg-active {
+  background-color: #8cdbff;
+}
+
+.bg-sidebar {
+  background-color: #b3e5fc;
+}
+</style>
