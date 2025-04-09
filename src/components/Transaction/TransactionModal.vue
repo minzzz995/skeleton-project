@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" id="addModal" data-bs-backdrop="static">
+  <div class="modal font-hakgyo" id="addModal" data-bs-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-center">
@@ -9,7 +9,7 @@
         <div class="modal-body">
           <form id="accountForm" @submit.prevent="onSubmit">
             <div class="mb-3">
-              <div class="custom-radio-group" @change="onClose">
+              <div class="custom-radio-group" @change="Reset">
                 <div class="custom-radio">
                   <input
                     type="radio"
@@ -131,10 +131,12 @@ const incomeCategories = ref([]);
 const expenseCategories = ref([]);
 
 const onClose = () => {
-  const form = document.getElementById("accountForm");
-  form.reset(); // HTML 요소 리셋
-  d.value = new Date();
+  Reset();
   selectedType.value = "income";
+};
+
+const Reset = () => {
+  d.value = new Date();
   selectedCategory.value = "";
 };
 

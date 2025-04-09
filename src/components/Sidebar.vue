@@ -53,27 +53,33 @@
         class="rounded-circle"
         style="width: 40px; height: 40px; object-fit: cover"
       />
-      <div class="ms-2">{{ user?.name || 'Guest' }}</div>
+      <div class="ms-2">{{ user?.name || "Guest" }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import * as api from '../services/api';
+import { ref, onMounted } from "vue";
+import * as api from "../services/api";
 
 const user = ref();
 
 onMounted(async () => {
   try {
-    const res = await api.get('user');
+    const res = await api.get("user");
     user.value = res[0];
   } catch (err) {
-    console.error('사용자 정보를 불러오지 못했습니다.');
+    console.error("사용자 정보를 불러오지 못했습니다.");
   }
 });
 </script>
 <style scope>
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
 ul li > a {
   padding: 8px 12px;
   border-radius: 8px;
