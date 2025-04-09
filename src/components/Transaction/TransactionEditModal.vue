@@ -1,16 +1,15 @@
 <template>
-  <div class="modal" id="modifyModal">
+  <div class="modal font-hakgyo" id="modifyModal" data-bs-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-center">
+        <div class="modal-header d-flex justify-content-center">
           <h4 class="modal-title">수정폼</h4>
         </div>
 
         <div class="modal-body">
-          <form id="accountForm" @submit.prevent="onSubmit">
+          <form id="modifyForm" @submit.prevent="onSubmit">
             <div class="mb-3">
-              <label class="form-label d-block">유형</label>
-              <div class="custom-radio-group">
+              <div class="custom-radio-group" @change="Reset">
                 <div class="custom-radio">
                   <input
                     type="radio"
@@ -42,12 +41,18 @@
                 locale="ko"
                 v-model="d"
                 :format="formatMonth"
+                :clearable="false"
                 style="width: 100%"
               />
             </div>
             <div class="mb-3">
               <label for="category" class="form-label">분류</label>
-              <select class="form-select" id="category" required>
+              <select
+                class="form-select"
+                id="category"
+                required
+                v-model="selectedCategory"
+              >
                 <option value="" selected disabled hidden>선택하세요</option>
                 <option
                   v-for="category in categoryList"
@@ -66,6 +71,7 @@
                 id="detailcategory"
                 placeholder="예: 스타벅스"
                 required
+                v-model="detailCategory"
               />
             </div>
             <div class="mb-3">
@@ -76,6 +82,7 @@
                 id="amount"
                 placeholder="예: 5500"
                 required
+                v-model="amount"
               />
             </div>
             <div class="mb-3">
@@ -85,16 +92,22 @@
                 id="memo"
                 rows="2"
                 placeholder="선택 사항"
+                v-model="memo"
               ></textarea>
             </div>
           </form>
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" form="accountForm">
+          <button type="submit" class="btn btn-blue" form="modifyForm">
             Modify
           </button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <button
+            type="button"
+            class="btn btn-red"
+            data-bs-dismiss="modal"
+            @click="onClose"
+          >
             Close
           </button>
         </div>
@@ -106,76 +119,112 @@
 <script setup>
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { onMounted, ref, computed } from "vue";
+import { useCategoryStore } from "@/store/categoryStore";
+import { onMounted, ref, watch, computed } from "vue";
 import { formatMonth } from "../../utils/formatDate";
 import * as api from "../../services/api";
+
+// selectedBudget 받아옴
+const props = defineProps({
+  selectedBudget: {
+    type: Object,
+    required: false,
+    default: null,
+  },
+});
+
+const emit = defineEmits(["updated", "close"]);
 
 // 날짜 값
 const d = ref(new Date());
 // 수입 or 지출 라디오 선택값
 const selectedType = ref("income");
+const selectedCategory = ref("");
+const detailCategory = ref("");
+const amount = ref(0);
+const memo = ref("");
 
-const incomeCategories = ref([]);
-const expenseCategories = ref([]);
+// selectedBudget 값 변경될 때마다 폼 초기화
+watch(
+  () => props.selectedBudget,
+  (newVal) => {
+    if (newVal) {
+      d.value = new Date(newVal.date);
+      selectedType.value = newVal.type;
+      selectedCategory.value = newVal.category;
+      detailCategory.value = newVal.detailcategory;
+      amount.value = newVal.amount;
+      memo.value = newVal.memo || "";
+    }
+  },
+  { immediate: true }
+);
+
+const categoryStore = useCategoryStore();
+
+const incomeCategories = computed(() => categoryStore.incomeCategories);
+const expenseCategories = computed(() => categoryStore.expenseCategories);
+
+onMounted(async () => {
+  await categoryStore.fetchCategories();
+
+  if (props.selectedBudget) {
+    selectedType.value = props.selectedBudget.type;
+    d.value = new Date(props.selectedBudget.date);
+    selectedCategory.value = props.selectedBudget.category;
+    detailCategory.value = props.selectedBudget.detailcategory;
+    amount.value = props.selectedBudget.amount;
+    memo.value = props.selectedBudget.memo;
+  }
+});
 
 const categoryList = computed(() => {
   if (selectedType.value === "income") return incomeCategories.value;
   if (selectedType.value === "expense") return expenseCategories.value;
 });
 
-onMounted(async () => {
-  try {
-    const [income, expense] = await Promise.all([
-      api.get("incomecategory"),
-      api.get("expensecategory"),
-    ]);
-
-    incomeCategories.value = income;
-    expenseCategories.value = expense;
-  } catch (err) {
-    console.log("카테고리 불러오기 실패!");
-  }
-});
-
 const onSubmit = async () => {
-  const form = document.getElementById("accountForm");
-
-  const type = selectedType.value;
-  const date = d.value;
-  const category = form.category.value;
-  const detailcategory = form.detailcategory.value;
-  const amount = Number(form.amount.value);
-  const memo = form.memo.value;
-
-  const newEntry = {
-    type,
-    date,
-    category,
-    detailcategory,
-    amount,
-    memo,
+  const updatedBudget = {
+    ...props.selectedBudget,
+    type: selectedType.value,
+    date: d.value,
+    category: selectedCategory.value,
+    detailcategory: detailCategory.value,
+    amount: Number(amount.value),
+    memo: memo.value,
   };
+  console.log("🛠 updatedBudget", updatedBudget);
 
-  console.log(newEntry);
-
-  // 저장
   try {
-    const res = await api.post("budget", newEntry);
-    alert("내역이 저장되었습니다!");
+    emit("updated", updatedBudget);
+    alert("수정되었습니다!");
   } catch (err) {
-    alert("저장 중 오류가 발생했습니다.");
+    alert("수정 중 오류가 발생했습니다.");
   }
-  // 모달 닫기
-  const modalEl = document.getElementById("modifyModal");
-  bootstrap.Modal.getInstance(modalEl)?.hide();
 
-  // 폼 초기화 -> 안하면 폼 닫고 초기화 안 되어있다!
-  form.reset();
-  d.value = new Date();
-  selectedType.value = "income";
+  bootstrap.Modal.getInstance(document.getElementById("modifyModal"))?.hide();
+  emit("close");
 };
 </script>
 <style scoped>
+.btn-red {
+  background-color: #ff5c5c;
+  color: white;
+}
+.btn-blue {
+  background-color: #50b4d8;
+  color: white;
+}
+.btn-red:hover {
+  background-color: #e04848; /* 기존보다 어두운 붉은색 */
+  color: white;
+}
+
+.btn-blue:hover {
+  background-color: #3ba1c7; /* 기존보다 어두운 푸른색 */
+  color: white;
+}
+
 .modal-header {
   border-bottom: none !important;
 }
@@ -211,15 +260,15 @@ const onSubmit = async () => {
 
 /* 선택된 버튼 스타일: 지출 - 빨강 */
 input[type="radio"]#expense:checked + label {
-  background-color: #dc3545; /* Bootstrap 빨강 */
+  background-color: #e1bee7;
   color: white;
-  border-color: #dc3545;
+  border-color: #e1bee7;
 }
 
 /* 선택된 버튼 스타일: 수입 - 파랑 */
 input[type="radio"]#income:checked + label {
-  background-color: #0d6efd; /* Bootstrap 파랑 */
+  background-color: #c8e6c9;
   color: white;
-  border-color: #0d6efd;
+  border-color: #c8e6c9;
 }
 </style>

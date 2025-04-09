@@ -3,6 +3,7 @@ import { useTransactionStore } from "@/store/transactionStore";
 import { useCategoryStore } from "@/store/categoryStore";
 import TransactionList from "@/components/Transaction/TransactionList.vue";
 import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
 import { ref, computed, onMounted } from "vue";
 import dayjs from "dayjs";
 
@@ -51,6 +52,8 @@ function openAddModal() {
 
 function openEditModal(budget) {
   selectedBudget.value = budget;
+  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
+  modal.show();
   modalVisible.value = true;
 }
 
@@ -152,18 +155,37 @@ function format(value) {
       @edit="openEditModal"
       @delete="deleteBudget"
     />
+    <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
     <button
       type="button"
-      class="btn rounded-pill px-4 py-2 text-black d-flex align-items-center gap-2 add-btn"
-      @click="openAddModal"
+      class="btn rounded-pill px-4 py-2 text-black d-flex align-items-center gap-2"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background-color: #b3e5fc;
+      "
+      data-bs-toggle="modal"
+      data-bs-target="#addModal"
     >
       <i class="fa-solid fa-pen-to-square"></i> 거래 추가
     </button>
-    <TransactionModal
-      v-if="modalVisible"
-      :editTarget="selectedBudget"
-      @close="modalVisible = false"
-    />
+
+    <Teleport to="body">
+      <TransactionModal
+        @close="modalVisible = false"
+        @added="transactionStore.fetchBudgets()"
+      />
+      <TransactionEditModal
+        :selectedBudget="selectedBudget"
+        @close="modalVisible = false"
+        @updated="
+          (updatedBudget) =>
+            transactionStore.updateBudgets(updatedBudget.id, updatedBudget)
+        "
+      />
+    </Teleport>
   </div>
 </template>
 
