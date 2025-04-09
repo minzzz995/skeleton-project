@@ -1,4 +1,12 @@
+<script setup>
+import { useTransactionStore } from "@/store/transactionStore";
+import { useCategoryStore } from "@/store/categoryStore";
+import TransactionList from "@/components/Transaction/TransactionList.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import dayjs from "dayjs";
+</script>
 <template>
   <h1>Transactions</h1>
 </template>
-<script setup></script>
+
+<style scoped></style>
