@@ -37,13 +37,52 @@
         </div>
       </div>
 
-      <!-- 차트 -->
+      <!-- 월 별 차트 보여주기기 -->
       <div class="rounded-4 border p-4 mb-5" style="border: 1px solid #ccc">
         <h6 class="fw-semibold mb-3">월 별 수입/지출</h6>
         <BarChart :data="monthlySummary" />
       </div>
 
-     
+      <!-- 거래 내역 (최근 5개만 보여주기) -->
+      <div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="fw-semibold">거래 내역</h6>
+          <button
+            class="btn btn-sm rounded-pill px-3 py-1 text-white"
+            style="background-color: #b3e5fc"
+            @click="goToTransactions"
+          >
+            + 더보기
+          </button>
+        </div>
+        <table class="table align-middle">
+          <thead>
+            <tr class="table-light">
+              <th>날짜</th>
+              <th>금액</th>
+              <th>카테고리</th>
+              <th>세부 카테고리</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in latestTransactions" :key="item.id">
+              <td>{{ formatDate(item.date) }}</td>
+              <td
+                :class="{
+                  'text-success': item.type === 'income',
+                  'text-danger': item.type === 'expense',
+                }"
+              >
+                {{ item.type === 'income' ? '+' : '-' }} ₩
+                {{ parseInt(item.amount).toLocaleString() }}
+              </td>
+
+              <td>{{ item.category }}</td>
+              <td>{{ item.detailcategory }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
       <button

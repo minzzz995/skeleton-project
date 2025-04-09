@@ -80,10 +80,34 @@
       "detailcategory": "테스트",
       "amount": 6500,
       "memo": ""
+    },
+    {
+      "id": "9d06",
+      "type": "income",
+      "date": "2025-04-09T02:21:28.471Z",
+      "category": "월급",
+      "detailcategory": "알바",
+      "amount": 120000,
+      "memo": "test"
     }
   ],
   "incomecategory": [
-
+    {
+      "id": "1",
+      "name": "월급"
+    },
+    {
+      "id": "2",
+      "name": "용돈"
+    },
+    {
+      "id": "3",
+      "name": "이자"
+    },
+    {
+      "id": "4",
+      "name": "기타"
+    }
   ],
   "expensecategory": [
     {
