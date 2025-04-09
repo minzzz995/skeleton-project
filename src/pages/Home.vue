@@ -128,6 +128,6 @@ const monthlySummary = computed(() => store.monthlySummary);
 const latestTransactions = computed(() => store.latestFive);
 
 const goToTransactions = () => {
-  router.push('/transactions');
+  router.push('/transaction');
 };
 </script>
