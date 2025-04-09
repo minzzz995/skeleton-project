@@ -164,15 +164,27 @@ const form = ref({
 
 const fileName = ref("");
 
-onMounted(() => {
-  form.value.name = userStore.name;
-  form.value.username = userStore.username;
-  const [p1, p2, p3] = userStore.phone?.split("-") || ["", "", ""];
-  form.value.phone1 = p1;
-  form.value.phone2 = p2;
-  form.value.phone3 = p3;
+onMounted(async () => {
+  try {
+    const userData = await getUserInfo();
 
-  form.value.profileImage = userStore.imgpath || "";
+    form.value.name = userData.name || "";
+    form.value.username = userData.id || "";
+    const [p1, p2, p3] = (userData.tel || "").split("-");
+    form.value.phone1 = p1 || "";
+    form.value.phone2 = p2 || "";
+    form.value.phone3 = p3 || "";
+    form.value.profileImage = userData.imgpath || "";
+
+    userStore.setUser({
+      name: userData.name,
+      username: userData.id,
+      phone: userData.tel,
+      imgpath: userData.imgpath,
+    });
+  } catch (e) {
+    alert("사용자 정보를 불러오는 데 실패했습니다.");
+  }
 });
 
 function onlyNumber(field) {
