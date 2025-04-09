@@ -62,27 +62,90 @@
       "detailcategory": "전기요금",
       "amount": "42000",
       "memo": "4월 고지서"
+    },
+    {
+      "id": "91cc",
+      "type": "expense",
+      "date": "2025-04-09T00:23:36.734Z",
+      "category": "식비",
+      "detailcategory": "스타벅스",
+      "amount": 6000,
+      "memo": ""
+    },
+    {
+      "id": "51ac",
+      "type": "expense",
+      "date": "2025-04-09T00:24:19.016Z",
+      "category": "식비",
+      "detailcategory": "테스트",
+      "amount": 6500,
+      "memo": ""
     }
   ],
   "incomecategory": [
-    { "id": "1", "name": "월급" },
-    { "id": "2", "name": "용돈" },
-    { "id": "3", "name": "이자" },
-    { "id": "4", "name": "기타" }
+
   ],
   "expensecategory": [
-    { "id": "1", "name": "식비", "imgpath": "" },
-    { "id": "2", "name": "교통비", "imgpath": "" },
-    { "id": "3", "name": "유흥비", "imgpath": "" },
-    { "id": "4", "name": "공과금", "imgpath": "" },
-    { "id": "5", "name": "저축", "imgpath": "" },
-    { "id": "6", "name": "문화생활", "imgpath": "" },
-    { "id": "7", "name": "경조사비", "imgpath": "" },
-    { "id": "8", "name": "의료비", "imgpath": "" },
-    { "id": "9", "name": "교육비", "imgpath": "" },
-    { "id": "10", "name": "보험료", "imgpath": "" },
-    { "id": "11", "name": "통신료", "imgpath": "" },
-    { "id": "12", "name": "기타", "imgpath": "" }
+    {
+      "id": "1",
+      "name": "식비",
+      "imgpath": ""
+    },
+    {
+      "id": "2",
+      "name": "교통비",
+      "imgpath": ""
+    },
+    {
+      "id": "3",
+      "name": "유흥비",
+      "imgpath": ""
+    },
+    {
+      "id": "4",
+      "name": "공과금",
+      "imgpath": ""
+    },
+    {
+      "id": "5",
+      "name": "저축",
+      "imgpath": ""
+    },
+    {
+      "id": "6",
+      "name": "문화생활",
+      "imgpath": ""
+    },
+    {
+      "id": "7",
+      "name": "경조사비",
+      "imgpath": ""
+    },
+    {
+      "id": "8",
+      "name": "의료비",
+      "imgpath": ""
+    },
+    {
+      "id": "9",
+      "name": "교육비",
+      "imgpath": ""
+    },
+    {
+      "id": "10",
+      "name": "보험료",
+      "imgpath": ""
+    },
+    {
+      "id": "11",
+      "name": "통신료",
+      "imgpath": ""
+    },
+    {
+      "id": "12",
+      "name": "기타",
+      "imgpath": ""
+    }
   ],
   "user": [
     {

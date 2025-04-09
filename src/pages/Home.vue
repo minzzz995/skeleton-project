@@ -40,7 +40,12 @@
         </div>
         <table class="table">
           <thead>
-            <tr><th>날짜</th><th>금액</th><th>카테고리</th><th>세부 카테고리</th></tr>
+            <tr>
+              <th>날짜</th>
+              <th>금액</th>
+              <th>카테고리</th>
+              <th>세부 카테고리</th>
+            </tr>
           </thead>
           <tbody>
             <tr v-for="item in latestTransactions" :key="item.id">
@@ -51,33 +56,47 @@
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-info mt-3 float-end">✏ 거래 추가</button>
+        <button
+          class="btn btn-info mt-3 float-end"
+          data-bs-toggle="modal"
+          data-bs-target="#addModal"
+        >
+          ✏ 거래 추가
+        </button>
+        <TransactionModal />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
-import { useTransactionStore } from '@/store/transactionStore'
-import Sidebar from '@/components/Sidebar.vue'
-import BarChart from '@/components/BarChart.vue'
-import { formatDate } from '@/utils/formatDate'
+import { computed, onMounted } from "vue";
+import { useTransactionStore } from "@/store/transactionStore";
+import Sidebar from "@/components/Sidebar.vue";
+import BarChart from "@/components/BarChart.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import { formatDate } from "@/utils/formatDate";
 
-const store = useTransactionStore()
+const store = useTransactionStore();
 
 onMounted(() => {
-  store.fetchBudgets()
-})
+  store.fetchBudgets();
+});
 
-const income = computed(() => store.thisMonthIncome)
-const expense = computed(() => store.thisMonthExpense)
-const monthlySummary = computed(() => store.monthlySummary)
-const latestTransactions = computed(() => store.latestFive)
+const income = computed(() => store.thisMonthIncome);
+const expense = computed(() => store.thisMonthExpense);
+const monthlySummary = computed(() => store.monthlySummary);
+const latestTransactions = computed(() => store.latestFive);
 </script>
 
 <style scoped>
-.bg-light-purple { background-color: #e1bee7; }
-.bg-light-green { background-color: #c8e6c9; }
-.bg-light-gray { background-color: #f3f3f3; }
+.bg-light-purple {
+  background-color: #e1bee7;
+}
+.bg-light-green {
+  background-color: #c8e6c9;
+}
+.bg-light-gray {
+  background-color: #f3f3f3;
+}
 </style>
