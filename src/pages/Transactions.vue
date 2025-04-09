@@ -1,10 +1,10 @@
 <script setup>
-import { useTransactionStore } from "@/store/transactionStore";
-import { useCategoryStore } from "@/store/categoryStore";
-import TransactionList from "@/components/Transaction/TransactionList.vue";
-import TransactionModal from "@/components/Transaction/TransactionModal.vue";
-import { ref, computed, onMounted } from "vue";
-import dayjs from "dayjs";
+import { useTransactionStore } from '@/store/transactionStore';
+import { useCategoryStore } from '@/store/categoryStore';
+import TransactionList from '@/components/Transaction/TransactionList.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import { ref, computed, onMounted } from 'vue';
+import dayjs from 'dayjs';
 
 // Store 연결
 const transactionStore = useTransactionStore();
@@ -13,14 +13,14 @@ const categoryStore = useCategoryStore();
 // 날짜 초기값 설정
 const now = dayjs();
 const dateRange = ref({
-  start: now.startOf("month").format("YYYY-MM-DD"),
-  end: now.format("YYYY-MM-DD"),
+  start: now.startOf('month').format('YYYY-MM-DD'),
+  end: now.format('YYYY-MM-DD'),
 });
 
 // 상태 변수
 const modalVisible = ref(false);
 const selectedBudget = ref(null);
-const selectedCategory = ref("");
+const selectedCategory = ref('');
 const showStartPicker = ref(false);
 const showEndPicker = ref(false);
 
@@ -30,10 +30,10 @@ const summary = computed(() => transactionStore.summary);
 const incomeCategories = computed(() => categoryStore.incomeCategories);
 const expenseCategories = computed(() => categoryStore.expenseCategories);
 const formattedStart = computed(() =>
-  dayjs(dateRange.value.start).format("M월 D일")
+  dayjs(dateRange.value.start).format('M월 D일')
 );
 const formattedEnd = computed(() =>
-  dayjs(dateRange.value.end).format("M월 D일")
+  dayjs(dateRange.value.end).format('M월 D일')
 );
 
 // 초기 데이터 로딩
@@ -60,11 +60,11 @@ async function deleteBudget(id) {
 
 function moveMonth(offset) {
   const newStart = dayjs(dateRange.value.start)
-    .add(offset, "month")
-    .startOf("month");
-  const newEnd = newStart.endOf("month");
-  dateRange.value.start = newStart.format("YYYY-MM-DD");
-  dateRange.value.end = newEnd.format("YYYY-MM-DD");
+    .add(offset, 'month')
+    .startOf('month');
+  const newEnd = newStart.endOf('month');
+  dateRange.value.start = newStart.format('YYYY-MM-DD');
+  dateRange.value.end = newEnd.format('YYYY-MM-DD');
   applyFilters();
 }
 
@@ -90,7 +90,7 @@ function applyFilters() {
 }
 
 function format(value) {
-  return parseInt(value).toLocaleString() + "원";
+  return parseInt(value).toLocaleString() + '원';
 }
 </script>
 
@@ -164,7 +164,7 @@ function format(value) {
 /* 전체 */
 .transaction-page {
   padding: 20px;
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   background-color: #fff;
 }
 
