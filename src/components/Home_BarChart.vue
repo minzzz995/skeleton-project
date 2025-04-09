@@ -1,4 +1,3 @@
-<
 <template>
   <div class="font-dahaeng">
     <apexchart
@@ -17,7 +16,7 @@ import ApexCharts from 'vue3-apexcharts';
 
 const store = useTransactionStore();
 
-// 현재 날짜를 기준으로 최근 12개월간의 목록을 생성하기
+// 최근 12개월 목록 생성
 const recent12Months = computed(() => {
   const months = [];
   const today = new Date();
@@ -27,23 +26,34 @@ const recent12Months = computed(() => {
       2,
       '0'
     )}`;
-    months.push({
-      key,
-      label: `${d.getMonth() + 1}월`,
-    });
+    const label = `${String(d.getFullYear()).slice(2)}.${String(
+      d.getMonth() + 1
+    ).padStart(2, '0')}`;
+    months.push({ key, label });
   }
   return months;
 });
 
-// 데이터가 있는 월만 필터링하여 보여주기
-const filteredSummary = computed(() => {
-  const keys = recent12Months.value.map((m) => m.key);
-  return store.monthlySummary.filter((item) => keys.includes(item.month));
+// 데이터 유무 관계없이 전체 월에 대한 수입/지출 세팅
+const normalizedSummary = computed(() => {
+  const summaryMap = {};
+  store.monthlySummary.forEach((item) => {
+    summaryMap[item.month] = item;
+  });
+
+  return recent12Months.value.map((month) => {
+    const matched = summaryMap[month.key];
+    return {
+      month: month.label,
+      income: matched ? matched.income : 0,
+      expense: matched ? matched.expense : 0,
+    };
+  });
 });
 
 const series = computed(() => [
-  { name: '수입', data: filteredSummary.value.map((m) => m.income) },
-  { name: '지출', data: filteredSummary.value.map((m) => m.expense) },
+  { name: '수입', data: normalizedSummary.value.map((m) => m.income) },
+  { name: '지출', data: normalizedSummary.value.map((m) => m.expense) },
 ]);
 
 const chartOptions = computed(() => ({
@@ -63,9 +73,7 @@ const chartOptions = computed(() => ({
   },
   colors: ['#b9e3b9', '#d5b6d5'],
   xaxis: {
-    categories: filteredSummary.value.map(
-      (m) => `${parseInt(m.month.split('-')[1])}월`
-    ),
+    categories: normalizedSummary.value.map((m) => m.month),
     labels: {
       style: {
         fontSize: '14px',
@@ -89,4 +97,3 @@ const chartOptions = computed(() => ({
   },
 }));
 </script>
->
