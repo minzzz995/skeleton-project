@@ -1,8 +1,16 @@
 <template>
-  <div class="top-category-card">
-    <!-- <img :src="imagePath" alt="카테고리 이미지" /> -->
-    <h3>{{ categoryName }}</h3>
-    <p>{{ description }}</p>
+  <div class="font-dahaeng">
+    <apexchart
+      type="bar"
+      height="200"
+      :options="chartOptions"
+      :series="series"
+    />
+    <div class="top-category-card">
+      <!-- <img :src="imagePath" alt="카테고리 이미지" /> -->
+      <h3>{{ categoryName }}</h3>
+      <p>{{ description }}</p>
+    </div>
   </div>
 </template>
 

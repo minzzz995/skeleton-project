@@ -8,15 +8,15 @@
 
     <!-- 메인 콘텐츠 -->
 
-    <main class="flex-fill p-3 font-hakgyo">
+    <main class="flex-fill font-hakgyo" style="overflow: hidden">
       <slot />
     </main>
   </div>
 </template>
 
 <script setup>
-import Navbar from '@/components/Navbar.vue';
-import SideBar from '@/components/Sidebar.vue';
+import Navbar from "@/components/Navbar.vue";
+import SideBar from "@/components/Sidebar.vue";
 </script>
 
 <style scoped>
