@@ -1,8 +1,6 @@
 <template>
   <div class="d-flex vh-100" style="font-family: 'NanumDahaeng', sans-serif">
-    <Sidebar />
-
-    <main class="flex-grow-1 p-4 bg-light overflow-auto">
+    <main class="flex-grow-1 overflow-auto">
       <div class="mx-auto w-75" style="max-width: 900px">
         <h1 style="margin-top: 5rem">회원 정보 수정</h1>
       </div>
