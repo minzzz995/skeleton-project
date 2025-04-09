@@ -47,10 +47,6 @@
 import { ref, onMounted } from 'vue';
 import CategoryChart from '@/components/Profile/CategoryChart.vue';
 import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
-import Sidebar from '@/components/Sidebar.vue';
-import TopCategoryChart from '@/components/Profile/TopCategoryChart.vue';
-// import { userStore } from '@/store/userStore';
-// import { categoryStore } from '@/store/categoryStore';
 
 const user = ref({});
 </script>
@@ -131,5 +127,25 @@ img {
 .edit-btn:hover {
   background-color: #8cdbff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 👈 그림자 추가 */
+}
+
+.comparison-cards {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.comparison-cards > * {
+  flex: 1 1 48%;
+}
+
+@media (max-width: 768px) {
+  .comparison-cards {
+    flex-direction: column;
+  }
+  .comparison-cards > * {
+    width: 100%;
+  }
 }
 </style>
