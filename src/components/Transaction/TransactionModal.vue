@@ -116,6 +116,7 @@
 <script setup>
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import { useCategoryStore } from "@/store/categoryStore";
 import { onMounted, ref, computed } from "vue";
 import { formatMonth } from "../../utils/formatDate";
 import * as api from "../../services/api";
@@ -127,8 +128,14 @@ const d = ref(new Date());
 const selectedType = ref("income");
 const selectedCategory = ref("");
 
-const incomeCategories = ref([]);
-const expenseCategories = ref([]);
+const categoryStore = useCategoryStore();
+
+const incomeCategories = computed(() => categoryStore.incomeCategories);
+const expenseCategories = computed(() => categoryStore.expenseCategories);
+
+onMounted(async () => {
+  await categoryStore.fetchCategories();
+});
 
 const onClose = () => {
   Reset();
@@ -143,21 +150,6 @@ const Reset = () => {
 const categoryList = computed(() => {
   if (selectedType.value === "income") return incomeCategories.value;
   if (selectedType.value === "expense") return expenseCategories.value;
-});
-
-onMounted(async () => {
-  try {
-    const [income, expense] = await Promise.all([
-      api.get("incomecategory"),
-      api.get("expensecategory"),
-    ]);
-
-    incomeCategories.value = income;
-    expenseCategories.value = expense;
-    console.log(expense);
-  } catch (err) {
-    console.log("카테고리 불러오기 실패!");
-  }
 });
 
 const onSubmit = async () => {
