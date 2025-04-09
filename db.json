@@ -89,6 +89,51 @@
       "detailcategory": "알바",
       "amount": 120000,
       "memo": "test"
+    },
+    {
+      "id": "d36a",
+      "type": "income",
+      "date": "2025-03-05T04:23:00.000Z",
+      "category": "월급",
+      "detailcategory": "알바비",
+      "amount": 1000000,
+      "memo": "test"
+    },
+    {
+      "id": "409a",
+      "type": "expense",
+      "date": "2025-04-09T04:27:38.988Z",
+      "category": "문화생활",
+      "detailcategory": "콘서트",
+      "amount": 200000,
+      "memo": "콘서트가 가고싶어요"
+    },
+    {
+      "id": "c466",
+      "type": "expense",
+      "date": "2025-04-09T04:28:17.558Z",
+      "category": "의료비",
+      "detailcategory": "병원 간 척",
+      "amount": 399999,
+      "memo": "병원 테스트"
+    },
+    {
+      "id": "f2b0",
+      "type": "expense",
+      "date": "2025-03-13T04:29:00.000Z",
+      "category": "저축",
+      "detailcategory": "저축",
+      "amount": 500000,
+      "memo": "저축 테스트"
+    },
+    {
+      "id": "fea9",
+      "type": "income",
+      "date": "2025-04-09T04:34:50.712Z",
+      "category": "월급",
+      "detailcategory": "환불",
+      "amount": 10000,
+      "memo": "환불 테스트"
     }
   ],
   "incomecategory": [
@@ -110,18 +155,66 @@
     }
   ],
   "expensecategory": [
-    { "id": "1", "name": "식비", "imgpath": "" },
-    { "id": "2", "name": "교통비", "imgpath": "" },
-    { "id": "3", "name": "유흥비", "imgpath": "" },
-    { "id": "4", "name": "공과금", "imgpath": "" },
-    { "id": "5", "name": "저축", "imgpath": "" },
-    { "id": "6", "name": "문화생활", "imgpath": "" },
-    { "id": "7", "name": "경조사비", "imgpath": "" },
-    { "id": "8", "name": "의료비", "imgpath": "" },
-    { "id": "9", "name": "교육비", "imgpath": "" },
-    { "id": "10", "name": "보험료", "imgpath": "" },
-    { "id": "11", "name": "통신료", "imgpath": "" },
-    { "id": "12", "name": "기타", "imgpath": "" }
+    {
+      "id": "1",
+      "name": "식비",
+      "imgpath": ""
+    },
+    {
+      "id": "2",
+      "name": "교통비",
+      "imgpath": ""
+    },
+    {
+      "id": "3",
+      "name": "유흥비",
+      "imgpath": ""
+    },
+    {
+      "id": "4",
+      "name": "공과금",
+      "imgpath": ""
+    },
+    {
+      "id": "5",
+      "name": "저축",
+      "imgpath": ""
+    },
+    {
+      "id": "6",
+      "name": "문화생활",
+      "imgpath": ""
+    },
+    {
+      "id": "7",
+      "name": "경조사비",
+      "imgpath": ""
+    },
+    {
+      "id": "8",
+      "name": "의료비",
+      "imgpath": ""
+    },
+    {
+      "id": "9",
+      "name": "교육비",
+      "imgpath": ""
+    },
+    {
+      "id": "10",
+      "name": "보험료",
+      "imgpath": ""
+    },
+    {
+      "id": "11",
+      "name": "통신료",
+      "imgpath": ""
+    },
+    {
+      "id": "12",
+      "name": "기타",
+      "imgpath": ""
+    }
   ],
   "user": [
     {
