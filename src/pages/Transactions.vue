@@ -1,12 +1,10 @@
 <script setup>
-
 import { useTransactionStore } from "@/store/transactionStore";
 import { useCategoryStore } from "@/store/categoryStore";
 import TransactionList from "@/components/Transaction/TransactionList.vue";
 import TransactionModal from "@/components/Transaction/TransactionModal.vue";
 import { ref, computed, onMounted } from "vue";
 import dayjs from "dayjs";
-
 
 // Store 연결
 const transactionStore = useTransactionStore();
@@ -162,4 +160,103 @@ function format(value) {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* 전체 */
+.transaction-page {
+  padding: 20px;
+  font-family: "Pretendard", sans-serif;
+  background-color: #fff;
+}
+
+/* 필터 */
+/* .filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+} */
+
+/* 날짜 */
+.day-filer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 8px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.day-filer button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.date-range {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* category */
+.category-filter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.category-filter select {
+  width: 90%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* summary */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.summary-box {
+  flex: 1;
+  background: #e6f3ff;
+  border: 2px solid #b4daff;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.summary-box p {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.summary-box span {
+  font-size: 18px;
+}
+
+.add-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #cbe4ff;
+  border: none;
+  border-radius: 32px;
+  padding: 12px 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-btn:hover {
+  background: #b4d7f7;
+}
+</style>

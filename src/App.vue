@@ -1,12 +1,16 @@
 <template>
-  <router-view />
+  <DefaultLayout>
+    <RouterView />
+  </DefaultLayout>
 </template>
 
-<script setup></script>
+<script setup>
+import DefaultLayout from "./layouts/DefaultLayout.vue";
+</script>
 
 <style>
 body {
   margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 </style>

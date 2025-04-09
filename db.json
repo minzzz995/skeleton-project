@@ -161,6 +161,15 @@
       "detailcategory": "알바비",
       "amount": 1000000,
       "memo": "테스트"
+    },
+    {
+      "id": "c851",
+      "type": "income",
+      "date": "2024-10-09T05:20:00.000Z",
+      "category": "월급",
+      "detailcategory": "테스트",
+      "amount": 1000000,
+      "memo": "test"
     }
   ],
   "incomecategory": [
