@@ -1,4 +1,127 @@
 <template>
-  <h1>Profile</h1>
+  <div class="d-flex vh-100">
+    <Sidebar :current="'dashboard'" />
+    <div class="flex-grow-1 p-4 bg-light overflow-auto">
+      <div class="profile-page">
+        <!-- 사용자 정보 -->
+        <section class="user-info">
+          <h2 class="section-title">나의 정보</h2>
+          <div class="profile-info">
+            <img src="@/assets/profile_default.png" alt="프로필 사진" />
+            <div class="text-info">
+              <p class="username">test0001</p>
+              <p class="tel">연락처 : 010-0000-0000</p>
+            </div>
+          </div>
+          <div class="btn-wrapper">
+            <router-link to="/profile/edit" class="edit-btn">
+              회원 정보 수정
+            </router-link>
+          </div>
+        </section>
+
+        <!-- 소비 패턴 분석 -->
+        <section class="spending-analysis">
+          <h2>나의 소비 패턴 분석</h2>
+
+          <!-- 카테고리별 지출 원형 그래프 -->
+          <CategoryChart />
+
+          <!-- 최근 3개월 상위 카테고리 소비 (막대 그래프) -->
+          <div class="top3-bar-chart">
+            <BarChart />
+          </div>
+
+          <!-- 절약/과소비 분석 카드, type별로 2개 보여줌. -->
+          <div class="comparison-cards">
+            <TopCategoryCard type="saved" />
+            <TopCategoryCard type="overspent" />
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
 </template>
-<script setup></script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import CategoryChart from '@/components/Profile/CategoryChart.vue';
+import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
+import Sidebar from '@/components/Sidebar.vue';
+import TopCategoryChart from '@/components/Profile/TopCategoryChart.vue';
+// import { userStore } from '@/store/userStore';
+// import { categoryStore } from '@/store/categoryStore';
+
+const user = ref({});
+</script>
+<style scoped>
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  padding: 1rem 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+.text-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  margin: 0;
+}
+
+.tel {
+  font-size: 0.95rem;
+  color: #000;
+  margin-top: 0.25rem;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.edit-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #b3e5fc;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #292929;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 👈 그림자 추가 */
+}
+
+.edit-btn:hover {
+  background-color: #8cdbff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 👈 그림자 추가 */
+}
+</style>
