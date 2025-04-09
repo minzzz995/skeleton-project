@@ -121,7 +121,7 @@
           style="margin-top: 4rem"
         >
           <button type="submit" class="btn btn-blue">수정하기</button>
-          <button @click.prevent="handleDelete" class="btn btn-red">
+          <button @click.prevent="router.push('/profile')" class="btn btn-red">
             뒤로가기
           </button>
         </div>
