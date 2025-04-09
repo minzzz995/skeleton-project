@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="d-flex flex-column flex-md-row h-100"
-    style="font-family: 'NanumDahaeng', sans-serif"
-  >
+  <div class="d-flex flex-column flex-md-row h-100">
     <!-- 모바일용 NavBar -->
     <Navbar class="d-md-none" />
 
@@ -10,15 +7,16 @@
     <SideBar class="d-none d-md-block" />
 
     <!-- 메인 콘텐츠 -->
-    <main class="flex-fill" style="overflow: hidden">
+
+    <main class="flex-fill p-3 font-hakgyo">
       <slot />
     </main>
   </div>
 </template>
 
 <script setup>
-import Navbar from "@/components/Navbar.vue";
-import SideBar from "@/components/Sidebar.vue";
+import Navbar from '@/components/Navbar.vue';
+import SideBar from '@/components/Sidebar.vue';
 </script>
 
 <style scoped>
