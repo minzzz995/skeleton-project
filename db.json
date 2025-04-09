@@ -152,6 +152,15 @@
       "detailcategory": "테스트용입니다",
       "amount": 1000000,
       "memo": "과소비 테스트"
+    },
+    {
+      "id": "1797",
+      "type": "income",
+      "date": "2025-01-09T05:18:00.000Z",
+      "category": "월급",
+      "detailcategory": "알바비",
+      "amount": 1000000,
+      "memo": "테스트"
     }
   ],
   "incomecategory": [
