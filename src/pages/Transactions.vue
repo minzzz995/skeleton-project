@@ -1,10 +1,12 @@
 <script setup>
+
 import { useTransactionStore } from "@/store/transactionStore";
 import { useCategoryStore } from "@/store/categoryStore";
 import TransactionList from "@/components/Transaction/TransactionList.vue";
 import TransactionModal from "@/components/Transaction/TransactionModal.vue";
 import { ref, computed, onMounted } from "vue";
 import dayjs from "dayjs";
+
 
 // Store 연결
 const transactionStore = useTransactionStore();
@@ -13,14 +15,14 @@ const categoryStore = useCategoryStore();
 // 날짜 초기값 설정
 const now = dayjs();
 const dateRange = ref({
-  start: now.startOf("month").format("YYYY-MM-DD"),
-  end: now.format("YYYY-MM-DD"),
+  start: now.startOf('month').format('YYYY-MM-DD'),
+  end: now.format('YYYY-MM-DD'),
 });
 
 // 상태 변수
 const modalVisible = ref(false);
 const selectedTransaction = ref(null);
-const selectedCategory = ref("");
+const selectedCategory = ref('');
 const showStartPicker = ref(false);
 const showEndPicker = ref(false);
 
