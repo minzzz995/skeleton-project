@@ -48,28 +48,30 @@
     <!-- 하단 프로필 -->
     <div class="d-flex align-items-center p-3 font-hakgyo">
       <img
-        :src="user?.imgpath || 'https://via.placeholder.com/40'"
+        :src="userStore.profileImage || 'https://via.placeholder.com/40'"
         alt="프로필"
         class="rounded-circle"
         style="width: 40px; height: 40px; object-fit: cover"
       />
-      <div class="ms-2">{{ user?.name || "Guest" }}</div>
+      <div class="ms-2">{{ userStore.name || 'Guest' }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import * as api from "../services/api";
+import { ref, onMounted } from 'vue';
+import * as api from '../services/api';
+import { useUserStore } from '@/store/userStore';
 
+const userStore = useUserStore();
 const user = ref();
 
 onMounted(async () => {
   try {
-    const res = await api.get("user");
+    const res = await api.get('user');
     user.value = res[0];
   } catch (err) {
-    console.error("사용자 정보를 불러오지 못했습니다.");
+    console.error('사용자 정보를 불러오지 못했습니다.');
   }
 });
 </script>
