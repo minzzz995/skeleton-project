@@ -54,7 +54,6 @@ const optionsWithLegendHidden = computed(() => {
 .chart-label {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
-  font-family: 'NanumDahaeng', sans-serif;
   font-size: 2rem;
   color: #444;
 }

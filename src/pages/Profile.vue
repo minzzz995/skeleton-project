@@ -1,11 +1,11 @@
 <template>
-  <div
-    style="
-      height: 100vh;
-      font-family: 'NanumDahaeng', sans-serif;
-      position: relative;
-    "
-  >
+  <div class="font-dahaeng">
+    <apexchart
+      type="bar"
+      height="200"
+      :options="chartOptions"
+      :series="series"
+    />
     <div class="d-flex vh-100">
       <div class="flex-grow-1 p-4 bg-light overflow-auto">
         <div class="profile-page">
