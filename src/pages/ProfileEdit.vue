@@ -26,17 +26,27 @@
         </div>
         <hr />
         <!-- 비밀번호 -->
+
         <div class="row align-items-center mb-3">
           <div class="col-3">
             <label for="password" class="form-label mb-0">비밀번호</label>
           </div>
           <div class="col-9">
-            <input
-              id="password"
-              type="password"
-              class="form-control"
-              v-model="form.password"
-            />
+            <div class="input-group">
+              <input
+                id="password"
+                :type="showPw ? 'text' : 'password'"
+                class="form-control"
+                v-model="form.password"
+              />
+              <span
+                class="input-group-text"
+                @click="showPw = !showPw"
+                style="cursor: pointer"
+              >
+                <i class="fa" :class="showPw ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </span>
+            </div>
           </div>
         </div>
         <hr />
@@ -48,12 +58,24 @@
             >
           </div>
           <div class="col-9">
-            <input
-              id="passwordConfirm"
-              type="password"
-              class="form-control"
-              v-model="form.passwordConfirm"
-            />
+            <div class="input-group">
+              <input
+                id="passwordConfirm"
+                :type="showPwConfirm ? 'text' : 'password'"
+                class="form-control"
+                v-model="form.passwordConfirm"
+              />
+              <span
+                class="input-group-text"
+                @click="showPwConfirm = !showPwConfirm"
+                style="cursor: pointer"
+              >
+                <i
+                  class="fa"
+                  :class="showPwConfirm ? 'fa-eye-slash' : 'fa-eye'"
+                ></i>
+              </span>
+            </div>
           </div>
         </div>
         <hr />
@@ -136,6 +158,9 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/store/userStore';
 
+const showPw = ref(false);
+const showPwConfirm = ref(false);
+
 const router = useRouter();
 const userStore = useUserStore();
 
@@ -172,13 +197,43 @@ function onlyNumber(field) {
 }
 
 async function handleSubmit() {
+  if (!form.value.name.trim()) {
+    alert('이름을 입력해주세요.');
+    return;
+  }
+  if (
+    !/^\d{3}$/.test(form.value.phone1) ||
+    !/^\d{4}$/.test(form.value.phone2) ||
+    !/^\d{4}$/.test(form.value.phone3)
+  ) {
+    alert('올바른 휴대전화 번호를 입력해주세요.');
+    return;
+  }
+
   if (form.value.password !== form.value.passwordConfirm) {
     alert('비밀번호가 일치하지 않습니다.');
     return;
   }
 
+  const original = {
+    name: userStore.name,
+    password: userStore.password,
+    phone: userStore.phone,
+    profileImage: userStore.profileImage,
+  };
+  const changed = {
+    name: form.value.name,
+    password: form.value.password,
+    phone: `${form.value.phone1}-${form.value.phone2}-${form.value.phone3}`,
+    profileImage: form.value.profileImage,
+  };
+  if (JSON.stringify(original) === JSON.stringify(changed)) {
+    alert('변경된 내용이 없습니다.');
+    return;
+  }
+
   try {
-    await userStore.updateUserInfo(form.value); // 👈 store에게 맡김
+    await userStore.updateUserInfo(form.value);
     alert('수정 완료!');
     router.push('/profile');
   } catch (e) {
