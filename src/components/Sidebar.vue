@@ -1,3 +1,4 @@
+<
 <template>
   <div
     class="d-flex flex-column bg-info text-white p-3"
@@ -39,3 +40,4 @@
 <script setup>
 const props = defineProps({ current: String });
 </script>
+>

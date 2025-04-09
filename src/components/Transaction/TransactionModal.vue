@@ -2,14 +2,13 @@
   <div class="modal" id="addModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-center">
-          <h4 class="modal-title">입력폼</h4>
+        <div class="modal-header d-flex justify-content-center">
+          <h3 class="modal-title">입력폼</h3>
         </div>
 
         <div class="modal-body">
           <form id="accountForm" @submit.prevent="onSubmit">
             <div class="mb-3">
-              <label class="form-label d-block">유형</label>
               <div class="custom-radio-group">
                 <div class="custom-radio">
                   <input
@@ -91,10 +90,10 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" form="accountForm">
+          <button type="submit" class="btn btn-blue" form="accountForm">
             Submit
           </button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-red" data-bs-dismiss="modal">
             Close
           </button>
         </div>
@@ -102,43 +101,43 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
-import { onMounted, ref, computed } from 'vue';
-import { formatMonth } from '../../utils/formatDate';
-import * as api from '../../services/api';
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import { onMounted, ref, computed } from "vue";
+import { formatMonth } from "../../utils/formatDate";
+import * as api from "../../services/api";
 
 // 날짜 값
 const d = ref(new Date());
 // 수입 or 지출 라디오 선택값
-const selectedType = ref('income');
+const selectedType = ref("income");
 
 const incomeCategories = ref([]);
 const expenseCategories = ref([]);
 
 const categoryList = computed(() => {
-  if (selectedType.value === 'income') return incomeCategories.value;
-  if (selectedType.value === 'expense') return expenseCategories.value;
+  if (selectedType.value === "income") return incomeCategories.value;
+  if (selectedType.value === "expense") return expenseCategories.value;
 });
 
 onMounted(async () => {
   try {
     const [income, expense] = await Promise.all([
-      api.get('incomecategory'),
-      api.get('expensecategory'),
+      api.get("incomecategory"),
+      api.get("expensecategory"),
     ]);
 
     incomeCategories.value = income;
     expenseCategories.value = expense;
+    console.log(expense);
   } catch (err) {
-    console.log('카테고리 불러오기 실패!');
+    console.log("카테고리 불러오기 실패!");
   }
 });
 
 const onSubmit = async () => {
-  const form = document.getElementById('accountForm');
+  const form = document.getElementById("accountForm");
 
   const type = selectedType.value;
   const date = d.value;
@@ -160,22 +159,40 @@ const onSubmit = async () => {
 
   // 저장
   try {
-    const res = await api.post('budget', newEntry);
-    alert('내역이 저장되었습니다!');
+    const res = await api.post("budget", newEntry);
+    alert("내역이 저장되었습니다!");
   } catch (err) {
-    alert('저장 중 오류가 발생했습니다.');
+    alert("저장 중 오류가 발생했습니다.");
   }
   // 모달 닫기
-  const modalEl = document.getElementById('addModal');
+  const modalEl = document.getElementById("addModal");
   bootstrap.Modal.getInstance(modalEl)?.hide();
 
   // 폼 초기화 -> 안하면 폼 닫고 초기화 안 되어있다!
   form.reset();
   d.value = new Date();
-  selectedType.value = 'income';
+  selectedType.value = "income";
 };
 </script>
 <style scoped>
+.btn-red {
+  background-color: #ff5c5c;
+  color: white;
+}
+.btn-blue {
+  background-color: #50b4d8;
+  color: white;
+}
+.btn-red:hover {
+  background-color: #e04848; /* 기존보다 어두운 붉은색 */
+  color: white;
+}
+
+.btn-blue:hover {
+  background-color: #3ba1c7; /* 기존보다 어두운 푸른색 */
+  color: white;
+}
+
 .modal-header {
   border-bottom: none !important;
 }
@@ -194,7 +211,7 @@ const onSubmit = async () => {
   display: inline-block;
 }
 
-.custom-radio input[type='radio'] {
+.custom-radio input[type="radio"] {
   display: none;
 }
 
@@ -210,16 +227,16 @@ const onSubmit = async () => {
 }
 
 /* 선택된 버튼 스타일: 지출 - 빨강 */
-input[type='radio']#expense:checked + label {
-  background-color: #dc3545; /* Bootstrap 빨강 */
+input[type="radio"]#expense:checked + label {
+  background-color: #e1bee7;
   color: white;
-  border-color: #dc3545;
+  border-color: #e1bee7;
 }
 
 /* 선택된 버튼 스타일: 수입 - 파랑 */
-input[type='radio']#income:checked + label {
-  background-color: #0d6efd; /* Bootstrap 파랑 */
+input[type="radio"]#income:checked + label {
+  background-color: #c8e6c9;
   color: white;
-  border-color: #0d6efd;
+  border-color: #c8e6c9;
 }
 </style>
