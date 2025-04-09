@@ -54,7 +54,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h6 class="fw-semibold">거래 내역</h6>
           <button
-            class="btn btn-sm rounded-pill px-3 py-1 text-white"
+            class="btn btn-sm rounded-pill px-3 py-1 text-black"
             style="background-color: #b3e5fc"
             @click="goToTransactions"
           >
@@ -92,7 +92,7 @@
 
       <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
       <button
-        class="btn rounded-pill px-4 py-2 text-white d-flex align-items-center gap-2"
+        class="btn rounded-pill px-4 py-2 text-black d-flex align-items-center gap-2"
         style="
           position: fixed;
           bottom: 20px;
