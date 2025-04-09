@@ -102,42 +102,43 @@
   </div>
 </template>
 <script setup>
-import VueDatePicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
-import { onMounted, ref, computed } from "vue";
-import { formatMonth } from "../../utils/formatDate";
-import * as api from "../../services/api";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+import { onMounted, ref, computed } from 'vue';
+import { formatMonth } from '../../utils/formatDate';
+import * as api from '../../services/api';
 
+const emit = defineEmits(['close', 'added']);
 // 날짜 값
 const d = ref(new Date());
 // 수입 or 지출 라디오 선택값
-const selectedType = ref("income");
+const selectedType = ref('income');
 
 const incomeCategories = ref([]);
 const expenseCategories = ref([]);
 
 const categoryList = computed(() => {
-  if (selectedType.value === "income") return incomeCategories.value;
-  if (selectedType.value === "expense") return expenseCategories.value;
+  if (selectedType.value === 'income') return incomeCategories.value;
+  if (selectedType.value === 'expense') return expenseCategories.value;
 });
 
 onMounted(async () => {
   try {
     const [income, expense] = await Promise.all([
-      api.get("incomecategory"),
-      api.get("expensecategory"),
+      api.get('incomecategory'),
+      api.get('expensecategory'),
     ]);
 
     incomeCategories.value = income;
     expenseCategories.value = expense;
     console.log(expense);
   } catch (err) {
-    console.log("카테고리 불러오기 실패!");
+    console.log('카테고리 불러오기 실패!');
   }
 });
 
 const onSubmit = async () => {
-  const form = document.getElementById("accountForm");
+  const form = document.getElementById('accountForm');
 
   const type = selectedType.value;
   const date = d.value;
@@ -159,19 +160,20 @@ const onSubmit = async () => {
 
   // 저장
   try {
-    const res = await api.post("budget", newEntry);
-    alert("내역이 저장되었습니다!");
+    const res = await api.post('budget', newEntry);
+    alert('내역이 저장되었습니다!');
+    emit('added');
   } catch (err) {
-    alert("저장 중 오류가 발생했습니다.");
+    alert('저장 중 오류가 발생했습니다.');
   }
   // 모달 닫기
-  const modalEl = document.getElementById("addModal");
+  const modalEl = document.getElementById('addModal');
   bootstrap.Modal.getInstance(modalEl)?.hide();
 
   // 폼 초기화 -> 안하면 폼 닫고 초기화 안 되어있다!
   form.reset();
   d.value = new Date();
-  selectedType.value = "income";
+  selectedType.value = 'income';
 };
 </script>
 <style scoped>
@@ -211,7 +213,7 @@ const onSubmit = async () => {
   display: inline-block;
 }
 
-.custom-radio input[type="radio"] {
+.custom-radio input[type='radio'] {
   display: none;
 }
 
@@ -227,14 +229,14 @@ const onSubmit = async () => {
 }
 
 /* 선택된 버튼 스타일: 지출 - 빨강 */
-input[type="radio"]#expense:checked + label {
+input[type='radio']#expense:checked + label {
   background-color: #e1bee7;
   color: white;
   border-color: #e1bee7;
 }
 
 /* 선택된 버튼 스타일: 수입 - 파랑 */
-input[type="radio"]#income:checked + label {
+input[type='radio']#income:checked + label {
   background-color: #c8e6c9;
   color: white;
   border-color: #c8e6c9;
