@@ -1,15 +1,7 @@
 <template>
-  <div class="layout-container">
-    <aside class="sidebar">
-      <h2>사이드바</h2>
-      <div>
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-        </ul>
-      </div>
-    </aside>
+  <div class="d-flex vh-100">
+    <Sidebar :current="'dashboard'" />
+
     <main class="main-content">
       <h1>회원 정보 수정</h1>
       <form @submit.prevent="handleSubmit">
@@ -93,48 +85,48 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useUserStore } from '@/store/userStore';
-import { updateUserInfo, deleteUserAccount } from '@/services/api';
-import Sidebar from '@/components/Sidebar.vue';
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/userStore";
+import { updateUserInfo, deleteUserAccount } from "@/services/api";
+import Sidebar from "@/components/Sidebar.vue";
 
 const router = useRouter();
 const userStore = useUserStore();
 
 function handleNavigate(tab) {
   const routeMap = {
-    dashboard: '/dashboard',
-    transactions: '/transaction',
-    profile: '/profile',
+    dashboard: "/dashboard",
+    transactions: "/transaction",
+    profile: "/profile",
   };
   router.push(routeMap[tab]);
 }
 
 const form = ref({
-  name: '',
-  username: '',
-  password: '',
-  passwordConfirm: '',
-  phone1: '',
-  phone2: '',
-  phone3: '',
+  name: "",
+  username: "",
+  password: "",
+  passwordConfirm: "",
+  phone1: "",
+  phone2: "",
+  phone3: "",
   profileImage: null,
 });
 
-const fileName = ref('');
+const fileName = ref("");
 
 onMounted(() => {
   form.value.name = userStore.name;
   form.value.username = userStore.username;
-  const [p1, p2, p3] = userStore.phone?.split('-') || ['', '', ''];
+  const [p1, p2, p3] = userStore.phone?.split("-") || ["", "", ""];
   form.value.phone1 = p1;
   form.value.phone2 = p2;
   form.value.phone3 = p3;
 });
 
 function onlyNumber(field) {
-  form.value[field] = form.value[field].replace(/\D/g, '');
+  form.value[field] = form.value[field].replace(/\D/g, "");
 }
 
 function handleFileChange(e) {
@@ -147,20 +139,20 @@ function handleFileChange(e) {
 
 async function handleSubmit() {
   if (form.value.password !== form.value.passwordConfirm) {
-    alert('비밀번호가 일치하지 않습니다.');
+    alert("비밀번호가 일치하지 않습니다.");
     return;
   }
 
   const payload = new FormData();
-  payload.append('name', form.value.name);
+  payload.append("name", form.value.name);
   payload.append(
-    'phone',
+    "phone",
     `${form.value.phone1}-${form.value.phone2}-${form.value.phone3}`
   );
-  if (form.value.password) payload.append('password', form.value.password);
+  if (form.value.password) payload.append("password", form.value.password);
   if (form.value.profileImage) {
-    payload.append('profileImage', form.value.profileImage);
-    payload.append('imgpath', form.value.profileImage.name);
+    payload.append("profileImage", form.value.profileImage);
+    payload.append("imgpath", form.value.profileImage.name);
   }
 
   try {
@@ -172,33 +164,28 @@ async function handleSubmit() {
       phone: `${form.value.phone1}-${form.value.phone2}-${form.value.phone3}`,
       imgpath: form.value.imgpath,
     });
-    alert('수정 완료!');
-    router.push('/profile');
+    alert("수정 완료!");
+    router.push("/profile");
   } catch (e) {
-    alert('수정 실패');
+    alert("수정 실패");
   }
 }
 
 async function handleDelete() {
-  const confirmDelete = confirm('정말로 계정을 삭제하시겠습니까?');
+  const confirmDelete = confirm("정말로 계정을 삭제하시겠습니까?");
   if (!confirmDelete) return;
 
   try {
     await deleteUserAccount();
     userStore.clearUser();
-    router.push('/');
+    router.push("/");
   } catch (e) {
-    alert('삭제 실패');
+    alert("삭제 실패");
   }
 }
 </script>
 
 <style scoped>
-.layout-container {
-  display: flex;
-  height: 100vh;
-}
-
 .sidebar {
   flex: 1;
   background-color: #f4f4f4;
