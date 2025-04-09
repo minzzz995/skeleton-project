@@ -119,7 +119,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import Sidebar from '@/components/Sidebar.vue';
-import BarChart from '@/components/BarChart.vue';
+import BarChart from '@/components/Home_BarChart.vue';
 import TransactionModal from '@/components/Transaction/TransactionModal.vue';
 import { formatDate } from '@/utils/formatDate';
 import { useTransactionStore } from '@/store/transactionStore';
