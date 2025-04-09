@@ -9,7 +9,7 @@
         '<strong>{{ topCategory }}</strong
         >' 항목이 가장 많아요
       </p>
-      <!-- <BarChart :chartData="barChartData" :options="barChartOptions" /> -->
+      <BarChart />
     </div>
   </div>
 </template>
