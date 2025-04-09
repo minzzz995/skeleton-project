@@ -2,75 +2,114 @@
   <div class="d-flex vh-100">
     <Sidebar :current="'dashboard'" />
 
-    <main class="main-content">
-      <h1>회원 정보 수정</h1>
+    <main class="flex-grow-1 p-4 bg-light overflow-auto">
+      <h1 style="margin-bottom: 5rem">회원 정보 수정</h1>
+
       <form @submit.prevent="handleSubmit">
-        <div class="mb-3">
-          <label for="name" class="form-label">이름</label>
-          <input
-            id="name"
-            type="text"
-            class="form-control"
-            v-model="form.name"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">비밀번호</label>
-          <input
-            id="password"
-            type="password"
-            class="form-control"
-            v-model="form.password"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="passwordConfirm" class="form-label">비밀번호 확인</label>
-          <input
-            id="passwordConfirm"
-            type="password"
-            class="form-control"
-            v-model="form.passwordConfirm"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">연락처</label>
-          <div class="d-flex gap-2">
+        <!-- 이름 -->
+        <div class="row align-items-center mb-3">
+          <div class="col-2">
+            <label for="name" class="form-label mb-0">이름</label>
+          </div>
+          <div class="col-10">
             <input
+              id="name"
+              type="text"
               class="form-control"
-              v-model="form.phone1"
-              maxlength="3"
-              @input="onlyNumber('phone1')"
-            />
-            <span class="align-self-center">-</span>
-            <input
-              class="form-control"
-              v-model="form.phone2"
-              maxlength="4"
-              @input="onlyNumber('phone2')"
-            />
-            <span class="align-self-center">-</span>
-            <input
-              class="form-control"
-              v-model="form.phone3"
-              maxlength="4"
-              @input="onlyNumber('phone3')"
+              v-model="form.name"
             />
           </div>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">프로필 사진 첨부</label>
-          <input type="file" class="form-control" @change="handleFileChange" />
+        <!-- 비밀번호 -->
+        <div class="row align-items-center mb-3">
+          <div class="col-2">
+            <label for="password" class="form-label mb-0">비밀번호</label>
+          </div>
+          <div class="col-10">
+            <input
+              id="password"
+              type="password"
+              class="form-control"
+              v-model="form.password"
+            />
+          </div>
+        </div>
 
-          <img
-            v-if="form.profileImage"
-            :src="URL.createObjectURL(form.profileImage)"
-            alt="미리보기"
-            style="max-width: 200px; margin-top: 10px"
-          />
+        <!-- 비밀번호 확인 -->
+        <div class="row align-items-center mb-3">
+          <div class="col-2">
+            <label for="passwordConfirm" class="form-label mb-0"
+              >비밀번호 확인</label
+            >
+          </div>
+          <div class="col-10">
+            <input
+              id="passwordConfirm"
+              type="password"
+              class="form-control"
+              v-model="form.passwordConfirm"
+            />
+          </div>
+        </div>
+
+        <!-- 연락처 -->
+        <div class="row align-items-center mb-3">
+          <div class="col-2">
+            <label class="form-label mb-0">연락처</label>
+          </div>
+          <div class="col-10">
+            <div class="d-flex gap-2">
+              <input
+                class="form-control"
+                v-model="form.phone1"
+                maxlength="3"
+                @input="onlyNumber('phone1')"
+              />
+              <span class="align-self-center">-</span>
+              <input
+                class="form-control"
+                v-model="form.phone2"
+                maxlength="4"
+                @input="onlyNumber('phone2')"
+              />
+              <span class="align-self-center">-</span>
+              <input
+                class="form-control"
+                v-model="form.phone3"
+                maxlength="4"
+                @input="onlyNumber('phone3')"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 프로필 사진 선택 (미리보기 아이콘 형태) -->
+        <div class="row align-items-start mb-3">
+          <div class="col-2">
+            <label class="form-label mb-0">프로필 이미지 선택</label>
+          </div>
+          <div class="col-10">
+            <div class="d-flex gap-3 flex-wrap">
+              <img
+                v-for="(img, index) in predefinedImages"
+                :key="index"
+                :src="img"
+                alt="프로필 이미지"
+                @click="selectProfileImage(img)"
+                class="rounded-circle border"
+                :class="{
+                  'border-primary border-3': form.profileImage === img,
+                }"
+                style="
+                  width: 80px;
+                  height: 80px;
+                  cursor: pointer;
+                  object-fit: cover;
+                "
+              />
+            </div>
+          </div>
         </div>
 
         <div class="d-flex gap-2">
@@ -123,20 +162,13 @@ onMounted(() => {
   form.value.phone1 = p1;
   form.value.phone2 = p2;
   form.value.phone3 = p3;
+
+  form.value.profileImage = userStore.imgpath || "";
 });
 
 function onlyNumber(field) {
   form.value[field] = form.value[field].replace(/\D/g, "");
 }
-
-function handleFileChange(e) {
-  const file = e.target.files[0];
-  if (file) {
-    form.value.profileImage = file;
-    fileName.value = file.name;
-  }
-}
-
 async function handleSubmit() {
   if (form.value.password !== form.value.passwordConfirm) {
     alert("비밀번호가 일치하지 않습니다.");
@@ -150,10 +182,8 @@ async function handleSubmit() {
     `${form.value.phone1}-${form.value.phone2}-${form.value.phone3}`
   );
   if (form.value.password) payload.append("password", form.value.password);
-  if (form.value.profileImage) {
-    payload.append("profileImage", form.value.profileImage);
-    payload.append("imgpath", form.value.profileImage.name);
-  }
+
+  payload.append("imgpath", form.value.profileImage || "");
 
   try {
     await updateUserInfo(payload);
@@ -183,19 +213,18 @@ async function handleDelete() {
     alert("삭제 실패");
   }
 }
+
+// 미리보기 이미지 리스트
+const predefinedImages = [
+  new URL("@/assets/profile1.png", import.meta.url).href,
+  new URL("@/assets/profile2.png", import.meta.url).href,
+  new URL("@/assets/profile3.png", import.meta.url).href,
+  new URL("@/assets/profile4.png", import.meta.url).href,
+];
+
+// 이미지 선택 핸들러
+function selectProfileImage(imageUrl) {
+  form.value.profileImage = imageUrl;
+  fileName.value = ""; // 기존 파일 업로드 이름 초기화
+}
 </script>
-
-<style scoped>
-.sidebar {
-  flex: 1;
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-}
-
-.main-content {
-  flex: 9;
-  background-color: #fff;
-  padding: 20px;
-}
-</style>
