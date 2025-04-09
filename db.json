@@ -83,22 +83,7 @@
     }
   ],
   "incomecategory": [
-    {
-      "id": "1",
-      "name": "월급"
-    },
-    {
-      "id": "2",
-      "name": "용돈"
-    },
-    {
-      "id": "3",
-      "name": "이자"
-    },
-    {
-      "id": "4",
-      "name": "기타"
-    }
+
   ],
   "expensecategory": [
     {
@@ -168,7 +153,7 @@
       "name": "name",
       "password": "testtest",
       "tel": "010-1234-5678",
-      "imagepath": ""
+      "imgpath": ""
     }
   ]
 }

@@ -5,6 +5,7 @@ This template should help get you started developing with Vue 3 in Vite.
 ㅇㅈ이요~
 가나다라
 김동연 로컬 브랜치 확인
+김선희 로컬 브랜치 확인
 
 ## Recommended IDE Setup
 
