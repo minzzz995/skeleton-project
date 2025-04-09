@@ -1,10 +1,5 @@
 <template>
   <div class="bar-chart-container">
-    <p class="top-text">
-      최근 3개월간<br />
-      '<strong>{{ topCategory }}</strong
-      >' 항목이 가장 많아요
-    </p>
     <Bar :data="barChartData" :options="chartOptions" />
     <div class="labels">
       <div
@@ -13,7 +8,7 @@
         class="label-item"
       >
         <p class="category">{{ item.category }}</p>
-        <p class="percentage">{{ item.percentage.toFixed(1) }}%</p>
+        <p class="percentage">{{ item.percentage.toFixed(0) }}%</p>
       </div>
     </div>
   </div>
@@ -29,10 +24,11 @@ import {
   Tooltip,
 } from 'chart.js';
 import { useTransactionStore } from '@/store/transactionStore';
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
 
+const emit = defineEmits(['update-top-category']);
 const transactionStore = useTransactionStore();
 const threeMonthExpenses = ref([]);
 
@@ -60,7 +56,7 @@ const topCategories = computed(() => {
 
   const sorted = Object.entries(categoryMap)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 3);
+    .slice(0, 3); // ❗ 기타 없음
 
   const total = sorted.reduce((sum, [, amt]) => sum + amt, 0);
 
@@ -70,6 +66,16 @@ const topCategories = computed(() => {
     percentage: (amount / total) * 100,
   }));
 });
+
+const topCategory = computed(() => topCategories.value[0]?.category || 'N/A');
+
+watch(
+  topCategory,
+  (newVal) => {
+    emit('update-top-category', newVal);
+  },
+  { immediate: true }
+);
 
 const barChartData = computed(() => ({
   labels: topCategories.value.map((item) => item.category),
@@ -96,6 +102,9 @@ const chartOptions = {
       grid: {
         display: false,
       },
+      ticks: {
+        display: false,
+      },
     },
     y: {
       grid: {
@@ -107,10 +116,6 @@ const chartOptions = {
     },
   },
 };
-
-const topCategory = computed(() =>
-  topCategories.value.length > 0 ? topCategories.value[0].category : 'N/A'
-);
 </script>
 
 <style scoped>
