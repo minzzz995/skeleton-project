@@ -1,9 +1,3 @@
-<script setup></script>
-<template>
-  <h1>TransactionsList</h1>
-</template>
-
-<style scoped></style>
 <script setup>
 import { defineProps, defineEmits, computed } from "vue";
 import dayjs from "dayjs";
