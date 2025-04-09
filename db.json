@@ -170,6 +170,15 @@
       "detailcategory": "테스트",
       "amount": 1000000,
       "memo": "test"
+    },
+    {
+      "id": "a887",
+      "type": "expense",
+      "date": "2025-04-09T06:07:02.463Z",
+      "category": "기타",
+      "detailcategory": "test",
+      "amount": -10000,
+      "memo": "test"
     }
   ],
   "incomecategory": [
