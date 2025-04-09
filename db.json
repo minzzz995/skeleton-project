@@ -68,7 +68,7 @@
     { "id": "1", "name": "월급" },
     { "id": "2", "name": "용돈" },
     { "id": "3", "name": "이자" },
-    {"id":"4", "name": "기타"}
+    { "id": "4", "name": "기타" }
   ],
   "expensecategory": [
     { "id": "1", "name": "식비", "imgpath": "" },
