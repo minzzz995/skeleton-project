@@ -11,28 +11,34 @@
 
     <div class="flex-grow-1 bg-white p-5 overflow-auto">
       <!-- 해당 월 수입/지출/순이익 카드 -->
-      <div class="d-flex justify-content-between gap-4 mb-4">
-        <div
-          class="text-center rounded-4 p-4 flex-fill text-white"
-          style="background-color: #d9c4e6"
-        >
-          <div>이번 달 수입</div>
-          <div class="fw-bold fs-5">₩ {{ income.toLocaleString() }}</div>
+      <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+        <div class="col">
+          <div
+            class="text-center rounded-4 p-4 text-black"
+            style="background-color: #c8e6c9"
+          >
+            <div>이번 달 수입</div>
+            <div class="fw-bold fs-5">₩ {{ income.toLocaleString() }}</div>
+          </div>
         </div>
-        <div
-          class="text-center rounded-4 p-4 flex-fill text-white"
-          style="background-color: #c8e6c9"
-        >
-          <div>이번 달 지출</div>
-          <div class="fw-bold fs-5">₩ {{ expense.toLocaleString() }}</div>
+        <div class="col">
+          <div
+            class="text-center rounded-4 p-4 text-black"
+            style="background-color: #d9c4e6"
+          >
+            <div>이번 달 지출</div>
+            <div class="fw-bold fs-5">₩ {{ expense.toLocaleString() }}</div>
+          </div>
         </div>
-        <div
-          class="text-center rounded-4 p-4 flex-fill"
-          style="background-color: #f3f3f3"
-        >
-          <div>이번 달 순이익</div>
-          <div class="fw-bold fs-5">
-            ₩ {{ (income - expense).toLocaleString() }}
+        <div class="col">
+          <div
+            class="text-center rounded-4 p-4"
+            style="background-color: #f3f3f3"
+          >
+            <div>이번 달 순이익</div>
+            <div class="fw-bold fs-5">
+              ₩ {{ (income - expense).toLocaleString() }}
+            </div>
           </div>
         </div>
       </div>
@@ -73,7 +79,7 @@
                   'text-danger': item.type === 'expense',
                 }"
               >
-                {{ item.type === 'income' ? '+' : '-' }} ₩
+                {{ item.type === 'income' ? '+' : '-' }}
                 {{ parseInt(item.amount).toLocaleString() }}
               </td>
 
@@ -99,19 +105,24 @@
       >
         <i class="fa-solid fa-pen-to-square"></i> 거래 추가
       </button>
-      <TransactionModal />
+      <Teleport to="body">
+        <TransactionModal
+          @close="showModal = false"
+          @added="store.fetchBudgets()"
+        />
+      </Teleport>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
-import Sidebar from "@/components/Sidebar.vue";
-import BarChart from "@/components/BarChart.vue";
-import TransactionModal from "@/components/Transaction/TransactionModal.vue";
-import { formatDate } from "@/utils/formatDate";
-import { useTransactionStore } from "@/store/transactionStore";
+import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import Sidebar from '@/components/Sidebar.vue';
+import BarChart from '@/components/Home_BarChart.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import { formatDate } from '@/utils/formatDate';
+import { useTransactionStore } from '@/store/transactionStore';
 
 const router = useRouter();
 const store = useTransactionStore();
@@ -124,6 +135,6 @@ const monthlySummary = computed(() => store.monthlySummary);
 const latestTransactions = computed(() => store.latestFive);
 
 const goToTransactions = () => {
-  router.push("/transactions");
+  router.push('/transactions');
 };
 </script>

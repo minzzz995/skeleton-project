@@ -19,23 +19,79 @@ const dateRange = ref({
 
 // 상태 변수
 const modalVisible = ref(false);
-const selectedTransaction = ref(null);
+const selectedBudget = ref(null);
 const selectedCategory = ref("");
 const showStartPicker = ref(false);
 const showEndPicker = ref(false);
 
 // 계산된 값
+const groupedBudgets = computed(() => transactionStore.groupByDate);
+const summary = computed(() => transactionStore.summary);
 const incomeCategories = computed(() => categoryStore.incomeCategories);
 const expenseCategories = computed(() => categoryStore.expenseCategories);
+const formattedStart = computed(() =>
+  dayjs(dateRange.value.start).format("M월 D일")
+);
+const formattedEnd = computed(() =>
+  dayjs(dateRange.value.end).format("M월 D일")
+);
 
 // 초기 데이터 로딩
 onMounted(async () => {
-  //await transactionStore.fetchTransactions()
+  await transactionStore.fetchBudgets();
   await categoryStore.fetchCategories();
-  //applyFilters();
+  applyFilters();
 });
 
 // 메서드 정의
+function openAddModal() {
+  selectedBudget.value = null;
+  modalVisible.value = true;
+}
+
+function openEditModal(budget) {
+  selectedBudget.value = budget;
+  modalVisible.value = true;
+}
+
+async function deleteBudget(id) {
+  await transactionStore.deleteBudget(id);
+}
+
+function moveMonth(offset) {
+  const newStart = dayjs(dateRange.value.start)
+    .add(offset, "month")
+    .startOf("month");
+  const newEnd = newStart.endOf("month");
+  dateRange.value.start = newStart.format("YYYY-MM-DD");
+  dateRange.value.end = newEnd.format("YYYY-MM-DD");
+  applyFilters();
+}
+
+function handleStartDateSelect(date) {
+  dateRange.value.start = date;
+  showStartPicker.value = false;
+  applyFilters();
+}
+
+function handleEndDateSelect(date) {
+  dateRange.value.end = date;
+  showEndPicker.value = false;
+  applyFilters();
+}
+
+function updateCategory() {
+  transactionStore.setCategoryFilter(selectedCategory.value);
+}
+
+function applyFilters() {
+  transactionStore.setDateRange(dateRange.value.start, dateRange.value.end);
+  transactionStore.setCategoryFilter(selectedCategory.value);
+}
+
+function format(value) {
+  return parseInt(value).toLocaleString() + "원";
+}
 </script>
 
 <template>
@@ -45,11 +101,9 @@ onMounted(async () => {
         <button @click="moveMonth(-1)">
           <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </button>
-        <span>2025.02.01</span
-        ><!-- <span>{{ formattedStart }}</span> -->
+        <span>{{ formattedStart }}</span>
         ~
-        <span>2025.02.10</span
-        ><!-- <span>{{ formattedEnd }}</span> -->
+        <span>{{ formattedEnd }}</span>
         <button @click="moveMonth(1)">
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </button>
@@ -81,29 +135,128 @@ onMounted(async () => {
     <div class="summary">
       <div class="summary-box">
         <p>수입</p>
-        200<!-- {{ format(summary.income) }} -->
+        {{ format(summary.income) }}
       </div>
       <div class="summary-box">
         <p>지출</p>
-        200<!-- {{ format(summary.income) }} -->
+        {{ format(summary.expense) }}
       </div>
       <div class="summary-box">
         <p>순이익</p>
-        200<!-- {{ format(summary.income) }} -->
+        {{ format(summary.net) }}
       </div>
     </div>
     <TransactionList
-      :transactions="groupTransections"
+      :transactions="groupedBudgets"
       @edit="openEditModal"
-      @delete="deleteTransaction"
+      @delete="deleteBudget"
     />
     <button class="add-btn" @click="openAddModal">거래 추가</button>
     <TransactionModal
       v-if="modalVisible"
-      :editTarget="selectedTransaction"
+      :editTarget="selectedBudget"
       @close="modalVisible = false"
     />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* 전체 */
+.transaction-page {
+  padding: 20px;
+  font-family: "Pretendard", sans-serif;
+  background-color: #fff;
+}
+
+/* 필터 */
+/* .filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+} */
+
+/* 날짜 */
+.day-filer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 8px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.day-filer button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.date-range {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* category */
+.category-filter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.category-filter select {
+  width: 90%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* summary */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.summary-box {
+  flex: 1;
+  background: #e6f3ff;
+  border: 2px solid #b4daff;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.summary-box p {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.summary-box span {
+  font-size: 18px;
+}
+
+.add-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #cbe4ff;
+  border: none;
+  border-radius: 32px;
+  padding: 12px 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-btn:hover {
+  background: #b4d7f7;
+}
+</style>
