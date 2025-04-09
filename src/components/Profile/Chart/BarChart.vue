@@ -1,1 +1,0 @@
-<template>BarChart</template>
