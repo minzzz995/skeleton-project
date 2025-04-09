@@ -254,11 +254,11 @@
   ],
   "user": [
     {
-      "id": "test",
-      "name": "박박박",
-      "password": "testtest",
-      "tel": "010-1234-5678",
-      "imgpath": "/profile_default.png"
+      "name": "정민지",
+      "password": "wjdalswl",
+      "tel": "010-2464-5678",
+      "imgpath": "http://localhost:5173/image/profile3.png",
+      "id": "test"
     }
   ]
 }
