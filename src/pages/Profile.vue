@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex vh-100">
-    <Sidebar :current="'dashboard'" />
     <div class="flex-grow-1 p-4 bg-light overflow-auto">
       <div class="profile-page">
         <!-- 사용자 정보 -->
@@ -43,11 +42,11 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
-import CategoryChart from '@/components/Profile/CategoryChart.vue';
-import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
-import Sidebar from '@/components/Sidebar.vue';
-import TopCategoryChart from '@/components/Profile/TopCategoryChart.vue';
+import { ref, onMounted } from "vue";
+import CategoryChart from "@/components/Profile/CategoryChart.vue";
+import TopCategoryCard from "@/components/Profile/TopCategoryCard.vue";
+import Sidebar from "@/components/Sidebar.vue";
+import TopCategoryChart from "@/components/Profile/TopCategoryChart.vue";
 // import { userStore } from '@/store/userStore';
 // import { categoryStore } from '@/store/categoryStore';
 
