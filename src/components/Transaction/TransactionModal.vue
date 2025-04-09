@@ -1,6 +1,6 @@
 <template>
-  <div class="modal" id="addModal">
-    <div class="modal-dialog">
+  <div class="modal-backdrop" @click.self="$emit('close')">
+    <div class="modal-dialog-custom">
       <div class="modal-content">
         <div class="modal-header text-center">
           <h4 class="modal-title">입력폼</h4>
@@ -87,16 +87,18 @@
                 placeholder="선택 사항"
               ></textarea>
             </div>
-          </form>
-        </div>
 
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" form="accountForm">
-            Submit
-          </button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-            Close
-          </button>
+            <div class="modal-footer d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                @click="$emit('close')"
+              >
+                Close
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -110,17 +112,16 @@ import { onMounted, ref, computed } from 'vue';
 import { formatMonth } from '../../utils/formatDate';
 import * as api from '../../services/api';
 
-// 날짜 값
 const d = ref(new Date());
-// 수입 or 지출 라디오 선택값
 const selectedType = ref('income');
 
 const incomeCategories = ref([]);
 const expenseCategories = ref([]);
 
 const categoryList = computed(() => {
-  if (selectedType.value === 'income') return incomeCategories.value;
-  if (selectedType.value === 'expense') return expenseCategories.value;
+  return selectedType.value === 'income'
+    ? incomeCategories.value
+    : expenseCategories.value;
 });
 
 onMounted(async () => {
@@ -129,58 +130,63 @@ onMounted(async () => {
       api.get('incomecategory'),
       api.get('expensecategory'),
     ]);
-
     incomeCategories.value = income;
     expenseCategories.value = expense;
   } catch (err) {
-    console.log('카테고리 불러오기 실패!');
+    console.error('카테고리 불러오기 실패:', err);
   }
 });
 
 const onSubmit = async () => {
   const form = document.getElementById('accountForm');
 
-  const type = selectedType.value;
-  const date = d.value;
-  const category = form.category.value;
-  const detailcategory = form.detailcategory.value;
-  const amount = Number(form.amount.value);
-  const memo = form.memo.value;
-
   const newEntry = {
-    type,
-    date,
-    category,
-    detailcategory,
-    amount,
-    memo,
+    type: selectedType.value,
+    date: d.value,
+    category: form.category.value,
+    detailcategory: form.detailcategory.value,
+    amount: Number(form.amount.value),
+    memo: form.memo.value,
   };
 
-  console.log(newEntry);
-
-  // 저장
   try {
-    const res = await api.post('budget', newEntry);
+    await api.post('budget', newEntry);
     alert('내역이 저장되었습니다!');
+    form.reset();
+    d.value = new Date();
+    selectedType.value = 'income';
+    // 모달 닫기
+    emit('close');
   } catch (err) {
-    alert('저장 중 오류가 발생했습니다.');
+    alert('저장 실패!');
   }
-  // 모달 닫기
-  const modalEl = document.getElementById('addModal');
-  bootstrap.Modal.getInstance(modalEl)?.hide();
-
-  // 폼 초기화 -> 안하면 폼 닫고 초기화 안 되어있다!
-  form.reset();
-  d.value = new Date();
-  selectedType.value = 'income';
 };
 </script>
+
 <style scoped>
-.modal-header {
-  border-bottom: none !important;
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
 }
+
+.modal-dialog-custom {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.modal-header,
 .modal-footer {
-  border-top: none !important;
+  border: none;
 }
 
 .custom-radio-group {
@@ -189,36 +195,27 @@ const onSubmit = async () => {
   gap: 30px;
 }
 
-.custom-radio {
-  position: relative;
-  display: inline-block;
-}
-
 .custom-radio input[type='radio'] {
   display: none;
 }
 
 .custom-radio label {
-  display: inline-block;
   padding: 10px 50px;
   border: 2px solid #eee;
   border-radius: 6px;
   cursor: pointer;
-  color: black;
   transition: all 0.2s ease-in-out;
   user-select: none;
 }
 
-/* 선택된 버튼 스타일: 지출 - 빨강 */
 input[type='radio']#expense:checked + label {
-  background-color: #dc3545; /* Bootstrap 빨강 */
+  background-color: #dc3545;
   color: white;
   border-color: #dc3545;
 }
 
-/* 선택된 버튼 스타일: 수입 - 파랑 */
 input[type='radio']#income:checked + label {
-  background-color: #0d6efd; /* Bootstrap 파랑 */
+  background-color: #0d6efd;
   color: white;
   border-color: #0d6efd;
 }
