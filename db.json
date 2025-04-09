@@ -134,6 +134,24 @@
       "detailcategory": "환불",
       "amount": 10000,
       "memo": "환불 테스트"
+    },
+    {
+      "id": "8071",
+      "type": "income",
+      "date": "2025-02-05T04:39:00.000Z",
+      "category": "월급",
+      "detailcategory": "알바",
+      "amount": 1200000,
+      "memo": "테스트"
+    },
+    {
+      "id": "6767",
+      "type": "expense",
+      "date": "2025-02-19T04:40:00.000Z",
+      "category": "기타",
+      "detailcategory": "테스트용입니다",
+      "amount": 1000000,
+      "memo": "과소비 테스트"
     }
   ],
   "incomecategory": [
