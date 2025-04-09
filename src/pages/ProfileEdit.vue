@@ -60,7 +60,7 @@
         <!-- 연락처 -->
         <div class="row align-items-center mb-3">
           <div class="col-3">
-            <label class="form-label mb-0">연락처</label>
+            <label class="form-label mb-0">휴대전화</label>
           </div>
           <div class="col-9">
             <div class="d-flex gap-2">
@@ -122,7 +122,7 @@
         >
           <button type="submit" class="btn btn-blue">수정하기</button>
           <button @click.prevent="handleDelete" class="btn btn-red">
-            삭제하기
+            뒤로가기
           </button>
         </div>
       </form>
@@ -135,7 +135,6 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/userStore";
 import { updateUserInfo, deleteUserAccount } from "@/services/api";
-import Sidebar from "@/components/Sidebar.vue";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -172,7 +171,9 @@ onMounted(async () => {
     form.value.phone1 = p1 || "";
     form.value.phone2 = p2 || "";
     form.value.phone3 = p3 || "";
-    form.value.profileImage = userData.imgpath || "";
+    form.value.password = userData.password || "";
+    form.value.passwordConfirm = userData.password || "";
+    form.value.profileImage = userData.imgpath || predefinedImages[0];
 
     userStore.setUser({
       name: userData.name,
@@ -181,9 +182,15 @@ onMounted(async () => {
       imgpath: userData.imgpath,
     });
   } catch (e) {
-    alert("사용자 정보를 불러오는 데 실패했습니다.");
+    alert("사용자 정보를 불러오는 데 실패했?습니다.");
   }
 });
+
+async function getUserInfo() {
+  const res = await fetch("http://localhost:3000/user");
+  const users = await res.json();
+  return users[0];
+}
 
 function onlyNumber(field) {
   form.value[field] = form.value[field].replace(/\D/g, "");

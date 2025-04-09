@@ -7,7 +7,9 @@
     <SideBar class="d-none d-md-block" />
 
     <!-- 메인 콘텐츠 -->
+
     <main class="flex-fill p-3 font-hakgyo">
+
       <slot />
     </main>
   </div>
