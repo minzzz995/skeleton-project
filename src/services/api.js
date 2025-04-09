@@ -27,10 +27,10 @@ export const put = async (target, product) => {
     alert("수정 실패");
   }
 };
-export const remove = async (target, params) => {
+export const remove = async (target) => {
   try {
-    console.log("[DELETE]", BASE + target, params);
-    const response = await axios.delete(BASE + target, { params });
+    console.log("[DELETE]", BASE + target);
+    const response = await axios.delete(BASE + target);
     return response.data;
   } catch (e) {
     alert("삭제 실패");

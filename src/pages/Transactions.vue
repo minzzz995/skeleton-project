@@ -21,8 +21,8 @@ const dateRange = ref({
 const modalVisible = ref(false);
 const selectedBudget = ref(null);
 const selectedCategory = ref("");
-const showStartPicker = ref(false);
-const showEndPicker = ref(false);
+// const showStartPicker = ref(false);
+// const showEndPicker = ref(false);
 
 // 계산된 값
 const groupedBudgets = computed(() => transactionStore.groupByDate);
