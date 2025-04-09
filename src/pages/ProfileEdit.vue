@@ -1,17 +1,23 @@
 <template>
-  <div class="d-flex vh-100">
-    <Sidebar :current="'dashboard'" />
+  <div class="d-flex vh-100" style="font-family: 'NanumDahaeng', sans-serif">
+    <Sidebar />
 
     <main class="flex-grow-1 p-4 bg-light overflow-auto">
-      <h1 style="margin-bottom: 5rem">회원 정보 수정</h1>
-
-      <form @submit.prevent="handleSubmit">
+      <div class="mx-auto w-75" style="max-width: 900px">
+        <h1 style="margin-top: 5rem">회원 정보 수정</h1>
+      </div>
+      <form
+        @submit.prevent="handleSubmit"
+        class="mx-auto w-75"
+        style="max-width: 900px"
+      >
+        <hr />
         <!-- 이름 -->
         <div class="row align-items-center mb-3">
-          <div class="col-2">
+          <div class="col-3">
             <label for="name" class="form-label mb-0">이름</label>
           </div>
-          <div class="col-10">
+          <div class="col-9">
             <input
               id="name"
               type="text"
@@ -20,13 +26,13 @@
             />
           </div>
         </div>
-
+        <hr />
         <!-- 비밀번호 -->
         <div class="row align-items-center mb-3">
-          <div class="col-2">
+          <div class="col-3">
             <label for="password" class="form-label mb-0">비밀번호</label>
           </div>
-          <div class="col-10">
+          <div class="col-9">
             <input
               id="password"
               type="password"
@@ -35,15 +41,15 @@
             />
           </div>
         </div>
-
+        <hr />
         <!-- 비밀번호 확인 -->
         <div class="row align-items-center mb-3">
-          <div class="col-2">
+          <div class="col-3">
             <label for="passwordConfirm" class="form-label mb-0"
               >비밀번호 확인</label
             >
           </div>
-          <div class="col-10">
+          <div class="col-9">
             <input
               id="passwordConfirm"
               type="password"
@@ -52,13 +58,13 @@
             />
           </div>
         </div>
-
+        <hr />
         <!-- 연락처 -->
         <div class="row align-items-center mb-3">
-          <div class="col-2">
+          <div class="col-3">
             <label class="form-label mb-0">연락처</label>
           </div>
-          <div class="col-10">
+          <div class="col-9">
             <div class="d-flex gap-2">
               <input
                 class="form-control"
@@ -83,13 +89,13 @@
             </div>
           </div>
         </div>
-
+        <hr />
         <!-- 프로필 사진 선택 (미리보기 아이콘 형태) -->
         <div class="row align-items-start mb-3">
-          <div class="col-2">
+          <div class="col-3">
             <label class="form-label mb-0">프로필 이미지 선택</label>
           </div>
-          <div class="col-10">
+          <div class="col-9">
             <div class="d-flex gap-3 flex-wrap">
               <img
                 v-for="(img, index) in predefinedImages"
@@ -111,10 +117,13 @@
             </div>
           </div>
         </div>
-
-        <div class="d-flex gap-2">
-          <button type="submit" class="btn btn-primary">수정하기</button>
-          <button @click.prevent="handleDelete" class="btn btn-danger">
+        <hr />
+        <div
+          class="d-flex justify-content-center gap-3"
+          style="margin-top: 4rem"
+        >
+          <button type="submit" class="btn btn-blue">수정하기</button>
+          <button @click.prevent="handleDelete" class="btn btn-red">
             삭제하기
           </button>
         </div>
@@ -216,10 +225,10 @@ async function handleDelete() {
 
 // 미리보기 이미지 리스트
 const predefinedImages = [
-  new URL("@/assets/profile1.png", import.meta.url).href,
-  new URL("@/assets/profile2.png", import.meta.url).href,
-  new URL("@/assets/profile3.png", import.meta.url).href,
-  new URL("@/assets/profile4.png", import.meta.url).href,
+  new URL("@/assets/image/profile1.png", import.meta.url).href,
+  new URL("@/assets/image/profile2.png", import.meta.url).href,
+  new URL("@/assets/image/profile3.png", import.meta.url).href,
+  new URL("@/assets/image/profile4.png", import.meta.url).href,
 ];
 
 // 이미지 선택 핸들러
@@ -228,3 +237,23 @@ function selectProfileImage(imageUrl) {
   fileName.value = ""; // 기존 파일 업로드 이름 초기화
 }
 </script>
+
+<style scoped>
+.btn-red {
+  background-color: #ff5c5c;
+  color: white;
+}
+.btn-blue {
+  background-color: #50b4d8;
+  color: white;
+}
+.btn-red:hover {
+  background-color: #e04848; /* 기존보다 어두운 붉은색 */
+  color: white;
+}
+
+.btn-blue:hover {
+  background-color: #3ba1c7; /* 기존보다 어두운 푸른색 */
+  color: white;
+}
+</style>

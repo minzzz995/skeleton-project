@@ -73,7 +73,7 @@
                   'text-danger': item.type === 'expense',
                 }"
               >
-                {{ item.type === 'income' ? '+' : '-' }} ₩
+                {{ item.type === "income" ? "+" : "-" }} ₩
                 {{ parseInt(item.amount).toLocaleString() }}
               </td>
 
