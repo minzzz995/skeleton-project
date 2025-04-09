@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getCategories } from "@/services/api.js";
+import { get } from "@/services/api";
 
 export const useCategoryStore = defineStore("categoryStore", {
   state: () => ({
@@ -11,11 +11,11 @@ export const useCategoryStore = defineStore("categoryStore", {
     async fetchCategories() {
       try {
         const [incomeRes, expenseRes] = await Promise.all([
-          axios.get("/incomecategory"),
-          axios.get("/expensecategory"),
+          get("incomecategory"),
+          get("expensecategory"),
         ]);
-        this.incomeCategories = incomeRes.data;
-        this.expenseCategories = expenseRes.data;
+        this.incomeCategories = incomeRes;
+        this.expenseCategories = expenseRes;
       } catch (error) {
         console.error("카테고리 불러오기 실패:", error);
       }
