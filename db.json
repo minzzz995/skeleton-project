@@ -194,12 +194,12 @@
     {
       "id": "1",
       "name": "식비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-utensils"
     },
     {
       "id": "2",
       "name": "교통비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-bus"
     },
     {
       "id": "3",
