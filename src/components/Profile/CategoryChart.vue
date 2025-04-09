@@ -110,26 +110,31 @@ const chartOptions = {
   background-color: #f2faff;
   padding: 20px;
   border-radius: 16px;
-  flex-wrap: wrap; /* 중요: 줄바꿈 허용 */
+  flex-wrap: wrap; /* 줄바꿈 허용 */
+  border: 1px solid #d0e5f0; /* ✅ 테두리 추가 */
 }
 
-.chart-left,
-.chart-right {
-  width: 48%;
-  flex: 1;
-}
+/* 왼쪽 도넛 차트 영역 */
 .chart-left {
   flex: 1;
-  width: 48%;
-  aspect-ratio: 1 / 1; /* 정사각형 비율 유지 */
+  width: 50%;
+  aspect-ratio: 1 / 1;
   min-width: 200px;
+  max-width: 400px; /* ✅ 최대 크기 제한 */
+  margin-right: 1rem; /* ✅ 오른쪽 여백 */
 }
+
+/* 오른쪽 막대 차트 영역 */
 .chart-right {
+  flex: 1;
+  width: 50%;
+  max-width: 500px; /* ✅ 최대 크기 제한 */
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+/* 상단 텍스트 카드 */
 .top-text {
   background-color: #d6f3fe;
   padding: 12px 16px;
@@ -142,7 +147,7 @@ const chartOptions = {
 }
 
 /* ✅ 반응형 처리 */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .category-analysis {
     flex-direction: column;
     align-items: stretch;
@@ -150,7 +155,17 @@ const chartOptions = {
 
   .chart-left,
   .chart-right {
-    width: 100%;
+    width: 95%;
+    max-width: none; /* ✅ 모바일에선 max-width 해제 */
+  }
+
+  .chart-left {
+    margin-top: 1.5rem;
+    margin-right: 0; /* ✅ 여백 제거 */
+  }
+
+  .chart-right {
+    margin-top: 2.5rem;
   }
 
   .top-text {

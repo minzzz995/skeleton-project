@@ -55,6 +55,13 @@ import TopCategoryChart from '@/components/Profile/TopCategoryChart.vue';
 const user = ref({});
 </script>
 <style scoped>
+.profile-page {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
 .user-info {
   display: flex;
   flex-direction: column;
