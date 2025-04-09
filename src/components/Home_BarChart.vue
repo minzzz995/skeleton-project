@@ -49,7 +49,7 @@ const series = computed(() => [
 const chartOptions = computed(() => ({
   chart: {
     toolbar: { show: false },
-    fontFamily: 'NanumDahaeng, sans-serif',
+    fontFamily: 'HakgyoansimDunggeunmiso, sans-serif',
   },
   plotOptions: {
     bar: { borderRadius: 4, columnWidth: '40%' },
