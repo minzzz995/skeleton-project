@@ -9,7 +9,6 @@
     <!-- 메인 콘텐츠 -->
 
     <main class="flex-fill p-3 font-hakgyo">
-
       <slot />
     </main>
   </div>
