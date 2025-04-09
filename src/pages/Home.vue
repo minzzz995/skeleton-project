@@ -14,8 +14,8 @@
       <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
         <div class="col">
           <div
-            class="text-center rounded-4 p-4 text-white"
-            style="background-color: #d9c4e6"
+            class="text-center rounded-4 p-4 text-black"
+            style="background-color: #c8e6c9"
           >
             <div>이번 달 수입</div>
             <div class="fw-bold fs-5">₩ {{ income.toLocaleString() }}</div>
@@ -23,8 +23,8 @@
         </div>
         <div class="col">
           <div
-            class="text-center rounded-4 p-4 text-white"
-            style="background-color: #c8e6c9"
+            class="text-center rounded-4 p-4 text-black"
+            style="background-color: #d9c4e6"
           >
             <div>이번 달 지출</div>
             <div class="fw-bold fs-5">₩ {{ expense.toLocaleString() }}</div>
