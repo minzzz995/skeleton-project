@@ -1,10 +1,12 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useTransactionStore } from '@/store/transactionStore';
-import { useCategoryStore } from '@/store/categoryStore';
-import TransactionList from '@/components/Transaction/TransactionList.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import dayjs from 'dayjs';
+
+import { useTransactionStore } from "@/store/transactionStore";
+import { useCategoryStore } from "@/store/categoryStore";
+import TransactionList from "@/components/Transaction/TransactionList.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import { ref, computed, onMounted } from "vue";
+import dayjs from "dayjs";
+
 
 // Store 연결
 const transactionStore = useTransactionStore();
