@@ -255,7 +255,7 @@ const hasData = (date) => getIncome(date) > 0 || getExpense(date) > 0;
 }
 
 .transaction-box ul li {
-  margin-bottom: 10px; /* 👈 각 줄 간격 */
+  margin-bottom: 10px;
 }
 
 .dot {
@@ -267,11 +267,11 @@ const hasData = (date) => getIncome(date) > 0 || getExpense(date) > 0;
 }
 
 .dot-income {
-  background-color: #28a745; /* 초록색 점 */
+  background-color: #28a745;
 }
 
 .dot-expense {
-  background-color: #dc3545; /* 빨간색 점 */
+  background-color: #dc3545;
 }
 
 @media (min-width: 1200px) {
