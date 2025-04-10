@@ -199,10 +199,11 @@ function moveMonth(offset) {
 function applyFilters() {
   const [start, end] = dateRange.value;
   if (!start || !end) return;
-  transactionStore.setDateRange(
-    dayjs(start).format('YYYY-MM-DD'),
-    dayjs(end).format('YYYY-MM-DD')
-  );
+
+  const startDay = dayjs(start).startOf('day').format('YYYY-MM-DD');
+  const endDay = dayjs(end).endOf('day').format('YYYY-MM-DD');
+
+  transactionStore.setDateRange(startDay, endDay);
   transactionStore.setCategoryFilter([...selectedCategories.value]);
 }
 
