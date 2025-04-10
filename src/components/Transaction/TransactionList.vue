@@ -78,8 +78,10 @@ function getWeekday(dateStr) {
           </span>
           <span class="memo">{{ item.memo }}</span>
           <div class="actions">
-            <button @click="$emit('edit', item)">수정</button>
-            <button @click="$emit('delete', item.id)">삭제</button>
+            <button class="edit" @click="$emit('edit', item)">수정</button>
+            <button class="delete" @click="$emit('delete', item.id)">
+              삭제
+            </button>
           </div>
         </li>
       </ul>
@@ -123,21 +125,16 @@ function getWeekday(dateStr) {
 /* 날짜별 거래 내역 - li */
 .transaction-item {
   display: grid;
-  grid-template-columns: 14% 10% 20% 12% 30% 14%;
+  grid-template-columns: 14% 10% 20% 12% 30% 18%;
   align-items: center;
   padding: 8px 20px 8px 30px;
   border-bottom: 1px dashed #eee;
   gap: 10px;
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-}
-
-.category {
+.detail {
   font-weight: 600;
-  color: #444;
+  color: #666;
 }
 
 .amount {
@@ -165,7 +162,10 @@ function getWeekday(dateStr) {
   font-size: 14px;
 }
 
-.actions button:hover {
+.edit:hover {
   color: #333;
+}
+.delete:hover {
+  color: #ff4d4f;
 }
 </style>
