@@ -140,6 +140,7 @@ function getWeekday(dateStr) {
 .amount {
   font-weight: bold;
   text-align: right;
+  white-space: nowrap;
 }
 
 .memo {
@@ -169,5 +170,31 @@ function getWeekday(dateStr) {
 }
 .delete:hover {
   color: #ff4d4f;
+}
+
+@media (max-width: 640px) {
+  .transaction-item {
+    grid-template-columns: 1fr 1fr 1.2fr auto;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .type,
+  .memo {
+    display: none;
+  }
+
+  .amount {
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .actions {
+    justify-self: end;
+  }
+  .actions button {
+    padding: 0 4px;
+    font-size: 13px;
+  }
 }
 </style>
