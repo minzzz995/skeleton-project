@@ -1,14 +1,15 @@
 <template>
   <div class="transaction-page font-hakgyo">
+    <!-- 날짜 및 필터 -->
     <div class="filter-bar font-hakgyo">
       <div class="day-title">
-        {{ dayjs(dateRange[0]).format("YYYY.MM.DD") }} ~
-        {{ dayjs(dateRange[1]).format("YYYY.MM.DD") }} / 총
+        {{ dayjs(dateRange[0]).format('YYYY.MM.DD') }} ~
+        {{ dayjs(dateRange[1]).format('YYYY.MM.DD') }} / 총
         {{ transactionStore.filteredBudgets.length }}건
       </div>
 
       <div class="filters">
-        <!-- ✅ 날짜 선택 UI -->
+        <!-- ✅ 날짜 선택 -->
         <div class="custom-date-container">
           <button @click="moveMonth(-1)" class="arrow-btn">
             <i class="fa fa-chevron-left"></i>
@@ -27,16 +28,33 @@
             <i class="fa fa-chevron-right"></i>
           </button>
         </div>
+
+        <!-- ✅ 카테고리 필터 -->
         <div class="category-filter">
           <button class="btn btn-blue" @click="openCategoryModal">
-            {{ selectedCategory || "카테고리 선택" }}
+            카테고리 선택
           </button>
         </div>
       </div>
     </div>
+
+    <!-- ✅ 선택된 카테고리 뱃지 -->
     <div class="category-box font-hakgyo" v-if="selectedCategories.length">
-      {{ selectedCategoryLabel }}
+      <div class="category-badge-wrapper">
+        <span
+          v-for="category in sortedSelectedCategories"
+          :key="category.id"
+          :class="[
+            'category-badge',
+            category.type === 'income' ? 'income' : 'expense',
+          ]"
+        >
+          {{ category.name }}
+        </span>
+      </div>
     </div>
+
+    <!-- 요약 -->
     <div class="summary font-hakgyo">
       <div class="summary-box">
         <p>수입</p>
@@ -52,7 +70,7 @@
       </div>
     </div>
 
-    <!-- 리스트 -->
+    <!-- 거래 리스트 -->
     <TransactionList
       :transactions="groupedBudgets"
       @edit="openEditModal"
@@ -101,87 +119,96 @@
 </template>
 
 <script setup>
-import { useTransactionStore } from "@/store/transactionStore";
-import { useCategoryStore } from "@/store/categoryStore";
-import TransactionList from "@/components/Transaction/TransactionList.vue";
-import TransactionModal from "@/components/Transaction/TransactionModal.vue";
-import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
-import CategoryFilterModal from "@/components/Transaction/CategoryFilterModal.vue";
-import VueDatePicker from "@vuepic/vue-datepicker";
-import { ref, computed, onMounted } from "vue";
-import dayjs from "dayjs";
-import * as bootstrap from "bootstrap";
+import { ref, computed, onMounted } from 'vue';
+import dayjs from 'dayjs';
+import * as bootstrap from 'bootstrap';
+
+import { useTransactionStore } from '@/store/transactionStore';
+import { useCategoryStore } from '@/store/categoryStore';
+
+import VueDatePicker from '@vuepic/vue-datepicker';
+import TransactionList from '@/components/Transaction/TransactionList.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
+import CategoryFilterModal from '@/components/Transaction/CategoryFilterModal.vue';
 
 // 스토어
 const transactionStore = useTransactionStore();
 const categoryStore = useCategoryStore();
-const selectedCategoryLabel = computed(() =>
-  selectedCategories.value.map((c) => c.name).join(" | ")
-);
 
-// 날짜 초기값
+// 날짜 필터 초기값
 const dateRange = ref([
-  dayjs().startOf("month").toDate(),
-  dayjs().endOf("month").toDate(),
+  dayjs().startOf('month').toDate(),
+  dayjs().endOf('month').toDate(),
 ]);
 
 const modalVisible = ref(false);
 const selectedBudget = ref(null);
 const selectedCategories = ref([]);
-
 const categoryModalVisible = ref(false);
 
 // 계산된 값
 const groupedBudgets = computed(() => transactionStore.groupByDate);
 const summary = computed(() => transactionStore.summary);
-const incomeCategories = computed(() => categoryStore.incomeCategories);
-const expenseCategories = computed(() => categoryStore.expenseCategories);
+const sortedSelectedCategories = computed(() => {
+  return [...selectedCategories.value].sort((a, b) => {
+    if (a.type === b.type) return 0;
+    return a.type === 'income' ? -1 : 1;
+  });
+});
 
-// 초기 로딩
+const selectedCategoryLabel = computed(() =>
+  selectedCategories.value.map((c) => c.name).join(' | ')
+);
+
+// 초기 데이터 로딩
 onMounted(async () => {
   await transactionStore.fetchBudgets();
   await categoryStore.fetchCategories();
   applyFilters();
 });
 
-// 메서드
+// 메서드 정의
 function openAddModal() {
   selectedBudget.value = null;
   modalVisible.value = true;
 }
+
 function openEditModal(budget) {
   selectedBudget.value = budget;
-  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
+  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
   modal.show();
   modalVisible.value = true;
 }
+
 async function deleteBudget(id) {
-  const confirmed = window.confirm("삭제하시겠습니까?");
+  const confirmed = window.confirm('삭제하시겠습니까?');
   if (!confirmed) return;
   await transactionStore.deleteBudget(id);
 }
+
 function moveMonth(offset) {
   const currentStart = dayjs(dateRange.value[0]);
-  const newStart = currentStart.add(offset, "month").startOf("month");
-  const newEnd = newStart.endOf("month");
+  const newStart = currentStart.add(offset, 'month').startOf('month');
+  const newEnd = newStart.endOf('month');
   dateRange.value = [newStart.toDate(), newEnd.toDate()];
   applyFilters();
 }
-function updateCategory() {
-  transactionStore.setCategoryFilter(selectedCategory.value);
-}
+
 function applyFilters() {
   const [start, end] = dateRange.value;
   if (!start || !end) return;
   transactionStore.setDateRange(
-    dayjs(start).format("YYYY-MM-DD"),
-    dayjs(end).format("YYYY-MM-DD")
+    dayjs(start).format('YYYY-MM-DD'),
+    dayjs(end).format('YYYY-MM-DD')
   );
-  transactionStore.setCategoryFilter(selectedCategory.value);
+  transactionStore.setCategoryFilter([...selectedCategories.value]);
 }
+
 function format(value) {
-  return parseInt(value).toLocaleString() + "원";
+  return parseInt(value).toLocaleString() + '원';
 }
+
 function openCategoryModal() {
   categoryModalVisible.value = true;
 }
@@ -200,7 +227,6 @@ function onCategorySelected(categories) {
   background-color: white;
   color: #000;
 }
-
 .btn-blue:hover {
   border: 2px solid #b4daff;
   background-color: #e6f3ff;
@@ -209,7 +235,7 @@ function onCategorySelected(categories) {
 
 .transaction-page {
   padding: 20px;
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   background-color: #fff;
 }
 
@@ -257,19 +283,14 @@ function onCategorySelected(categories) {
   align-items: center;
   justify-content: center;
 }
-
 .date-picker-box ::v-deep(.dp__input) {
   border: none !important;
-  background-image: none !important;
   background: transparent !important;
-  padding: 0 !important;
-  box-shadow: none !important;
   font-size: 16px;
   text-align: center !important;
   color: #333;
   width: 100%;
 }
-
 .date-picker-box ::v-deep(svg) {
   display: none !important;
 }
@@ -280,13 +301,6 @@ function onCategorySelected(categories) {
   color: #4285f4;
   font-size: 16px;
   cursor: pointer;
-}
-
-.category-filter select {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
 }
 
 .summary {
@@ -313,6 +327,7 @@ function onCategorySelected(categories) {
 .summary-box span {
   font-size: 18px;
 }
+
 .category-box {
   margin: 12px auto 20px auto;
   border-radius: 12px;
@@ -322,5 +337,31 @@ function onCategorySelected(categories) {
   color: #333;
   max-width: 80%;
   font-size: 16px;
+}
+.category-badge-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.category-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid;
+}
+.category-badge.income {
+  background-color: #e6f7ff;
+  color: #0077cc;
+  border-color: #91d5ff;
+}
+.category-badge.expense {
+  background-color: #fff1f0;
+  color: #d4380d;
+  border-color: #ffa39e;
 }
 </style>
