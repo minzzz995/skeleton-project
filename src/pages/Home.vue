@@ -66,12 +66,21 @@
                   <th>날짜</th>
                   <th>금액</th>
                   <th>카테고리</th>
-                  <th>세부 카테고리</th>
+                  <!-- ✅ 세부 카테고리는 데스크탑에서만 표시 -->
+                  <th class="d-none d-sm-table-cell">세부 카테고리</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="item in latestTransactions" :key="item.id">
-                  <td>{{ formatDate(item.date) }}</td>
+                  <td>
+                    <!-- ✅ 모바일에선 MM.DD 형식, 데스크탑에선 YYYY.MM.DD -->
+                    <span class="d-sm-none">{{
+                      formatDate(item.date, 'MM.DD')
+                    }}</span>
+                    <span class="d-none d-sm-inline">{{
+                      formatDate(item.date)
+                    }}</span>
+                  </td>
                   <td
                     :class="{
                       'text-success': item.type === 'income',
@@ -82,7 +91,10 @@
                     {{ parseInt(item.amount).toLocaleString() }}
                   </td>
                   <td>{{ item.category }}</td>
-                  <td>{{ item.detailcategory }}</td>
+                  <!-- ✅ 데스크탑에서만 세부카테고리 표시 -->
+                  <td class="d-none d-sm-table-cell">
+                    {{ item.detailcategory }}
+                  </td>
                 </tr>
               </tbody>
             </table>
