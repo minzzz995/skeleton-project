@@ -2,29 +2,9 @@
   <div
     class="container-fluid py-4 font-hakgyo d-flex flex-column align-items-center"
   >
-    <!-- 입출금 내역 (항상 상단에 고정) -->
-    <div
-      class="bg-white rounded shadow-sm p-4 mb-4 transaction-box w-100"
-      style="max-width: 900px"
-    >
-      <h5 class="fw-bold mb-3">{{ formatDate(selectedDate) }}의 입출금 내역</h5>
-      <ul v-if="filteredTransactions.length">
-        <li
-          v-for="(item, i) in filteredTransactions"
-          :key="i"
-          :class="item.type === 'income' ? 'text-success' : 'text-danger'"
-        >
-          {{ item.type === 'income' ? '입금' : '출금' }} - {{ item.category }}:
-          ₩{{ parseInt(item.amount).toLocaleString() }} (
-          {{ item.detailcategory || '' }} )
-        </li>
-      </ul>
-      <p v-else class="text-muted">내역이 없습니다.</p>
-    </div>
-
     <!-- 캘린더 -->
     <div
-      class="calendar-wrapper bg-white rounded shadow-sm p-3 w-100"
+      class="calendar-wrapper bg-white rounded shadow-sm p-3 w-100 mb-4"
       style="max-width: 900px"
     >
       <!-- 헤더 -->
@@ -65,6 +45,26 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- 입출금 내역 (항상 하단에 고정) -->
+    <div
+      class="bg-white rounded shadow-sm p-4 transaction-box w-100"
+      style="max-width: 900px"
+    >
+      <h5 class="fw-bold mb-3">{{ formatDate(selectedDate) }}의 입출금 내역</h5>
+      <ul v-if="filteredTransactions.length">
+        <li
+          v-for="(item, i) in filteredTransactions"
+          :key="i"
+          :class="item.type === 'income' ? 'text-success' : 'text-danger'"
+        >
+          {{ item.type === 'income' ? '입금' : '출금' }} - {{ item.category }}:
+          ₩{{ parseInt(item.amount).toLocaleString() }} (
+          {{ item.detailcategory || '' }} )
+        </li>
+      </ul>
+      <p v-else class="text-muted">내역이 없습니다.</p>
     </div>
   </div>
 </template>

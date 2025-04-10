@@ -41,17 +41,17 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute } from 'vue-router';
 const $route = useRoute();
 
 const items = [
-  { path: "/", label: "대시보드", icon: "fa-solid fa-house" },
+  { path: '/', label: '대시보드', icon: 'fa-solid fa-house' },
   {
-    path: "/transaction",
-    label: "거래내역",
-    icon: "fa-regular fa-money-bill-1",
+    path: '/transaction',
+    label: '거래내역',
+    icon: 'fa-regular fa-money-bill-1',
   },
-  { path: "/profile", label: "프로필", icon: "fa-regular fa-circle-user" },
+  { path: '/profile', label: '프로필', icon: 'fa-regular fa-circle-user' },
 ];
 </script>
 
