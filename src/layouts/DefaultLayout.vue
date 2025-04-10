@@ -1,13 +1,15 @@
 <template>
-  <div class="d-flex flex-column flex-md-row h-100">
+  <div class="layout-wrapper d-flex flex-column flex-md-row">
     <!-- 모바일용 NavBar -->
     <Navbar class="d-md-none" />
 
     <!-- 태블릿 이상용 SideBar -->
-    <SideBar class="d-none d-md-block" />
+    <div class="sidebar-wrapper d-none d-md-block">
+      <SideBar />
+    </div>
 
     <!-- 메인 콘텐츠 -->
-    <main class="flex-fill font-hakgyo" style="overflow-y: auto">
+    <main class="main-content-wrapper flex-fill font-hakgyo">
       <slot />
     </main>
   </div>
@@ -19,5 +21,29 @@ import SideBar from '@/components/Sidebar.vue';
 </script>
 
 <style scoped>
-/* 필요 시 추가 스타일 */
+.layout-wrapper {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-wrapper {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.main-content-wrapper {
+  height: 100vh;
+  overflow-y: auto;
+  padding-left: 0;
+}
+
+@media (min-width: 768px) {
+  .main-content-wrapper {
+    margin-left: 250px;
+  }
+}
 </style>

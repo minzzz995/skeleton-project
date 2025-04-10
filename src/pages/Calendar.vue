@@ -1,74 +1,68 @@
 <template>
-  <div class="container-fluid py-4 font-hakgyo">
-    <div class="row g-4">
-      <!-- 캘린더 영역 -->
-      <div class="col-12 col-md-6">
-        <div class="calendar-wrapper shadow-sm bg-white rounded p-3">
-          <!-- 헤더 -->
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <button class="btn btn-outline-secondary btn-sm" @click="prevMonth">
-              이전달
-            </button>
-            <h5 class="fw-bold m-0">
-              {{ currentYear }}년 {{ currentMonth + 1 }}월
-            </h5>
-            <button class="btn btn-outline-secondary btn-sm" @click="nextMonth">
-              다음달
-            </button>
-          </div>
+  <div
+    class="container-fluid py-4 font-hakgyo d-flex flex-column align-items-center"
+  >
+    <!-- 입출금 내역 (항상 상단에 고정) -->
+    <div
+      class="bg-white rounded shadow-sm p-4 mb-4 transaction-box w-100"
+      style="max-width: 900px"
+    >
+      <h5 class="fw-bold mb-3">{{ formatDate(selectedDate) }}의 입출금 내역</h5>
+      <ul v-if="filteredTransactions.length">
+        <li
+          v-for="(item, i) in filteredTransactions"
+          :key="i"
+          :class="item.type === 'income' ? 'text-success' : 'text-danger'"
+        >
+          {{ item.type === 'income' ? '입금' : '출금' }} - {{ item.category }}:
+          ₩{{ parseInt(item.amount).toLocaleString() }} ({ { item.detailcategory
+          || '' } })
+        </li>
+      </ul>
+      <p v-else class="text-muted">내역이 없습니다.</p>
+    </div>
 
-          <!-- 요일 헤더 -->
-          <div class="calendar-grid">
-            <div class="day-name" v-for="day in dayNames" :key="day">
-              {{ day }}
-            </div>
-
-            <!-- 날짜 셀 -->
-            <div
-              v-for="(date, index) in calendarDays"
-              :key="index"
-              class="calendar-cell"
-              :class="{
-                'bg-light': date.isCurrentMonth,
-                'bg-secondary text-white': !date.isCurrentMonth,
-                'border border-primary': isSameDate(date.date, selectedDate),
-              }"
-              @click="selectDate(date.date)"
-            >
-              <div class="fw-bold">{{ date.date.getDate() }}</div>
-              <div v-if="hasData(date.date)" class="mt-1 text-center">
-                <div v-if="getIncome(date.date)" class="text-success small">
-                  +{{ getIncome(date.date).toLocaleString() }}
-                </div>
-                <div v-if="getExpense(date.date)" class="text-danger small">
-                  -{{ getExpense(date.date).toLocaleString() }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- 캘린더 -->
+    <div
+      class="calendar-wrapper bg-white rounded shadow-sm p-3 w-100"
+      style="max-width: 900px"
+    >
+      <!-- 헤더 -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-outline-secondary btn-sm" @click="prevMonth">
+          이전달
+        </button>
+        <h5 class="fw-bold m-0">
+          {{ currentYear }}년 {{ currentMonth + 1 }}월
+        </h5>
+        <button class="btn btn-outline-secondary btn-sm" @click="nextMonth">
+          다음달
+        </button>
       </div>
 
-      <!-- 선택된 날짜의 입출금 내역 -->
-      <div class="col-12 col-md-6">
-        <div class="border rounded p-4 bg-white shadow-sm h-100">
-          <h5 class="fw-bold mb-3">
-            {{ formatDate(selectedDate) }}의 입출금 내역
-          </h5>
-          <ul v-if="filteredTransactions.length">
-            <li
-              v-for="(item, i) in filteredTransactions"
-              :key="i"
-              :class="item.type === 'income' ? 'text-success' : 'text-danger'"
-            >
-              {{ item.type === 'income' ? '입금' : '출금' }} -
-              {{ item.category }}: ₩{{
-                parseInt(item.amount).toLocaleString()
-              }}
-              ({{ item.detailcategory || '' }})
-            </li>
-          </ul>
-          <p v-else class="text-muted">내역이 없습니다.</p>
+      <!-- 요일 헤더 + 날짜 -->
+      <div class="calendar-grid">
+        <div class="day-name" v-for="day in dayNames" :key="day">{{ day }}</div>
+        <div
+          v-for="(date, index) in calendarDays"
+          :key="index"
+          class="calendar-cell"
+          :class="{
+            'bg-light': date.isCurrentMonth,
+            'bg-secondary text-white': !date.isCurrentMonth,
+            'border border-primary': isSameDate(date.date, selectedDate),
+          }"
+          @click="selectDate(date.date)"
+        >
+          <div class="fw-bold">{{ date.date.getDate() }}</div>
+          <div v-if="hasData(date.date)" class="mt-1 text-center">
+            <div v-if="getIncome(date.date)" class="text-success small">
+              +{{ getIncome(date.date).toLocaleString() }}
+            </div>
+            <div v-if="getExpense(date.date)" class="text-danger small">
+              -{{ getExpense(date.date).toLocaleString() }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -194,12 +188,11 @@ const hasData = (date) => getIncome(date) > 0 || getExpense(date) > 0;
 <style scoped>
 .calendar-wrapper {
   width: 100%;
-  height: auto;
 }
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -226,6 +219,16 @@ const hasData = (date) => getIncome(date) > 0 || getExpense(date) > 0;
 
 .calendar-cell:hover {
   background-color: #e3f2fd;
+}
+
+.transaction-box {
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .calendar-wrapper {
+    max-width: 800px;
+  }
 }
 
 @media (max-width: 768px) {
