@@ -98,7 +98,6 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 1.5rem;
 }
 
 .username {
