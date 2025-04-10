@@ -1,3 +1,92 @@
+<script setup>
+import { useTransactionStore } from "@/store/transactionStore";
+import { useCategoryStore } from "@/store/categoryStore";
+import TransactionList from "@/components/Transaction/TransactionList.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
+import { ref, computed, onMounted } from "vue";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import * as bootstrap from "bootstrap";
+import dayjs from "dayjs";
+
+// Store 연결
+const transactionStore = useTransactionStore();
+const categoryStore = useCategoryStore();
+
+// 날짜 초기값 설정
+const dateRange = ref([
+  dayjs().startOf("month").toDate(),
+  dayjs().endOf("month").toDate(),
+]);
+
+// 상태 변수
+const modalVisible = ref(false);
+const selectedBudget = ref(null);
+const selectedCategory = ref("");
+
+// 계산된 값
+const groupedBudgets = computed(() => transactionStore.groupByDate);
+const summary = computed(() => transactionStore.summary);
+const incomeCategories = computed(() => categoryStore.incomeCategories);
+const expenseCategories = computed(() => categoryStore.expenseCategories);
+
+// 초기 데이터 로딩
+onMounted(async () => {
+  await transactionStore.fetchBudgets();
+  await categoryStore.fetchCategories();
+  applyFilters();
+});
+
+// 메서드 정의
+function openAddModal() {
+  selectedBudget.value = null;
+  modalVisible.value = true;
+}
+
+function openEditModal(budget) {
+  selectedBudget.value = budget;
+  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
+  modal.show();
+  modalVisible.value = true;
+}
+
+async function deleteBudget(id) {
+  const confirmed = window.confirm("삭제하시겠습니까?");
+  if (!confirmed) return;
+
+  await transactionStore.deleteBudget(id);
+  console.log("삭제 요청 ID:", id);
+}
+
+function moveMonth(offset) {
+  const currentStart = dayjs(dateRange.value[0]);
+  const newStart = currentStart.add(offset, "month").startOf("month");
+  const newEnd = newStart.endOf("month");
+
+  dateRange.value = [newStart.toDate(), newEnd.toDate()];
+  applyFilters();
+}
+
+function updateCategory() {
+  transactionStore.setCategoryFilter(selectedCategory.value);
+}
+
+function applyFilters() {
+  const [start, end] = dateRange.value;
+  if (!start || !end) return;
+
+  transactionStore.setDateRange(
+    dayjs(start).format("YYYY-MM-DD"),
+    dayjs(end).format("YYYY-MM-DD")
+  );
+  transactionStore.setCategoryFilter(selectedCategory.value);
+}
+
+function format(value) {
+  return parseInt(value).toLocaleString() + "원";
+}
+</script>
+
 <template>
   <div class="transaction-page font-hakgyo">
     <div class="filter-bar font-hakgyo">
@@ -97,85 +186,6 @@
     </Teleport>
   </div>
 </template>
-
-<script setup>
-import { useTransactionStore } from '@/store/transactionStore';
-import { useCategoryStore } from '@/store/categoryStore';
-import TransactionList from '@/components/Transaction/TransactionList.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
-import { ref, computed, onMounted } from 'vue';
-import dayjs from 'dayjs';
-import * as bootstrap from 'bootstrap';
-
-const transactionStore = useTransactionStore();
-const categoryStore = useCategoryStore();
-
-const dateRange = ref([
-  dayjs().startOf('month').toDate(),
-  dayjs().endOf('month').toDate(),
-]);
-
-const modalVisible = ref(false);
-const selectedBudget = ref(null);
-const selectedCategory = ref('');
-
-const groupedBudgets = computed(() => transactionStore.groupByDate);
-const summary = computed(() => transactionStore.summary);
-const incomeCategories = computed(() => categoryStore.incomeCategories);
-const expenseCategories = computed(() => categoryStore.expenseCategories);
-
-onMounted(async () => {
-  await transactionStore.fetchBudgets();
-  await categoryStore.fetchCategories();
-  applyFilters();
-});
-
-function openAddModal() {
-  selectedBudget.value = null;
-  modalVisible.value = true;
-}
-
-function openEditModal(budget) {
-  selectedBudget.value = budget;
-  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
-  modal.show();
-  modalVisible.value = true;
-}
-
-async function deleteBudget(id) {
-  await transactionStore.deleteBudget(id);
-  console.log('삭제 요청 ID:', id);
-}
-
-function moveMonth(offset) {
-  const currentStart = dayjs(dateRange.value[0]);
-  const newStart = currentStart.add(offset, 'month').startOf('month');
-  const newEnd = newStart.endOf('month');
-
-  dateRange.value = [newStart.toDate(), newEnd.toDate()];
-  applyFilters();
-}
-
-function updateCategory() {
-  transactionStore.setCategoryFilter(selectedCategory.value);
-}
-
-function applyFilters() {
-  const [start, end] = dateRange.value;
-  if (!start || !end) return;
-
-  transactionStore.setDateRange(
-    dayjs(start).format('YYYY-MM-DD'),
-    dayjs(end).format('YYYY-MM-DD')
-  );
-  transactionStore.setCategoryFilter(selectedCategory.value);
-}
-
-function format(value) {
-  return parseInt(value).toLocaleString() + '원';
-}
-</script>
 
 <style scoped>
 .transaction-page {
