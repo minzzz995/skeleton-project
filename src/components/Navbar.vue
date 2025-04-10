@@ -7,26 +7,23 @@
       <span
         class="navbar-brand fw-bold"
         style="font-family: 'NanumDahaeng', sans-serif"
-        >폭싹 썼수다</span
       >
+        폭싹 썼수다
+      </span>
     </router-link>
 
     <!-- 햄버거 + 드롭다운 메뉴 -->
     <div class="dropdown">
       <button
-        class="no-border bg-sidebar p-2 rounded"
+        class="no-border bg-sidebar p-2 rounded dropdown-toggle"
         type="button"
-        id="dropdownMenuButton"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <ul
-        class="dropdown-menu dropdown-menu-end bg-sidebar shadow"
-        aria-labelledby="dropdownMenuButton"
-      >
+      <ul class="dropdown-menu dropdown-menu-end bg-sidebar shadow">
         <li v-for="item in items" :key="item.path">
           <router-link
             :to="item.path"
@@ -43,18 +40,18 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute } from 'vue-router';
 const $route = useRoute();
 
 const items = [
-  { path: "/", label: "대시보드", icon: "fa-solid fa-house" },
+  { path: '/', label: '대시보드', icon: 'fa-solid fa-house' },
   {
-    path: "/transaction",
-    label: "거래내역",
-    icon: "fa-regular fa-money-bill-1",
+    path: '/transaction',
+    label: '거래내역',
+    icon: 'fa-regular fa-money-bill-1',
   },
-  { path: "/calendar", label: "캘린더", icon: "fa-regular fa-calendar" },
-  { path: "/profile", label: "프로필", icon: "fa-regular fa-circle-user" },
+  { path: '/calendar', label: '캘린더', icon: 'fa-regular fa-calendar' },
+  { path: '/profile', label: '프로필', icon: 'fa-regular fa-circle-user' },
 ];
 </script>
 

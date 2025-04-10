@@ -1,13 +1,13 @@
 <script setup>
-import { useTransactionStore } from "@/store/transactionStore";
-import { useCategoryStore } from "@/store/categoryStore";
-import TransactionList from "@/components/Transaction/TransactionList.vue";
-import TransactionModal from "@/components/Transaction/TransactionModal.vue";
-import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
-import { ref, computed, onMounted } from "vue";
-import VueDatePicker from "@vuepic/vue-datepicker";
-import * as bootstrap from "bootstrap";
-import dayjs from "dayjs";
+import { useTransactionStore } from '@/store/transactionStore';
+import { useCategoryStore } from '@/store/categoryStore';
+import TransactionList from '@/components/Transaction/TransactionList.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
+import { ref, computed, onMounted } from 'vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import * as bootstrap from 'bootstrap';
+import dayjs from 'dayjs';
 
 // Store 연결
 const transactionStore = useTransactionStore();
@@ -15,14 +15,14 @@ const categoryStore = useCategoryStore();
 
 // 날짜 초기값 설정
 const dateRange = ref([
-  dayjs().startOf("month").toDate(),
-  dayjs().endOf("month").toDate(),
+  dayjs().startOf('month').toDate(),
+  dayjs().endOf('month').toDate(),
 ]);
 
 // 상태 변수
 const modalVisible = ref(false);
 const selectedBudget = ref(null);
-const selectedCategory = ref("");
+const selectedCategory = ref('');
 
 // 계산된 값
 const groupedBudgets = computed(() => transactionStore.groupByDate);
@@ -45,20 +45,20 @@ function openAddModal() {
 
 function openEditModal(budget) {
   selectedBudget.value = budget;
-  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
+  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
   modal.show();
   modalVisible.value = true;
 }
 
 async function deleteBudget(id) {
   await transactionStore.deleteBudget(id);
-  console.log("삭제 요청 ID:", id);
+  console.log('삭제 요청 ID:', id);
 }
 
 function moveMonth(offset) {
   const currentStart = dayjs(dateRange.value[0]);
-  const newStart = currentStart.add(offset, "month").startOf("month");
-  const newEnd = newStart.endOf("month");
+  const newStart = currentStart.add(offset, 'month').startOf('month');
+  const newEnd = newStart.endOf('month');
 
   dateRange.value = [newStart.toDate(), newEnd.toDate()];
   applyFilters();
@@ -73,14 +73,14 @@ function applyFilters() {
   if (!start || !end) return;
 
   transactionStore.setDateRange(
-    dayjs(start).format("YYYY-MM-DD"),
-    dayjs(end).format("YYYY-MM-DD")
+    dayjs(start).format('YYYY-MM-DD'),
+    dayjs(end).format('YYYY-MM-DD')
   );
   transactionStore.setCategoryFilter(selectedCategory.value);
 }
 
 function format(value) {
-  return parseInt(value).toLocaleString() + "원";
+  return parseInt(value).toLocaleString() + '원';
 }
 </script>
 
@@ -195,7 +195,7 @@ function format(value) {
 /* 전체 */
 .transaction-page {
   padding: 20px;
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   background-color: #fff;
 }
 
