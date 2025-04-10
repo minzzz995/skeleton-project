@@ -7,7 +7,7 @@
       </div>
       <div class="text">
         <h3>{{ categoryName }}</h3>
-        <p>카테고리에서 지난 달보다</p>
+        <p>지난 달보다</p>
         <p>{{ description }}</p>
       </div>
     </div>
