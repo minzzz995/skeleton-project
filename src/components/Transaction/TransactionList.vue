@@ -125,7 +125,7 @@ function getWeekday(dateStr) {
 /* 날짜별 거래 내역 - li */
 .transaction-item {
   display: grid;
-  grid-template-columns: 14% 10% 20% 12% 30% 18%;
+  grid-template-columns: 1fr 1fr 1.5fr 1fr 2fr 1fr;
   align-items: center;
   padding: 8px 20px 8px 30px;
   border-bottom: 1px dashed #eee;
@@ -139,9 +139,11 @@ function getWeekday(dateStr) {
 
 .amount {
   font-weight: bold;
+  text-align: right;
 }
 
 .memo {
+  padding: 10px;
   font-size: 12px;
   color: #777;
 }
