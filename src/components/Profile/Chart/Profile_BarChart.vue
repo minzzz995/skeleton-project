@@ -134,9 +134,10 @@ const chartOptions = {
 }
 
 .labels {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* topCategories 수만큼 */
   margin-top: 16px;
+  gap: 0; /* 막대와 정확히 붙이려면 gap 없애기 */
 }
 
 .label-item {
