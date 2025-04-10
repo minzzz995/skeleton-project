@@ -72,7 +72,7 @@ onMounted(async () => {
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 0.75rem;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
 }
 
 .section-title {
