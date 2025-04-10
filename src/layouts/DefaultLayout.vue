@@ -45,6 +45,7 @@ import SideBar from '@/components/Sidebar.vue';
 @media (min-width: 768px) {
   .main-content-wrapper {
     margin-left: 250px;
+    padding-top: 0;
   }
 }
 </style>
