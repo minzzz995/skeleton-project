@@ -4,8 +4,8 @@
     <div class="flex-grow-1 p-4 bg-light">
       <div class="profile-page">
         <!-- 사용자 정보 -->
+        <h2 class="section-title">나의 정보</h2>
         <section class="user-info" v-if="userStore.name">
-          <h2 class="section-title">나의 정보</h2>
           <div class="profile-info">
             <img
               :src="userStore.profileImage || 'https://via.placeholder.com/40'"
@@ -70,7 +70,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 0.75rem;
   padding: 1rem 2rem;
 }
 
@@ -98,6 +98,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 1.5rem;
 }
 
 .username {
@@ -116,7 +117,6 @@ img {
 .btn-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
 }
 
 .edit-btn {
