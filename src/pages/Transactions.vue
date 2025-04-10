@@ -87,46 +87,54 @@ function format(value) {
 <template>
   <div class="transaction-page font-hakgyo">
     <div class="filter-bar font-hakgyo">
-      <div class="day-filter">
-        <button @click="moveMonth(-1)">
-          <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        </button>
-        <VueDatePicker
-          v-model="dateRange"
-          range
-          format="yyyy-MM-dd"
-          :teleport="true"
-          :clearable="false"
-          :enable-time-picker="false"
-          @update:model-value="applyFilters"
-          class="date-picker"
-        />
-        <button @click="moveMonth(1)">
-          <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </button>
+      <div class="day-title">
+        {{ dayjs(dateRange[0]).format("YYYY.MM.DD") }} ~
+        {{ dayjs(dateRange[1]).format("YYYY.MM.DD") }} / 총
+        {{ transactionStore.filteredBudgets.length }}건
       </div>
-      <div class="category-filter">
-        <select v-model="selectedCategory" @change="updateCategory">
-          <option value="">전체 카테고리</option>
-          <optgroup label="수입">
-            <option
-              v-for="income in incomeCategories"
-              :key="income.id"
-              :value="income.name"
-            >
-              {{ income.name }}
-            </option>
-          </optgroup>
-          <optgroup label="지출">
-            <option
-              v-for="expense in expenseCategories"
-              :key="expense.id"
-              :value="expense.name"
-            >
-              {{ expense.name }}
-            </option>
-          </optgroup>
-        </select>
+      <div class="filters">
+        <div class="day-filter">
+          <button @click="moveMonth(-1)">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <VueDatePicker
+            v-model="dateRange"
+            range
+            format="yyyy-MM-dd"
+            :teleport="true"
+            :clearable="false"
+            :enable-time-picker="false"
+            @update:model-value="applyFilters"
+            class="date-picker"
+          />
+          <button @click="moveMonth(1)">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="category-filter">
+          <select v-model="selectedCategory" @change="updateCategory">
+            <option value="">전체 카테고리</option>
+            <optgroup label="수입">
+              <option
+                v-for="income in incomeCategories"
+                :key="income.id"
+                :value="income.name"
+              >
+                {{ income.name }}
+              </option>
+            </optgroup>
+            <optgroup label="지출">
+              <option
+                v-for="expense in expenseCategories"
+                :key="expense.id"
+                :value="expense.name"
+              >
+                {{ expense.name }}
+              </option>
+            </optgroup>
+          </select>
+        </div>
       </div>
     </div>
     <div class="summary font-hakgyo">
@@ -191,14 +199,38 @@ function format(value) {
   background-color: #fff;
 }
 
+/* 필터 */
+.filters {
+  /* 화면이 640px 이하 - 세로정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 640px) {
+  /* 화면이 640px 이상 - 가로정렬 */
+  .filters {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 /* 날짜 */
+.day-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 10px;
+}
 .day-filter {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
   gap: 8px;
-  font-size: 30px;
+  font-size: 18px;
   font-weight: bold;
 }
 .day-filter button {
@@ -208,22 +240,21 @@ function format(value) {
   cursor: pointer;
 }
 .date-picker {
-  max-width: 260px;
+  max-width: 340px;
   font-size: 16px;
 }
 
 /* category */
 .category-filter {
-  width: 100%;
   display: flex;
-  justify-content: center;
-  margin-bottom: 24px;
+  align-items: center;
 }
+
 .category-filter select {
-  width: 90%;
   padding: 6px 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  font-size: 14px;
 }
 
 /* summary */
@@ -252,17 +283,5 @@ function format(value) {
 
 .summary-box span {
   font-size: 18px;
-}
-
-.add-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  background-color: #b3e5fc;
-}
-
-.add-btn:hover {
-  background: #b4d7f7;
 }
 </style>
