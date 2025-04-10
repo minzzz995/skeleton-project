@@ -55,7 +55,7 @@ const chartData = computed(() => {
   const top = sorted.slice(0, 3);
   const etcTotal = sorted.slice(3).reduce((acc, [, amt]) => acc + amt, 0);
 
-  const labels = top.map(([cat]) => cat).concat(etcTotal > 0 ? '기타' : []);
+  const labels = top.map(([cat]) => cat).concat(etcTotal > 0 ? '나머지' : []);
   const data = top.map(([, amt]) => amt).concat(etcTotal > 0 ? etcTotal : []);
 
   return {
@@ -138,7 +138,7 @@ const chartOptions = {
   justify-content: center;
   align-items: center;
 
-  min-height: 340px; 
+  min-height: 340px;
 }
 
 /* 오른쪽 바 차트 영역 */
