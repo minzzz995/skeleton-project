@@ -17,6 +17,7 @@ const router = createRouter({
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   ],
   scrollBehavior(to, from, savedPosition) {
+    // 항상 스크롤을 맨 위로 이동
     return { top: 0 };
   },
 });
