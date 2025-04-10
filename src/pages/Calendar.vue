@@ -158,7 +158,19 @@ const calendarDays = computed(() => {
 });
 
 const selectDate = (date) => {
-  selectedDate.value = new Date(date);
+  const selected = new Date(date);
+  selectedDate.value = selected;
+
+  const selectedYear = selected.getFullYear();
+  const selectedMonth = selected.getMonth();
+
+  if (
+    selectedYear !== currentYear.value ||
+    selectedMonth !== currentMonth.value
+  ) {
+    currentYear.value = selectedYear;
+    currentMonth.value = selectedMonth;
+  }
 };
 
 const filteredTransactions = computed(() => {
