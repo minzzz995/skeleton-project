@@ -9,6 +9,7 @@
     <div class="top-category-card">
       <!-- <img :src="imagePath" alt="카테고리 이미지" /> -->
       <h3>{{ categoryName }}</h3>
+      <p>카테고리에서 지난 달보다</p>
       <p>{{ description }}</p>
     </div>
   </div>
@@ -104,7 +105,7 @@ const description = computed(() => {
 
   const diff = Math.abs(categoryData.value?.diff || 0);
   const verb = props.type === 'saved' ? '절약했어요!' : '더 많이 썼어요!';
-  return `카테고리에서 ${diff.toLocaleString()}원 ${verb}`;
+  return `${diff.toLocaleString()}원 ${verb}`;
 });
 </script>
 
