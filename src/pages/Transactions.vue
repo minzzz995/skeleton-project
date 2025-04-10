@@ -107,6 +107,7 @@ import TransactionList from "@/components/Transaction/TransactionList.vue";
 import TransactionModal from "@/components/Transaction/TransactionModal.vue";
 import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
 import CategoryFilterModal from "@/components/Transaction/CategoryFilterModal.vue";
+import VueDatePicker from "@vuepic/vue-datepicker";
 import { ref, computed, onMounted } from "vue";
 import dayjs from "dayjs";
 import * as bootstrap from "bootstrap";
@@ -155,7 +156,7 @@ function openEditModal(budget) {
   modalVisible.value = true;
 }
 async function deleteBudget(id) {
-  const confirmed = window.confirm('삭제하시겠습니까?');
+  const confirmed = window.confirm("삭제하시겠습니까?");
   if (!confirmed) return;
   await transactionStore.deleteBudget(id);
 }
