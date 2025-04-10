@@ -70,6 +70,7 @@
                 class="form-control"
                 id="detailcategory"
                 placeholder="예: 스타벅스"
+                min="0"
                 required
                 v-model="detailCategory"
               />
@@ -138,10 +139,10 @@ const emit = defineEmits(["updated", "close"]);
 // 날짜 값
 const d = ref(new Date());
 // 수입 or 지출 라디오 선택값
-const selectedType = ref("income");
+const selectedType = ref("");
 const selectedCategory = ref("");
 const detailCategory = ref("");
-const amount = ref(0);
+const amount = ref();
 const memo = ref("");
 
 // selectedBudget 값 변경될 때마다 폼 초기화
@@ -198,11 +199,17 @@ const onSubmit = async () => {
   try {
     emit("updated", updatedBudget);
     alert("수정되었습니다!");
+    // 모달 강제 닫기
+    const modalEl = document.getElementById("modifyModal");
+    modalEl.classList.remove("show");
+    modalEl.style.display = "none";
+    // 💥 백드롭 수동 제거
+    const backdrop = document.querySelector(".modal-backdrop");
+    if (backdrop) backdrop.remove();
   } catch (err) {
     alert("수정 중 오류가 발생했습니다.");
   }
 
-  bootstrap.Modal.getInstance(document.getElementById("modifyModal"))?.hide();
   emit("close");
 };
 </script>
