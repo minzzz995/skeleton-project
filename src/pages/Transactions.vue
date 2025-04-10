@@ -5,6 +5,8 @@ import TransactionList from "@/components/Transaction/TransactionList.vue";
 import TransactionModal from "@/components/Transaction/TransactionModal.vue";
 import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
 import { ref, computed, onMounted } from "vue";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import * as bootstrap from "bootstrap";
 import dayjs from "dayjs";
 
 // Store 연결
@@ -12,30 +14,21 @@ const transactionStore = useTransactionStore();
 const categoryStore = useCategoryStore();
 
 // 날짜 초기값 설정
-const now = dayjs();
-const dateRange = ref({
-  start: now.startOf("month").format("YYYY-MM-DD"),
-  end: now.format("YYYY-MM-DD"),
-});
+const dateRange = ref([
+  dayjs().startOf("month").toDate(),
+  dayjs().endOf("month").toDate(),
+]);
 
 // 상태 변수
 const modalVisible = ref(false);
 const selectedBudget = ref(null);
 const selectedCategory = ref("");
-// const showStartPicker = ref(false);
-// const showEndPicker = ref(false);
 
 // 계산된 값
 const groupedBudgets = computed(() => transactionStore.groupByDate);
 const summary = computed(() => transactionStore.summary);
 const incomeCategories = computed(() => categoryStore.incomeCategories);
 const expenseCategories = computed(() => categoryStore.expenseCategories);
-const formattedStart = computed(() =>
-  dayjs(dateRange.value.start).format("M월 D일")
-);
-const formattedEnd = computed(() =>
-  dayjs(dateRange.value.end).format("M월 D일")
-);
 
 // 초기 데이터 로딩
 onMounted(async () => {
@@ -63,24 +56,11 @@ async function deleteBudget(id) {
 }
 
 function moveMonth(offset) {
-  const newStart = dayjs(dateRange.value.start)
-    .add(offset, "month")
-    .startOf("month");
+  const currentStart = dayjs(dateRange.value[0]);
+  const newStart = currentStart.add(offset, "month").startOf("month");
   const newEnd = newStart.endOf("month");
-  dateRange.value.start = newStart.format("YYYY-MM-DD");
-  dateRange.value.end = newEnd.format("YYYY-MM-DD");
-  applyFilters();
-}
 
-function handleStartDateSelect(date) {
-  dateRange.value.start = date;
-  showStartPicker.value = false;
-  applyFilters();
-}
-
-function handleEndDateSelect(date) {
-  dateRange.value.end = date;
-  showEndPicker.value = false;
+  dateRange.value = [newStart.toDate(), newEnd.toDate()];
   applyFilters();
 }
 
@@ -89,7 +69,13 @@ function updateCategory() {
 }
 
 function applyFilters() {
-  transactionStore.setDateRange(dateRange.value.start, dateRange.value.end);
+  const [start, end] = dateRange.value;
+  if (!start || !end) return;
+
+  transactionStore.setDateRange(
+    dayjs(start).format("YYYY-MM-DD"),
+    dayjs(end).format("YYYY-MM-DD")
+  );
   transactionStore.setCategoryFilter(selectedCategory.value);
 }
 
@@ -101,13 +87,20 @@ function format(value) {
 <template>
   <div class="transaction-page font-hakgyo">
     <div class="filter-bar font-hakgyo">
-      <div class="day-filer">
+      <div class="day-filter">
         <button @click="moveMonth(-1)">
           <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </button>
-        <span>{{ formattedStart }}</span>
-        ~
-        <span>{{ formattedEnd }}</span>
+        <VueDatePicker
+          v-model="dateRange"
+          range
+          format="yyyy-MM-dd"
+          :teleport="true"
+          :clearable="false"
+          :enable-time-picker="false"
+          @update:model-value="applyFilters"
+          class="date-picker"
+        />
         <button @click="moveMonth(1)">
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </button>
@@ -166,6 +159,7 @@ function format(value) {
         z-index: 1000;
         background-color: #b3e5fc;
       "
+      @click="openAddModal"
       data-bs-toggle="modal"
       data-bs-target="#addModal"
     >
@@ -198,7 +192,7 @@ function format(value) {
 }
 
 /* 날짜 */
-.day-filer {
+.day-filter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,18 +201,15 @@ function format(value) {
   font-size: 30px;
   font-weight: bold;
 }
-.day-filer button {
+.day-filter button {
   background: none;
   border: none;
   font-size: 18px;
   cursor: pointer;
 }
-.date-range {
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 16px;
+.date-picker {
+  max-width: 260px;
+  font-size: 16px;
 }
 
 /* category */

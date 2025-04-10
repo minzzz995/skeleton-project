@@ -96,7 +96,7 @@ export const useTransactionStore = defineStore("transaction", {
     groupByDate: (state) => {
       // 필터된 거래들을 MM/DD 형태로 묶어 Object로 반환
       const grouped = {};
-      const data = useTransactionStore().filteredBudgets;
+      const data = state.filteredBudgets;
       data.forEach((t) => {
         const key = dayjs(t.date).format("MM/DD");
         if (!grouped[key]) grouped[key] = [];
@@ -108,7 +108,7 @@ export const useTransactionStore = defineStore("transaction", {
       // 필터링된 거래 기준으로 수입/지출/순수익을 계산
       let income = 0,
         expense = 0;
-      const data = useTransactionStore().filteredBudgets;
+      const data = state.filteredBudgets;
       data.forEach((t) => {
         const amt = parseInt(t.amount);
         if (t.type === "income") income += amt;
