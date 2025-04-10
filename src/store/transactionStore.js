@@ -94,9 +94,8 @@ export const useTransactionStore = defineStore('transaction', {
         const date = dayjs(t.date);
         const inRange =
           (!state.dateRange.start ||
-            date.isAfter(dayjs(state.dateRange.start).subtract(1, 'day'))) &&
-          (!state.dateRange.end ||
-            date.isBefore(dayjs(state.dateRange.end).add(1, 'day')));
+            !date.isBefore(state.dateRange.start, 'day')) &&
+          (!state.dateRange.end || !date.isAfter(state.dateRange.end, 'day'));
 
         const matchesCategory =
           state.categoryFilter.length === 0 ||
