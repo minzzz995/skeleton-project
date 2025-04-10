@@ -26,17 +26,41 @@
         </div>
         <hr />
         <!-- 비밀번호 -->
+
         <div class="row align-items-center mb-3">
           <div class="col-3">
             <label for="password" class="form-label mb-0">비밀번호</label>
           </div>
           <div class="col-9">
-            <input
-              id="password"
-              type="password"
-              class="form-control"
-              v-model="form.password"
-            />
+            <div class="input-group">
+              <input
+                id="password"
+                :type="showPw ? 'text' : 'password'"
+                class="form-control"
+                v-model="form.password"
+                @input="validatePassword(form.password)"
+              />
+              <span
+                class="input-group-text"
+                @click="showPw = !showPw"
+                style="cursor: pointer"
+              >
+                <i class="fa" :class="showPw ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </span>
+            </div>
+            <ul class="password-checklist mt-2">
+              <li :class="{ pass: passwordConditions.length }">✅ 8자 이상</li>
+              <li :class="{ pass: passwordConditions.upper }">
+                ✅ 대문자 포함
+              </li>
+              <li :class="{ pass: passwordConditions.lower }">
+                ✅ 소문자 포함
+              </li>
+              <li :class="{ pass: passwordConditions.digit }">✅ 숫자 포함</li>
+              <li :class="{ pass: passwordConditions.special }">
+                ✅ 특수문자 포함
+              </li>
+            </ul>
           </div>
         </div>
         <hr />
@@ -48,12 +72,24 @@
             >
           </div>
           <div class="col-9">
-            <input
-              id="passwordConfirm"
-              type="password"
-              class="form-control"
-              v-model="form.passwordConfirm"
-            />
+            <div class="input-group">
+              <input
+                id="passwordConfirm"
+                :type="showPwConfirm ? 'text' : 'password'"
+                class="form-control"
+                v-model="form.passwordConfirm"
+              />
+              <span
+                class="input-group-text"
+                @click="showPwConfirm = !showPwConfirm"
+                style="cursor: pointer"
+              >
+                <i
+                  class="fa"
+                  :class="showPwConfirm ? 'fa-eye-slash' : 'fa-eye'"
+                ></i>
+              </span>
+            </div>
           </div>
         </div>
         <hr />
@@ -103,7 +139,8 @@
                 @click="selectProfileImage(img)"
                 class="rounded-circle border"
                 :class="{
-                  'border-primary border-3': form.profileImage === img,
+                  'border-primary border-3':
+                    normalize(form.profileImage) === normalize(img),
                 }"
                 style="
                   width: 80px;
@@ -121,7 +158,7 @@
           style="margin-top: 4rem"
         >
           <button type="submit" class="btn btn-blue">수정하기</button>
-          <button @click.prevent="handleDelete" class="btn btn-red">
+          <button @click.prevent="router.push('/profile')" class="btn btn-red">
             뒤로가기
           </button>
         </div>
@@ -131,127 +168,136 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useUserStore } from "@/store/userStore";
-import { updateUserInfo, deleteUserAccount } from "@/services/api";
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/store/userStore';
+
+const showPw = ref(false);
+const showPwConfirm = ref(false);
+const passwordValid = ref(false);
+
+const passwordConditions = ref({
+  length: false,
+  upper: false,
+  lower: false,
+  digit: false,
+  special: false,
+});
 
 const router = useRouter();
 const userStore = useUserStore();
 
-function handleNavigate(tab) {
-  const routeMap = {
-    dashboard: "/dashboard",
-    transactions: "/transaction",
-    profile: "/profile",
-  };
-  router.push(routeMap[tab]);
-}
-
 const form = ref({
-  name: "",
-  username: "",
-  password: "",
-  passwordConfirm: "",
-  phone1: "",
-  phone2: "",
-  phone3: "",
+  id: '',
+  name: '',
+  password: '',
+  passwordConfirm: '',
+  phone1: '',
+  phone2: '',
+  phone3: '',
   profileImage: null,
 });
 
-const fileName = ref("");
-
 onMounted(async () => {
   try {
-    const userData = await getUserInfo();
+    await userStore.fetchUserInfo();
+    form.value.name = userStore.name || '';
+    form.value.id = userStore.id || '';
+    form.value.password = userStore.password || '';
+    form.value.passwordConfirm = userStore.password || '';
+    const [p1, p2, p3] = (userStore.phone || '').split('-');
+    form.value.phone1 = p1 || '';
+    form.value.phone2 = p2 || '';
+    form.value.phone3 = p3 || '';
+    form.value.profileImage = userStore.profileImage || predefinedImages[0];
 
-    form.value.name = userData.name || "";
-    form.value.username = userData.id || "";
-    const [p1, p2, p3] = (userData.tel || "").split("-");
-    form.value.phone1 = p1 || "";
-    form.value.phone2 = p2 || "";
-    form.value.phone3 = p3 || "";
-    form.value.password = userData.password || "";
-    form.value.passwordConfirm = userData.password || "";
-    form.value.profileImage = userData.imgpath || predefinedImages[0];
-
-    userStore.setUser({
-      name: userData.name,
-      username: userData.id,
-      phone: userData.tel,
-      imgpath: userData.imgpath,
-    });
+    validatePassword(form.value.password);
   } catch (e) {
-    alert("사용자 정보를 불러오는 데 실패했?습니다.");
+    alert('사용자 정보를 불러오는 데 실패했습니다.');
   }
 });
 
-async function getUserInfo() {
-  const res = await fetch("http://localhost:3000/user");
-  const users = await res.json();
-  return users[0];
+function onlyNumber(field) {
+  form.value[field] = form.value[field].replace(/\D/g, '');
 }
 
-function onlyNumber(field) {
-  form.value[field] = form.value[field].replace(/\D/g, "");
-}
 async function handleSubmit() {
+  if (!form.value.name.trim()) {
+    alert('이름을 입력해주세요.');
+    return;
+  }
+  if (
+    !/^\d{3}$/.test(form.value.phone1) ||
+    !/^\d{4}$/.test(form.value.phone2) ||
+    !/^\d{4}$/.test(form.value.phone3)
+  ) {
+    alert('올바른 휴대전화 번호를 입력해주세요.');
+    return;
+  }
+  if (!passwordValid.value) {
+    alert('비밀번호 형식을 확인해주세요.');
+    return;
+  }
   if (form.value.password !== form.value.passwordConfirm) {
-    alert("비밀번호가 일치하지 않습니다.");
+    alert('비밀번호가 일치하지 않습니다.');
     return;
   }
 
-  const payload = new FormData();
-  payload.append("name", form.value.name);
-  payload.append(
-    "phone",
-    `${form.value.phone1}-${form.value.phone2}-${form.value.phone3}`
-  );
-  if (form.value.password) payload.append("password", form.value.password);
-
-  payload.append("imgpath", form.value.profileImage || "");
-
-  try {
-    await updateUserInfo(payload);
-    userStore.setUser({
-      name: form.value.name,
-      username: form.value.username,
-      password: form.value.password,
-      phone: `${form.value.phone1}-${form.value.phone2}-${form.value.phone3}`,
-      imgpath: form.value.imgpath,
-    });
-    alert("수정 완료!");
-    router.push("/profile");
-  } catch (e) {
-    alert("수정 실패");
+  const original = {
+    name: userStore.name,
+    password: userStore.password,
+    phone: userStore.phone,
+    profileImage: userStore.profileImage,
+  };
+  const changed = {
+    name: form.value.name,
+    password: form.value.password,
+    phone: `${form.value.phone1}-${form.value.phone2}-${form.value.phone3}`,
+    profileImage: form.value.profileImage,
+  };
+  if (JSON.stringify(original) === JSON.stringify(changed)) {
+    alert('변경된 내용이 없습니다.');
+    return;
   }
-}
-
-async function handleDelete() {
-  const confirmDelete = confirm("정말로 계정을 삭제하시겠습니까?");
-  if (!confirmDelete) return;
 
   try {
-    await deleteUserAccount();
-    userStore.clearUser();
-    router.push("/");
+    await userStore.updateUserInfo(form.value);
+    alert('수정 완료!');
+    router.push('/profile');
   } catch (e) {
-    alert("삭제 실패");
+    alert('수정 실패');
   }
 }
 
 // 미리보기 이미지 리스트
 const predefinedImages = [
-  new URL("@/assets/image/profile1.png", import.meta.url).href,
-  new URL("@/assets/image/profile2.png", import.meta.url).href,
-  new URL("@/assets/image/profile3.png", import.meta.url).href,
-  new URL("@/assets/image/profile4.png", import.meta.url).href,
+  new URL('/image/profile1.png', import.meta.url).href,
+  new URL('/image/profile2.png', import.meta.url).href,
+  new URL('/image/profile3.png', import.meta.url).href,
+  new URL('/image/profile4.png', import.meta.url).href,
 ];
 
 // 이미지 선택 핸들러
 function selectProfileImage(imageUrl) {
   form.value.profileImage = imageUrl;
-  fileName.value = ""; // 기존 파일 업로드 이름 초기화
+}
+
+function normalize(url) {
+  if (!url) return '';
+  return url.split('/').slice(-2).join('/'); // "image/profile1.png"처럼 비교
+}
+
+function validatePassword(password) {
+  passwordConditions.value.length = password.length >= 8;
+  passwordConditions.value.upper = /[A-Z]/.test(password);
+  passwordConditions.value.lower = /[a-z]/.test(password);
+  passwordConditions.value.digit = /[0-9]/.test(password);
+  passwordConditions.value.special = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(
+    password
+  );
+
+  // 최종 유효 여부
+  passwordValid.value = Object.values(passwordConditions.value).every((v) => v);
 }
 </script>
 
@@ -272,5 +318,19 @@ function selectProfileImage(imageUrl) {
 .btn-blue:hover {
   background-color: #3ba1c7; /* 기존보다 어두운 푸른색 */
   color: white;
+}
+.password-checklist {
+  font-size: 0.9rem;
+  color: #888;
+  padding-left: 1rem;
+  list-style: none;
+  margin: 0;
+}
+.password-checklist li {
+  margin-bottom: 0.2rem;
+}
+.password-checklist li.pass {
+  color: green;
+  font-weight: bold;
 }
 </style>

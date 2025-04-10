@@ -10,13 +10,20 @@
       <div class="flex-grow-1 p-4 bg-light overflow-auto">
         <div class="profile-page">
           <!-- 사용자 정보 -->
-          <section class="user-info">
+          <section class="user-info" v-if="userStore.name">
             <h2 class="section-title">나의 정보</h2>
             <div class="profile-info">
-              <img src="@/assets/profile_default.png" alt="프로필 사진" />
+              <img
+                :src="
+                  userStore.profileImage || 'https://via.placeholder.com/40'
+                "
+                alt="프로필 사진"
+              />
               <div class="text-info">
-                <p class="username">test0001</p>
-                <p class="tel">연락처 : 010-0000-0000</p>
+                <p class="username">{{ userStore.name || '닉네임 없음' }}</p>
+                <p class="tel">
+                  연락처 : {{ userStore.phone || '000-0000-0000' }}
+                </p>
               </div>
               <div class="btn-wrapper">
                 <router-link to="/profile/edit" class="edit-btn">
@@ -24,6 +31,9 @@
                 </router-link>
               </div>
             </div>
+          </section>
+          <section v-else>
+            <p>로딩 중입니다...</p>
           </section>
 
           <!-- 소비 패턴 분석 -->
@@ -45,10 +55,16 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useUserStore } from '@/store/userStore';
 import CategoryChart from '@/components/Profile/CategoryChart.vue';
 import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
 
+const userStore = useUserStore();
 const user = ref({});
+
+onMounted(async () => {
+  await userStore.fetchUserInfo();
+});
 </script>
 <style scoped>
 .profile-page {
