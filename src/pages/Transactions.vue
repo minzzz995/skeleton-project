@@ -51,6 +51,9 @@ function openEditModal(budget) {
 }
 
 async function deleteBudget(id) {
+  const confirmed = window.confirm("삭제하시겠습니까?");
+  if (!confirmed) return;
+
   await transactionStore.deleteBudget(id);
   console.log("삭제 요청 ID:", id);
 }
