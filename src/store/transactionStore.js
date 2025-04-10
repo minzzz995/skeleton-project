@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 export const useTransactionStore = defineStore("transaction", {
   state: () => ({
     budgets: [],
-    categoryFilter: null,
+    categoryFilter: [], // 기존에는 null 또는 문자열
     dateRange: { start: null, end: null },
   }),
   actions: {
@@ -29,9 +29,9 @@ export const useTransactionStore = defineStore("transaction", {
       await remove(`budget/${id}`);
       this.budgets = this.budgets.filter((t) => t.id !== id);
     },
-    setCategoryFilter(category) {
-      // 카테고리 필터 적용
-      this.categoryFilter = category;
+    setCategoryFilter(categories) {
+      // 배열로 받음
+      this.categoryFilter = categories;
     },
     setDateRange(start, end) {
       // 기간 필터 적용
@@ -89,7 +89,11 @@ export const useTransactionStore = defineStore("transaction", {
           (!state.dateRange.end ||
             date.isBefore(dayjs(state.dateRange.end).add(1, "day")));
         const matchesCategory =
-          !state.categoryFilter || t.category === state.categoryFilter;
+          !state.categoryFilter.length ||
+          state.categoryFilter.some(
+            (f) => f.name === t.category && f.type === t.type
+          );
+
         return inRange && matchesCategory;
       });
     },

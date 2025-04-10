@@ -3,17 +3,22 @@
     class="d-none d-md-flex flex-column justify-content-between bg-sidebar text-dark"
     style="width: 250px; height: 100%"
   >
-    <!-- 상단 메뉴 -->
+    <!-- 상단 앱 제목 + 로고 -->
     <div>
-      <router-link to="/" class="text-decoration-none text-dark">
+      <router-link
+        to="/"
+        class="text-decoration-none text-dark d-flex align-items-center justify-content-between px-3 pt-3"
+        style="gap: 8px"
+      >
         <h5
-          class="mb-4 fw-bold px-3 pt-3 fs-3"
+          class="mb-0 fw-bold fs-3"
           style="font-family: 'NanumDahaeng', sans-serif"
         >
           폭싹 썼수다
         </h5>
       </router-link>
-      <ul class="list-unstyled px-3 font-hakgyo">
+
+      <ul class="list-unstyled px-3 font-hakgyo mt-4">
         <li class="mb-3">
           <router-link
             to="/"
@@ -24,6 +29,7 @@
             <span>대시보드</span>
           </router-link>
         </li>
+
         <li class="mb-3">
           <router-link
             to="/transaction"
@@ -34,6 +40,7 @@
             <span>거래내역</span>
           </router-link>
         </li>
+
         <li class="mb-3">
           <router-link
             to="/calendar"
@@ -44,6 +51,7 @@
             <span>캘린더</span>
           </router-link>
         </li>
+
         <li class="mb-3">
           <router-link
             to="/profile"
@@ -60,12 +68,11 @@
     <!-- 하단 프로필 -->
     <div class="d-flex align-items-center p-3 font-hakgyo">
       <img
-        :src="userStore.profileImage || defaultProfile"
+        :src="userStore.profileImage || '/assets/profile_default.png'"
         alt="프로필"
         class="rounded-circle"
         style="width: 40px; height: 40px; object-fit: cover"
       />
-
       <div class="ms-2">{{ userStore.name || 'Guest' }}</div>
     </div>
   </div>
