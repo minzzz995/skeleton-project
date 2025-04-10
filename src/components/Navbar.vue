@@ -52,6 +52,7 @@ const items = [
     icon: "fa-regular fa-money-bill-1",
   },
   { path: "/profile", label: "프로필", icon: "fa-regular fa-circle-user" },
+  { path: "/calendar", label: "캘린더", icon: "fa-regular fa-calendar" },
 ];
 </script>
 

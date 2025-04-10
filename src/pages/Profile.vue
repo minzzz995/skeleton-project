@@ -1,49 +1,46 @@
 <template>
   <div class="font-dahaeng">
     <apexchart type="bar" height="200" />
-    <div class="d-flex vh-100">
-      <div class="flex-grow-1 p-4 bg-light overflow-auto">
-        <div class="profile-page">
-          <!-- 사용자 정보 -->
-          <section class="user-info" v-if="userStore.name">
-            <h2 class="section-title">나의 정보</h2>
-            <div class="profile-info">
-              <img
-                :src="
-                  userStore.profileImage || 'https://via.placeholder.com/40'
-                "
-                alt="프로필 사진"
-              />
-              <div class="text-info">
-                <p class="username">{{ userStore.name || '닉네임 없음' }}</p>
-                <p class="tel">
-                  연락처 : {{ userStore.phone || '000-0000-0000' }}
-                </p>
-              </div>
-              <div class="btn-wrapper">
-                <router-link to="/profile/edit" class="edit-btn">
-                  회원 정보 수정
-                </router-link>
-              </div>
+    <div class="flex-grow-1 p-4 bg-light">
+      <div class="profile-page">
+        <!-- 사용자 정보 -->
+        <section class="user-info" v-if="userStore.name">
+          <h2 class="section-title">나의 정보</h2>
+          <div class="profile-info">
+            <img
+              :src="userStore.profileImage || 'https://via.placeholder.com/40'"
+              alt="프로필 사진"
+            />
+            <div class="text-info">
+              <p class="username">{{ userStore.name || '닉네임 없음' }}</p>
+              <p class="tel">
+                연락처 : {{ userStore.phone || '000-0000-0000' }}
+              </p>
             </div>
-          </section>
-          <section v-else>
-            <p>로딩 중입니다...</p>
-          </section>
+          </div>
+          <div class="btn-wrapper">
+            <router-link to="/profile/edit" class="edit-btn">
+              회원 정보 수정
+            </router-link>
+          </div>
+        </section>
+        <section v-else>
+          <p>로딩 중입니다...</p>
+        </section>
 
-          <!-- 소비 패턴 분석 -->
-          <section class="spending-analysis">
-            <h2>나의 소비 패턴 분석</h2>
-
-            <!-- 카테고리별 지출 원형 그래프 -->
+        <!-- 소비 패턴 분석 -->
+        <section class="spending-analysis">
+          <h2>나의 소비 패턴 분석</h2>
+          <!-- 카테고리별 지출 원형 그래프 -->
+          <div class="chart-graph">
             <CategoryChart />
-            <!-- 절약/과소비 분석 카드, type별로 2개 보여줌. -->
-            <div class="comparison-cards">
-              <TopCategoryCard type="saved" />
-              <TopCategoryCard type="overspent" />
-            </div>
-          </section>
-        </div>
+          </div>
+          <!-- 절약/과소비 분석 카드, type별로 2개 보여줌. -->
+          <div class="comparison-cards">
+            <TopCategoryCard type="saved" />
+            <TopCategoryCard type="overspent" />
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -144,6 +141,10 @@ img {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+}
+
+.chart-graph {
+  margin-top: 1.5rem;
 }
 
 .comparison-cards {

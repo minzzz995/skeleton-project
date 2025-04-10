@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex" style="height: 100vh; position: relative">
-    <div class="flex-grow-1 bg-white p-5 overflow-auto">
+    <div class="flex-grow-1 bg-white p-5">
       <!-- 해당 월 수입/지출/순이익 카드 -->
       <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
         <div class="col">
@@ -41,7 +41,7 @@
       </div>
 
       <!-- 거래 내역 (최근 5개만 보여주기) -->
-      <div>
+      <div class="pb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h6 class="fw-semibold">거래 내역</h6>
           <button
@@ -70,7 +70,7 @@
                   'text-danger': item.type === 'expense',
                 }"
               >
-                {{ item.type === 'income' ? '+' : '-' }}
+                {{ item.type === "income" ? "+" : "-" }}
                 {{ parseInt(item.amount).toLocaleString() }}
               </td>
 
@@ -109,13 +109,13 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import BarChart from '@/components/Home_BarChart.vue';
-import Sidebar from '@/components/Sidebar.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import { formatDate } from '@/utils/formatDate';
-import { useTransactionStore } from '@/store/transactionStore';
+import { onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+import BarChart from "@/components/Home_BarChart.vue";
+import Sidebar from "@/components/Sidebar.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import { formatDate } from "@/utils/formatDate";
+import { useTransactionStore } from "@/store/transactionStore";
 
 const router = useRouter();
 const store = useTransactionStore();
@@ -128,6 +128,6 @@ const monthlySummary = computed(() => store.monthlySummary);
 const latestTransactions = computed(() => store.latestFive);
 
 const goToTransactions = () => {
-  router.push('/transaction');
+  router.push("/transaction");
 };
 </script>
