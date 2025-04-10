@@ -170,6 +170,2904 @@
       "detailcategory": "테스트",
       "amount": 1000000,
       "memo": "test"
+    },
+    {
+      "id": "48ba",
+      "type": "expense",
+      "date": "2024-05-15T21:52:58.650220",
+      "category": "의료비",
+      "detailcategory": "버스",
+      "amount": 1792210,
+      "memo": "자동이체"
+    },
+    {
+      "id": "a48e",
+      "type": "expense",
+      "date": "2024-08-09T03:02:20.536221",
+      "category": "보험료",
+      "detailcategory": "보험료",
+      "amount": 831841,
+      "memo": "더치페이"
+    },
+    {
+      "id": "db45",
+      "type": "income",
+      "date": "2024-04-02T14:32:01.607764",
+      "category": "이자",
+      "detailcategory": "세금",
+      "amount": 1725062,
+      "memo": "더치페이"
+    },
+    {
+      "id": "4ed1",
+      "type": "expense",
+      "date": "2024-07-26T10:17:51.208918",
+      "category": "저축",
+      "detailcategory": "버스",
+      "amount": 668394,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "555d",
+      "type": "income",
+      "date": "2024-02-06T06:48:36.360137",
+      "category": "용돈",
+      "detailcategory": "스타벅스",
+      "amount": 198303,
+      "memo": "신용카드"
+    },
+    {
+      "id": "4ad6",
+      "type": "income",
+      "date": "2024-03-15T10:38:17.702356",
+      "category": "기타",
+      "detailcategory": "스타벅스",
+      "amount": 760867,
+      "memo": "기념일"
+    },
+    {
+      "id": "762d",
+      "type": "income",
+      "date": "2025-01-05T19:23:44.745183",
+      "category": "기타",
+      "detailcategory": "스타벅스",
+      "amount": 1624393,
+      "memo": "현금지급"
+    },
+    {
+      "id": "555c",
+      "type": "expense",
+      "date": "2025-02-08T19:08:50.894250",
+      "category": "경조사비",
+      "detailcategory": "넷플릭스",
+      "amount": 404408,
+      "memo": "정기결제"
+    },
+    {
+      "id": "394b",
+      "type": "expense",
+      "date": "2024-01-30T13:10:40.851325",
+      "category": "의료비",
+      "detailcategory": "데이터요금",
+      "amount": 1144512,
+      "memo": "자동이체"
+    },
+    {
+      "id": "34a8",
+      "type": "expense",
+      "date": "2024-10-03T22:47:32.831760",
+      "category": "경조사비",
+      "detailcategory": "수업",
+      "amount": 846464,
+      "memo": "더치페이"
+    },
+    {
+      "id": "dae5",
+      "type": "income",
+      "date": "2024-08-30T03:47:08.444552",
+      "category": "기타",
+      "detailcategory": "버스",
+      "amount": 27100,
+      "memo": "기념일"
+    },
+    {
+      "id": "328c",
+      "type": "expense",
+      "date": "2024-03-07T12:11:53.702795",
+      "category": "문화생활",
+      "detailcategory": "수업",
+      "amount": 1090006,
+      "memo": "테스트"
+    },
+    {
+      "id": "8f2e",
+      "type": "income",
+      "date": "2024-11-15T18:10:09.468154",
+      "category": "월급",
+      "detailcategory": "지하철",
+      "amount": 1748362,
+      "memo": "더치페이"
+    },
+    {
+      "id": "4562",
+      "type": "income",
+      "date": "2024-03-26T03:51:26.904317",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 899136,
+      "memo": "기념일"
+    },
+    {
+      "id": "7f56",
+      "type": "expense",
+      "date": "2024-07-31T21:08:56.519986",
+      "category": "식비",
+      "detailcategory": "데이터요금",
+      "amount": 1717418,
+      "memo": "기념일"
+    },
+    {
+      "id": "ddde",
+      "type": "expense",
+      "date": "2024-10-31T13:37:13.251796",
+      "category": "보험료",
+      "detailcategory": "데이터요금",
+      "amount": 1439954,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "76bf",
+      "type": "income",
+      "date": "2024-01-21T03:14:54.561107",
+      "category": "월급",
+      "detailcategory": "지하철",
+      "amount": 632861,
+      "memo": "기념일"
+    },
+    {
+      "id": "cf93",
+      "type": "expense",
+      "date": "2024-04-16T02:55:23.329329",
+      "category": "의료비",
+      "detailcategory": "병원",
+      "amount": 1584461,
+      "memo": "신용카드"
+    },
+    {
+      "id": "6167",
+      "type": "expense",
+      "date": "2024-06-11T06:37:45.091619",
+      "category": "의료비",
+      "detailcategory": "버스",
+      "amount": 1688434,
+      "memo": "자동이체"
+    },
+    {
+      "id": "daa1",
+      "type": "expense",
+      "date": "2024-12-08T12:51:54.622126",
+      "category": "보험료",
+      "detailcategory": "콘서트",
+      "amount": 735548,
+      "memo": "정기결제"
+    },
+    {
+      "id": "9602",
+      "type": "expense",
+      "date": "2024-06-24T23:27:05.777916",
+      "category": "교육비",
+      "detailcategory": "지하철",
+      "amount": 879820,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "b77c",
+      "type": "expense",
+      "date": "2025-02-19T11:09:16.704827",
+      "category": "공과금",
+      "detailcategory": "버스",
+      "amount": 1066934,
+      "memo": "더치페이"
+    },
+    {
+      "id": "97b6",
+      "type": "expense",
+      "date": "2024-06-26T06:46:54.177232",
+      "category": "보험료",
+      "detailcategory": "넷플릭스",
+      "amount": 456419,
+      "memo": "정기결제"
+    },
+    {
+      "id": "39ee",
+      "type": "income",
+      "date": "2025-05-12T04:49:03.237390",
+      "category": "기타",
+      "detailcategory": "버스",
+      "amount": 692350,
+      "memo": "기념일"
+    },
+    {
+      "id": "97f0",
+      "type": "expense",
+      "date": "2024-12-05T07:03:59.767710",
+      "category": "경조사비",
+      "detailcategory": "지하철",
+      "amount": 1233657,
+      "memo": "정기결제"
+    },
+    {
+      "id": "c1d0",
+      "type": "income",
+      "date": "2025-08-11T05:53:57.952073",
+      "category": "월급",
+      "detailcategory": "세금",
+      "amount": 640181,
+      "memo": "자동이체"
+    },
+    {
+      "id": "3361",
+      "type": "expense",
+      "date": "2025-11-16T11:49:23.823992",
+      "category": "보험료",
+      "detailcategory": "버스",
+      "amount": 1742048,
+      "memo": "테스트"
+    },
+    {
+      "id": "6025",
+      "type": "income",
+      "date": "2025-07-13T02:15:56.970749",
+      "category": "월급",
+      "detailcategory": "콘서트",
+      "amount": 1436623,
+      "memo": "기타"
+    },
+    {
+      "id": "b526",
+      "type": "income",
+      "date": "2024-10-03T09:38:33.216173",
+      "category": "이자",
+      "detailcategory": "수업",
+      "amount": 1490875,
+      "memo": "자동이체"
+    },
+    {
+      "id": "f5da",
+      "type": "expense",
+      "date": "2024-02-05T17:40:48.289315",
+      "category": "공과금",
+      "detailcategory": "스타벅스",
+      "amount": 1139689,
+      "memo": "더치페이"
+    },
+    {
+      "id": "fb3d",
+      "type": "income",
+      "date": "2024-03-08T11:58:41.293127",
+      "category": "용돈",
+      "detailcategory": "병원",
+      "amount": 1261084,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "7f94",
+      "type": "expense",
+      "date": "2025-05-25T18:08:22.251813",
+      "category": "보험료",
+      "detailcategory": "스타벅스",
+      "amount": 509398,
+      "memo": "현금지급"
+    },
+    {
+      "id": "56ef",
+      "type": "expense",
+      "date": "2024-09-24T04:10:54.945992",
+      "category": "보험료",
+      "detailcategory": "지하철",
+      "amount": 4180,
+      "memo": "더치페이"
+    },
+    {
+      "id": "4f8a",
+      "type": "income",
+      "date": "2025-02-01T09:32:45.821550",
+      "category": "이자",
+      "detailcategory": "보험료",
+      "amount": 624895,
+      "memo": "신용카드"
+    },
+    {
+      "id": "9b87",
+      "type": "income",
+      "date": "2024-06-26T15:09:22.361415",
+      "category": "기타",
+      "detailcategory": "수업",
+      "amount": 1656911,
+      "memo": "더치페이"
+    },
+    {
+      "id": "b353",
+      "type": "expense",
+      "date": "2024-03-14T05:08:41.951262",
+      "category": "통신료",
+      "detailcategory": "데이터요금",
+      "amount": 1621715,
+      "memo": "정기결제"
+    },
+    {
+      "id": "4cd4",
+      "type": "income",
+      "date": "2025-03-15T20:29:30.701851",
+      "category": "이자",
+      "detailcategory": "병원",
+      "amount": 883649,
+      "memo": "신용카드"
+    },
+    {
+      "id": "422b",
+      "type": "expense",
+      "date": "2024-02-02T22:51:27.710014",
+      "category": "기타",
+      "detailcategory": "세금",
+      "amount": 1479972,
+      "memo": "현금지급"
+    },
+    {
+      "id": "06cd",
+      "type": "expense",
+      "date": "2025-02-14T22:21:57.381747",
+      "category": "문화생활",
+      "detailcategory": "콘서트",
+      "amount": 1595449,
+      "memo": "자동이체"
+    },
+    {
+      "id": "66d8",
+      "type": "income",
+      "date": "2025-07-03T16:16:09.310136",
+      "category": "이자",
+      "detailcategory": "기타내용",
+      "amount": 949529,
+      "memo": "정기결제"
+    },
+    {
+      "id": "cc90",
+      "type": "income",
+      "date": "2025-10-03T21:58:05.112061",
+      "category": "월급",
+      "detailcategory": "스타벅스",
+      "amount": 799447,
+      "memo": "더치페이"
+    },
+    {
+      "id": "c3dc",
+      "type": "expense",
+      "date": "2024-12-07T05:59:43.480437",
+      "category": "통신료",
+      "detailcategory": "콘서트",
+      "amount": 1080583,
+      "memo": "자동이체"
+    },
+    {
+      "id": "e0eb",
+      "type": "income",
+      "date": "2024-07-18T16:54:25.621854",
+      "category": "용돈",
+      "detailcategory": "병원",
+      "amount": 1022301,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "ab96",
+      "type": "expense",
+      "date": "2025-05-19T19:37:31.413915",
+      "category": "공과금",
+      "detailcategory": "콘서트",
+      "amount": 603998,
+      "memo": "더치페이"
+    },
+    {
+      "id": "1cc3",
+      "type": "income",
+      "date": "2025-03-03T01:53:56.618934",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 1815175,
+      "memo": "테스트"
+    },
+    {
+      "id": "702f",
+      "type": "expense",
+      "date": "2025-09-22T09:08:22.032192",
+      "category": "교육비",
+      "detailcategory": "기타내용",
+      "amount": 1031534,
+      "memo": "신용카드"
+    },
+    {
+      "id": "ce17",
+      "type": "expense",
+      "date": "2024-01-18T18:39:12.910021",
+      "category": "의료비",
+      "detailcategory": "수업",
+      "amount": 365351,
+      "memo": "테스트"
+    },
+    {
+      "id": "1028",
+      "type": "expense",
+      "date": "2024-03-31T14:50:08.885858",
+      "category": "공과금",
+      "detailcategory": "스타벅스",
+      "amount": 983768,
+      "memo": "자동이체"
+    },
+    {
+      "id": "da32",
+      "type": "income",
+      "date": "2025-10-18T17:39:28.291181",
+      "category": "기타",
+      "detailcategory": "세금",
+      "amount": 1175481,
+      "memo": "정기결제"
+    },
+    {
+      "id": "755f",
+      "type": "expense",
+      "date": "2025-12-07T21:08:29.758899",
+      "category": "통신료",
+      "detailcategory": "스타벅스",
+      "amount": 1962107,
+      "memo": "자동이체"
+    },
+    {
+      "id": "afa1",
+      "type": "expense",
+      "date": "2025-07-05T16:37:00.135757",
+      "category": "의료비",
+      "detailcategory": "데이터요금",
+      "amount": 1317138,
+      "memo": "현금지급"
+    },
+    {
+      "id": "53ea",
+      "type": "expense",
+      "date": "2025-11-12T18:11:49.838775",
+      "category": "의료비",
+      "detailcategory": "지하철",
+      "amount": 634016,
+      "memo": "기타"
+    },
+    {
+      "id": "3183",
+      "type": "expense",
+      "date": "2024-04-08T11:56:07.235659",
+      "category": "기타",
+      "detailcategory": "세금",
+      "amount": 268503,
+      "memo": "테스트"
+    },
+    {
+      "id": "e507",
+      "type": "expense",
+      "date": "2024-05-20T00:56:38.057517",
+      "category": "공과금",
+      "detailcategory": "기타내용",
+      "amount": 422641,
+      "memo": "더치페이"
+    },
+    {
+      "id": "385a",
+      "type": "expense",
+      "date": "2025-01-12T19:34:35.155925",
+      "category": "경조사비",
+      "detailcategory": "넷플릭스",
+      "amount": 1815586,
+      "memo": "신용카드"
+    },
+    {
+      "id": "9149",
+      "type": "income",
+      "date": "2024-10-25T20:17:20.413648",
+      "category": "월급",
+      "detailcategory": "기타내용",
+      "amount": 1841442,
+      "memo": "기념일"
+    },
+    {
+      "id": "88b0",
+      "type": "expense",
+      "date": "2025-08-01T12:22:59.220325",
+      "category": "저축",
+      "detailcategory": "기타내용",
+      "amount": 768525,
+      "memo": "신용카드"
+    },
+    {
+      "id": "ba52",
+      "type": "income",
+      "date": "2024-05-31T18:42:53.850825",
+      "category": "월급",
+      "detailcategory": "세금",
+      "amount": 1580009,
+      "memo": "자동이체"
+    },
+    {
+      "id": "b642",
+      "type": "expense",
+      "date": "2024-04-12T06:03:52.283443",
+      "category": "교통비",
+      "detailcategory": "버스",
+      "amount": 291124,
+      "memo": "기타"
+    },
+    {
+      "id": "435a",
+      "type": "expense",
+      "date": "2025-04-02T12:44:54.171630",
+      "category": "기타",
+      "detailcategory": "넷플릭스",
+      "amount": 1883542,
+      "memo": "정기결제"
+    },
+    {
+      "id": "1bb3",
+      "type": "income",
+      "date": "2025-04-17T20:45:49.822676",
+      "category": "월급",
+      "detailcategory": "버스",
+      "amount": 1062607,
+      "memo": "현금지급"
+    },
+    {
+      "id": "bd2c",
+      "type": "income",
+      "date": "2024-06-27T01:06:36.004519",
+      "category": "기타",
+      "detailcategory": "스타벅스",
+      "amount": 1671338,
+      "memo": "기념일"
+    },
+    {
+      "id": "475c",
+      "type": "income",
+      "date": "2025-02-09T23:33:27.063282",
+      "category": "이자",
+      "detailcategory": "버스",
+      "amount": 1643982,
+      "memo": "신용카드"
+    },
+    {
+      "id": "c81a",
+      "type": "income",
+      "date": "2024-01-12T03:29:50.932010",
+      "category": "용돈",
+      "detailcategory": "넷플릭스",
+      "amount": 1884679,
+      "memo": "테스트"
+    },
+    {
+      "id": "d08b",
+      "type": "income",
+      "date": "2024-11-08T07:45:18.580247",
+      "category": "기타",
+      "detailcategory": "콘서트",
+      "amount": 108694,
+      "memo": "신용카드"
+    },
+    {
+      "id": "5dea",
+      "type": "income",
+      "date": "2025-06-13T02:11:23.911854",
+      "category": "기타",
+      "detailcategory": "콘서트",
+      "amount": 319642,
+      "memo": "정기결제"
+    },
+    {
+      "id": "6bab",
+      "type": "expense",
+      "date": "2024-10-22T11:29:22.980917",
+      "category": "보험료",
+      "detailcategory": "콘서트",
+      "amount": 1521152,
+      "memo": "기념일"
+    },
+    {
+      "id": "3b23",
+      "type": "expense",
+      "date": "2025-08-21T16:53:04.213722",
+      "category": "교통비",
+      "detailcategory": "지하철",
+      "amount": 1901741,
+      "memo": "더치페이"
+    },
+    {
+      "id": "f919",
+      "type": "expense",
+      "date": "2024-03-11T23:21:31.684329",
+      "category": "의료비",
+      "detailcategory": "넷플릭스",
+      "amount": 1121238,
+      "memo": "기념일"
+    },
+    {
+      "id": "67ec",
+      "type": "expense",
+      "date": "2025-05-13T13:19:28.700761",
+      "category": "통신료",
+      "detailcategory": "수업",
+      "amount": 993006,
+      "memo": "신용카드"
+    },
+    {
+      "id": "dde7",
+      "type": "expense",
+      "date": "2024-07-02T22:17:28.722948",
+      "category": "식비",
+      "detailcategory": "보험료",
+      "amount": 992010,
+      "memo": "더치페이"
+    },
+    {
+      "id": "d827",
+      "type": "expense",
+      "date": "2025-07-13T09:56:28.620954",
+      "category": "통신료",
+      "detailcategory": "기타내용",
+      "amount": 1756916,
+      "memo": "자동이체"
+    },
+    {
+      "id": "e859",
+      "type": "expense",
+      "date": "2025-05-14T03:28:55.820244",
+      "category": "의료비",
+      "detailcategory": "콘서트",
+      "amount": 644631,
+      "memo": "자동이체"
+    },
+    {
+      "id": "0220",
+      "type": "income",
+      "date": "2024-02-05T09:04:30.870861",
+      "category": "이자",
+      "detailcategory": "기타내용",
+      "amount": 929925,
+      "memo": "더치페이"
+    },
+    {
+      "id": "9e09",
+      "type": "expense",
+      "date": "2025-02-26T15:09:15.252109",
+      "category": "교통비",
+      "detailcategory": "세금",
+      "amount": 440771,
+      "memo": "현금지급"
+    },
+    {
+      "id": "52b1",
+      "type": "income",
+      "date": "2024-11-20T12:01:38.111662",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 250203,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "e318",
+      "type": "expense",
+      "date": "2025-03-19T13:19:04.481011",
+      "category": "공과금",
+      "detailcategory": "병원",
+      "amount": 715178,
+      "memo": "신용카드"
+    },
+    {
+      "id": "6525",
+      "type": "income",
+      "date": "2024-03-08T10:14:14.492499",
+      "category": "기타",
+      "detailcategory": "버스",
+      "amount": 198057,
+      "memo": "테스트"
+    },
+    {
+      "id": "10e3",
+      "type": "expense",
+      "date": "2025-08-25T21:51:37.055512",
+      "category": "저축",
+      "detailcategory": "스타벅스",
+      "amount": 1523862,
+      "memo": "기타"
+    },
+    {
+      "id": "7d6a",
+      "type": "expense",
+      "date": "2024-02-17T22:30:46.690691",
+      "category": "저축",
+      "detailcategory": "콘서트",
+      "amount": 182411,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "fece",
+      "type": "expense",
+      "date": "2025-05-31T16:56:08.391557",
+      "category": "보험료",
+      "detailcategory": "버스",
+      "amount": 1989481,
+      "memo": "더치페이"
+    },
+    {
+      "id": "f33c",
+      "type": "income",
+      "date": "2024-10-22T07:40:50.803890",
+      "category": "기타",
+      "detailcategory": "보험료",
+      "amount": 1485350,
+      "memo": "테스트"
+    },
+    {
+      "id": "ee49",
+      "type": "income",
+      "date": "2024-12-14T23:00:47.031396",
+      "category": "월급",
+      "detailcategory": "콘서트",
+      "amount": 1310398,
+      "memo": "더치페이"
+    },
+    {
+      "id": "0c86",
+      "type": "income",
+      "date": "2024-09-20T12:04:16.180662",
+      "category": "용돈",
+      "detailcategory": "콘서트",
+      "amount": 1785148,
+      "memo": "더치페이"
+    },
+    {
+      "id": "eb0d",
+      "type": "income",
+      "date": "2024-06-08T02:02:49.770879",
+      "category": "용돈",
+      "detailcategory": "콘서트",
+      "amount": 396833,
+      "memo": "자동이체"
+    },
+    {
+      "id": "8a6d",
+      "type": "expense",
+      "date": "2025-02-24T01:37:46.050323",
+      "category": "통신료",
+      "detailcategory": "데이터요금",
+      "amount": 1286995,
+      "memo": "현금지급"
+    },
+    {
+      "id": "a66d",
+      "type": "income",
+      "date": "2024-02-23T11:22:47.745482",
+      "category": "기타",
+      "detailcategory": "세금",
+      "amount": 327509,
+      "memo": "현금지급"
+    },
+    {
+      "id": "2fa3",
+      "type": "income",
+      "date": "2024-10-31T04:50:40.588486",
+      "category": "기타",
+      "detailcategory": "병원",
+      "amount": 1730423,
+      "memo": "기타"
+    },
+    {
+      "id": "9377",
+      "type": "expense",
+      "date": "2025-07-19T17:40:02.013238",
+      "category": "보험료",
+      "detailcategory": "수업",
+      "amount": 955293,
+      "memo": "현금지급"
+    },
+    {
+      "id": "bace",
+      "type": "income",
+      "date": "2024-12-26T00:07:39.943368",
+      "category": "이자",
+      "detailcategory": "보험료",
+      "amount": 137374,
+      "memo": "기타"
+    },
+    {
+      "id": "2c2b",
+      "type": "income",
+      "date": "2025-05-30T09:06:16.544025",
+      "category": "월급",
+      "detailcategory": "지하철",
+      "amount": 1671107,
+      "memo": "기념일"
+    },
+    {
+      "id": "f71d",
+      "type": "income",
+      "date": "2024-03-27T13:24:17.767826",
+      "category": "이자",
+      "detailcategory": "병원",
+      "amount": 767038,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "c1cd",
+      "type": "expense",
+      "date": "2025-11-05T13:15:45.874006",
+      "category": "문화생활",
+      "detailcategory": "보험료",
+      "amount": 1885802,
+      "memo": "정기결제"
+    },
+    {
+      "id": "ea34",
+      "type": "expense",
+      "date": "2024-08-06T16:01:22.597380",
+      "category": "교육비",
+      "detailcategory": "데이터요금",
+      "amount": 1066118,
+      "memo": "테스트"
+    },
+    {
+      "id": "1e7b",
+      "type": "expense",
+      "date": "2024-07-20T01:04:58.916125",
+      "category": "기타",
+      "detailcategory": "버스",
+      "amount": 1066938,
+      "memo": "신용카드"
+    },
+    {
+      "id": "f8ee",
+      "type": "expense",
+      "date": "2025-12-28T09:29:56.106548",
+      "category": "경조사비",
+      "detailcategory": "보험료",
+      "amount": 180123,
+      "memo": "자동이체"
+    },
+    {
+      "id": "d5c3",
+      "type": "expense",
+      "date": "2024-08-17T08:25:54.204307",
+      "category": "공과금",
+      "detailcategory": "수업",
+      "amount": 1471520,
+      "memo": "자동이체"
+    },
+    {
+      "id": "a177",
+      "type": "income",
+      "date": "2024-07-07T12:33:35.957843",
+      "category": "이자",
+      "detailcategory": "콘서트",
+      "amount": 1097625,
+      "memo": "현금지급"
+    },
+    {
+      "id": "c6f2",
+      "type": "expense",
+      "date": "2024-08-05T13:50:52.753044",
+      "category": "기타",
+      "detailcategory": "콘서트",
+      "amount": 1394978,
+      "memo": "자동이체"
+    },
+    {
+      "id": "f2fc",
+      "type": "income",
+      "date": "2025-02-05T16:10:19.622853",
+      "category": "이자",
+      "detailcategory": "수업",
+      "amount": 1577354,
+      "memo": "현금지급"
+    },
+    {
+      "id": "b417",
+      "type": "income",
+      "date": "2025-11-12T11:58:21.633823",
+      "category": "용돈",
+      "detailcategory": "세금",
+      "amount": 224869,
+      "memo": "더치페이"
+    },
+    {
+      "id": "5471",
+      "type": "expense",
+      "date": "2025-07-08T09:40:25.920649",
+      "category": "경조사비",
+      "detailcategory": "데이터요금",
+      "amount": 1364828,
+      "memo": "자동이체"
+    },
+    {
+      "id": "b0a0",
+      "type": "expense",
+      "date": "2025-07-10T12:56:19.895295",
+      "category": "교육비",
+      "detailcategory": "기타내용",
+      "amount": 1049660,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "314f",
+      "type": "income",
+      "date": "2025-06-09T08:18:13.614235",
+      "category": "용돈",
+      "detailcategory": "지하철",
+      "amount": 1436734,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "c336",
+      "type": "income",
+      "date": "2025-05-12T04:11:28.210705",
+      "category": "월급",
+      "detailcategory": "스타벅스",
+      "amount": 301068,
+      "memo": "기타"
+    },
+    {
+      "id": "ec3f",
+      "type": "income",
+      "date": "2025-04-03T22:07:25.245410",
+      "category": "용돈",
+      "detailcategory": "보험료",
+      "amount": 1924904,
+      "memo": "신용카드"
+    },
+    {
+      "id": "d400",
+      "type": "income",
+      "date": "2024-02-29T12:30:47.094236",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 1751831,
+      "memo": "기념일"
+    },
+    {
+      "id": "7071",
+      "type": "expense",
+      "date": "2025-08-14T03:58:34.516532",
+      "category": "식비",
+      "detailcategory": "병원",
+      "amount": 1667468,
+      "memo": "자동이체"
+    },
+    {
+      "id": "f2b2",
+      "type": "income",
+      "date": "2025-01-01T02:17:10.292625",
+      "category": "월급",
+      "detailcategory": "버스",
+      "amount": 306107,
+      "memo": "신용카드"
+    },
+    {
+      "id": "074b",
+      "type": "expense",
+      "date": "2024-01-04T06:15:30.749797",
+      "category": "교육비",
+      "detailcategory": "넷플릭스",
+      "amount": 245105,
+      "memo": "기념일"
+    },
+    {
+      "id": "98ce",
+      "type": "expense",
+      "date": "2024-09-01T11:31:24.492338",
+      "category": "교통비",
+      "detailcategory": "콘서트",
+      "amount": 831842,
+      "memo": "현금지급"
+    },
+    {
+      "id": "c6e3",
+      "type": "expense",
+      "date": "2025-09-08T19:17:54.278734",
+      "category": "저축",
+      "detailcategory": "버스",
+      "amount": 395563,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "add2",
+      "type": "expense",
+      "date": "2025-11-19T11:09:48.378369",
+      "category": "공과금",
+      "detailcategory": "기타내용",
+      "amount": 284217,
+      "memo": "기념일"
+    },
+    {
+      "id": "070b",
+      "type": "income",
+      "date": "2024-09-01T12:06:21.184119",
+      "category": "이자",
+      "detailcategory": "데이터요금",
+      "amount": 715411,
+      "memo": "자동이체"
+    },
+    {
+      "id": "b6d1",
+      "type": "income",
+      "date": "2025-11-01T23:06:06.427346",
+      "category": "월급",
+      "detailcategory": "병원",
+      "amount": 1103149,
+      "memo": "테스트"
+    },
+    {
+      "id": "cdc2",
+      "type": "expense",
+      "date": "2025-05-23T12:20:56.229855",
+      "category": "공과금",
+      "detailcategory": "데이터요금",
+      "amount": 1734728,
+      "memo": "기타"
+    },
+    {
+      "id": "3a8d",
+      "type": "income",
+      "date": "2024-04-06T08:26:29.793377",
+      "category": "용돈",
+      "detailcategory": "수업",
+      "amount": 1841563,
+      "memo": "더치페이"
+    },
+    {
+      "id": "1a2a",
+      "type": "expense",
+      "date": "2025-08-01T05:56:41.077113",
+      "category": "통신료",
+      "detailcategory": "기타내용",
+      "amount": 33835,
+      "memo": "기념일"
+    },
+    {
+      "id": "cf4a",
+      "type": "expense",
+      "date": "2025-07-14T05:30:28.801563",
+      "category": "공과금",
+      "detailcategory": "스타벅스",
+      "amount": 1313831,
+      "memo": "더치페이"
+    },
+    {
+      "id": "a990",
+      "type": "expense",
+      "date": "2024-03-17T02:57:56.413232",
+      "category": "통신료",
+      "detailcategory": "기타내용",
+      "amount": 1794422,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "5ee5",
+      "type": "income",
+      "date": "2024-04-12T19:42:22.238384",
+      "category": "기타",
+      "detailcategory": "스타벅스",
+      "amount": 1692650,
+      "memo": "기념일"
+    },
+    {
+      "id": "b950",
+      "type": "income",
+      "date": "2024-05-11T17:43:19.747317",
+      "category": "이자",
+      "detailcategory": "세금",
+      "amount": 1675360,
+      "memo": "기념일"
+    },
+    {
+      "id": "06a3",
+      "type": "income",
+      "date": "2024-09-12T18:54:15.197496",
+      "category": "기타",
+      "detailcategory": "병원",
+      "amount": 299310,
+      "memo": "자동이체"
+    },
+    {
+      "id": "1799",
+      "type": "expense",
+      "date": "2025-08-05T11:38:22.063514",
+      "category": "공과금",
+      "detailcategory": "세금",
+      "amount": 254722,
+      "memo": "테스트"
+    },
+    {
+      "id": "b5ad",
+      "type": "income",
+      "date": "2024-02-11T01:51:48.624055",
+      "category": "기타",
+      "detailcategory": "기타내용",
+      "amount": 1608352,
+      "memo": "테스트"
+    },
+    {
+      "id": "251f",
+      "type": "income",
+      "date": "2024-09-28T18:37:00.699747",
+      "category": "이자",
+      "detailcategory": "지하철",
+      "amount": 1384920,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "70c6",
+      "type": "expense",
+      "date": "2025-08-17T01:06:31.209757",
+      "category": "통신료",
+      "detailcategory": "데이터요금",
+      "amount": 1138550,
+      "memo": "자동이체"
+    },
+    {
+      "id": "df51",
+      "type": "income",
+      "date": "2025-06-08T22:58:33.793216",
+      "category": "기타",
+      "detailcategory": "데이터요금",
+      "amount": 1879265,
+      "memo": "자동이체"
+    },
+    {
+      "id": "3971",
+      "type": "income",
+      "date": "2025-08-18T10:14:12.990932",
+      "category": "용돈",
+      "detailcategory": "콘서트",
+      "amount": 1321897,
+      "memo": "테스트"
+    },
+    {
+      "id": "ffe9",
+      "type": "income",
+      "date": "2025-04-22T22:16:14.775991",
+      "category": "월급",
+      "detailcategory": "스타벅스",
+      "amount": 605382,
+      "memo": "테스트"
+    },
+    {
+      "id": "6527",
+      "type": "expense",
+      "date": "2025-11-25T18:47:39.943733",
+      "category": "공과금",
+      "detailcategory": "넷플릭스",
+      "amount": 538978,
+      "memo": "기타"
+    },
+    {
+      "id": "4f4c",
+      "type": "expense",
+      "date": "2025-05-24T05:20:10.708001",
+      "category": "저축",
+      "detailcategory": "넷플릭스",
+      "amount": 1104507,
+      "memo": "더치페이"
+    },
+    {
+      "id": "1005",
+      "type": "income",
+      "date": "2024-08-24T00:39:21.004759",
+      "category": "기타",
+      "detailcategory": "스타벅스",
+      "amount": 1116862,
+      "memo": "정기결제"
+    },
+    {
+      "id": "415c",
+      "type": "income",
+      "date": "2024-01-25T14:44:23.085950",
+      "category": "월급",
+      "detailcategory": "수업",
+      "amount": 558362,
+      "memo": "테스트"
+    },
+    {
+      "id": "2fd4",
+      "type": "expense",
+      "date": "2024-02-29T09:07:31.733964",
+      "category": "의료비",
+      "detailcategory": "기타내용",
+      "amount": 1785098,
+      "memo": "현금지급"
+    },
+    {
+      "id": "09a1",
+      "type": "expense",
+      "date": "2025-03-02T13:50:20.302610",
+      "category": "보험료",
+      "detailcategory": "지하철",
+      "amount": 1464649,
+      "memo": "테스트"
+    },
+    {
+      "id": "22c9",
+      "type": "expense",
+      "date": "2025-04-10T13:21:35.336305",
+      "category": "기타",
+      "detailcategory": "보험료",
+      "amount": 1904453,
+      "memo": "정기결제"
+    },
+    {
+      "id": "a68c",
+      "type": "expense",
+      "date": "2024-10-13T12:05:38.986442",
+      "category": "보험료",
+      "detailcategory": "데이터요금",
+      "amount": 938226,
+      "memo": "더치페이"
+    },
+    {
+      "id": "4512",
+      "type": "expense",
+      "date": "2025-12-24T22:55:51.641866",
+      "category": "식비",
+      "detailcategory": "버스",
+      "amount": 666951,
+      "memo": "정기결제"
+    },
+    {
+      "id": "0dfd",
+      "type": "expense",
+      "date": "2025-04-04T16:52:48.263398",
+      "category": "문화생활",
+      "detailcategory": "버스",
+      "amount": 256415,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "8426",
+      "type": "income",
+      "date": "2024-03-13T22:27:59.572853",
+      "category": "기타",
+      "detailcategory": "데이터요금",
+      "amount": 355131,
+      "memo": "자동이체"
+    },
+    {
+      "id": "cd9e",
+      "type": "expense",
+      "date": "2024-09-12T21:51:52.416874",
+      "category": "통신료",
+      "detailcategory": "보험료",
+      "amount": 1856092,
+      "memo": "더치페이"
+    },
+    {
+      "id": "8c5b",
+      "type": "income",
+      "date": "2024-09-06T23:29:55.399811",
+      "category": "기타",
+      "detailcategory": "데이터요금",
+      "amount": 1007267,
+      "memo": "테스트"
+    },
+    {
+      "id": "9f2e",
+      "type": "expense",
+      "date": "2024-02-29T23:25:10.624464",
+      "category": "교통비",
+      "detailcategory": "병원",
+      "amount": 1035816,
+      "memo": "기타"
+    },
+    {
+      "id": "d8fa",
+      "type": "expense",
+      "date": "2024-03-23T05:08:35.503333",
+      "category": "문화생활",
+      "detailcategory": "버스",
+      "amount": 1748345,
+      "memo": "기념일"
+    },
+    {
+      "id": "28cd",
+      "type": "income",
+      "date": "2025-07-14T13:04:51.793813",
+      "category": "이자",
+      "detailcategory": "세금",
+      "amount": 1788397,
+      "memo": "더치페이"
+    },
+    {
+      "id": "055b",
+      "type": "income",
+      "date": "2024-01-12T06:24:06.081546",
+      "category": "용돈",
+      "detailcategory": "콘서트",
+      "amount": 1157484,
+      "memo": "기타"
+    },
+    {
+      "id": "fd5a",
+      "type": "expense",
+      "date": "2025-12-15T02:04:23.754380",
+      "category": "의료비",
+      "detailcategory": "기타내용",
+      "amount": 199367,
+      "memo": "신용카드"
+    },
+    {
+      "id": "b8fc",
+      "type": "expense",
+      "date": "2025-01-15T21:55:10.505834",
+      "category": "교육비",
+      "detailcategory": "넷플릭스",
+      "amount": 1611054,
+      "memo": "기념일"
+    },
+    {
+      "id": "c280",
+      "type": "expense",
+      "date": "2025-08-16T10:49:14.532110",
+      "category": "교통비",
+      "detailcategory": "콘서트",
+      "amount": 1458117,
+      "memo": "현금지급"
+    },
+    {
+      "id": "2740",
+      "type": "expense",
+      "date": "2024-11-14T01:34:20.986698",
+      "category": "저축",
+      "detailcategory": "콘서트",
+      "amount": 762276,
+      "memo": "기타"
+    },
+    {
+      "id": "bc42",
+      "type": "expense",
+      "date": "2025-10-11T21:42:49.481872",
+      "category": "교통비",
+      "detailcategory": "데이터요금",
+      "amount": 1582883,
+      "memo": "현금지급"
+    },
+    {
+      "id": "01c0",
+      "type": "income",
+      "date": "2025-02-15T22:16:30.304368",
+      "category": "용돈",
+      "detailcategory": "넷플릭스",
+      "amount": 927859,
+      "memo": "자동이체"
+    },
+    {
+      "id": "6ff7",
+      "type": "income",
+      "date": "2024-04-08T20:06:18.851713",
+      "category": "기타",
+      "detailcategory": "데이터요금",
+      "amount": 1700057,
+      "memo": "테스트"
+    },
+    {
+      "id": "c22c",
+      "type": "income",
+      "date": "2024-07-17T15:42:48.440933",
+      "category": "이자",
+      "detailcategory": "병원",
+      "amount": 1596731,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "3356",
+      "type": "income",
+      "date": "2024-01-12T18:29:07.225782",
+      "category": "월급",
+      "detailcategory": "콘서트",
+      "amount": 343789,
+      "memo": "기념일"
+    },
+    {
+      "id": "dbb9",
+      "type": "income",
+      "date": "2024-09-24T04:34:24.851796",
+      "category": "이자",
+      "detailcategory": "세금",
+      "amount": 848659,
+      "memo": "신용카드"
+    },
+    {
+      "id": "2192",
+      "type": "expense",
+      "date": "2024-01-05T02:27:16.601132",
+      "category": "보험료",
+      "detailcategory": "병원",
+      "amount": 23722,
+      "memo": "신용카드"
+    },
+    {
+      "id": "580f",
+      "type": "expense",
+      "date": "2024-05-04T01:24:03.280321",
+      "category": "기타",
+      "detailcategory": "콘서트",
+      "amount": 792196,
+      "memo": "자동이체"
+    },
+    {
+      "id": "ea10",
+      "type": "income",
+      "date": "2025-10-10T05:36:29.186401",
+      "category": "기타",
+      "detailcategory": "수업",
+      "amount": 1397861,
+      "memo": "현금지급"
+    },
+    {
+      "id": "09cc",
+      "type": "income",
+      "date": "2025-08-05T21:15:51.087510",
+      "category": "월급",
+      "detailcategory": "세금",
+      "amount": 1547516,
+      "memo": "기타"
+    },
+    {
+      "id": "0dab",
+      "type": "income",
+      "date": "2025-08-15T16:19:14.116244",
+      "category": "이자",
+      "detailcategory": "세금",
+      "amount": 1899125,
+      "memo": "현금지급"
+    },
+    {
+      "id": "cdd9",
+      "type": "expense",
+      "date": "2024-05-22T11:51:05.123692",
+      "category": "교통비",
+      "detailcategory": "스타벅스",
+      "amount": 719117,
+      "memo": "더치페이"
+    },
+    {
+      "id": "82d4",
+      "type": "expense",
+      "date": "2025-09-06T03:12:29.477486",
+      "category": "의료비",
+      "detailcategory": "병원",
+      "amount": 504971,
+      "memo": "신용카드"
+    },
+    {
+      "id": "49fc",
+      "type": "income",
+      "date": "2025-07-26T22:57:19.193470",
+      "category": "이자",
+      "detailcategory": "병원",
+      "amount": 503649,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "9c3d",
+      "type": "expense",
+      "date": "2024-05-22T23:26:21.257241",
+      "category": "공과금",
+      "detailcategory": "스타벅스",
+      "amount": 975152,
+      "memo": "기타"
+    },
+    {
+      "id": "53a6",
+      "type": "income",
+      "date": "2025-10-11T22:08:40.871702",
+      "category": "기타",
+      "detailcategory": "지하철",
+      "amount": 1918677,
+      "memo": "테스트"
+    },
+    {
+      "id": "efa1",
+      "type": "income",
+      "date": "2024-06-23T18:27:12.707725",
+      "category": "기타",
+      "detailcategory": "수업",
+      "amount": 1760815,
+      "memo": "기념일"
+    },
+    {
+      "id": "711b",
+      "type": "income",
+      "date": "2024-05-16T00:07:44.134857",
+      "category": "이자",
+      "detailcategory": "병원",
+      "amount": 1365537,
+      "memo": "자동이체"
+    },
+    {
+      "id": "f205",
+      "type": "income",
+      "date": "2025-07-31T09:17:14.452816",
+      "category": "월급",
+      "detailcategory": "데이터요금",
+      "amount": 1793917,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "16b4",
+      "type": "income",
+      "date": "2025-03-18T20:17:35.803477",
+      "category": "용돈",
+      "detailcategory": "병원",
+      "amount": 167152,
+      "memo": "자동이체"
+    },
+    {
+      "id": "0969",
+      "type": "expense",
+      "date": "2024-04-02T08:08:17.446720",
+      "category": "경조사비",
+      "detailcategory": "수업",
+      "amount": 1663942,
+      "memo": "테스트"
+    },
+    {
+      "id": "2569",
+      "type": "expense",
+      "date": "2024-02-01T16:35:59.693933",
+      "category": "통신료",
+      "detailcategory": "넷플릭스",
+      "amount": 137452,
+      "memo": "더치페이"
+    },
+    {
+      "id": "ee6c",
+      "type": "expense",
+      "date": "2025-08-23T02:06:44.560701",
+      "category": "통신료",
+      "detailcategory": "병원",
+      "amount": 1456170,
+      "memo": "현금지급"
+    },
+    {
+      "id": "f3ed",
+      "type": "expense",
+      "date": "2025-06-03T08:22:37.078976",
+      "category": "경조사비",
+      "detailcategory": "수업",
+      "amount": 364807,
+      "memo": "현금지급"
+    },
+    {
+      "id": "3769",
+      "type": "income",
+      "date": "2024-05-31T03:49:55.815920",
+      "category": "월급",
+      "detailcategory": "세금",
+      "amount": 25088,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "7be6",
+      "type": "income",
+      "date": "2024-06-08T18:15:06.523950",
+      "category": "기타",
+      "detailcategory": "넷플릭스",
+      "amount": 489686,
+      "memo": "테스트"
+    },
+    {
+      "id": "c551",
+      "type": "expense",
+      "date": "2025-02-25T22:01:08.308926",
+      "category": "문화생활",
+      "detailcategory": "넷플릭스",
+      "amount": 146805,
+      "memo": "현금지급"
+    },
+    {
+      "id": "8b64",
+      "type": "expense",
+      "date": "2025-09-20T04:04:14.700602",
+      "category": "저축",
+      "detailcategory": "세금",
+      "amount": 7965,
+      "memo": "테스트"
+    },
+    {
+      "id": "3806",
+      "type": "income",
+      "date": "2024-03-08T08:09:41.029929",
+      "category": "월급",
+      "detailcategory": "세금",
+      "amount": 1066227,
+      "memo": "현금지급"
+    },
+    {
+      "id": "72aa",
+      "type": "expense",
+      "date": "2024-09-22T04:35:16.904339",
+      "category": "경조사비",
+      "detailcategory": "수업",
+      "amount": 939870,
+      "memo": "자동이체"
+    },
+    {
+      "id": "a531",
+      "type": "income",
+      "date": "2025-03-06T03:35:27.736559",
+      "category": "이자",
+      "detailcategory": "수업",
+      "amount": 1426340,
+      "memo": "더치페이"
+    },
+    {
+      "id": "b284",
+      "type": "income",
+      "date": "2024-05-22T10:23:02.094132",
+      "category": "월급",
+      "detailcategory": "콘서트",
+      "amount": 1295522,
+      "memo": "기타"
+    },
+    {
+      "id": "ea29",
+      "type": "income",
+      "date": "2025-10-26T19:01:34.159746",
+      "category": "용돈",
+      "detailcategory": "콘서트",
+      "amount": 1139398,
+      "memo": "자동이체"
+    },
+    {
+      "id": "9f39",
+      "type": "expense",
+      "date": "2024-01-20T21:35:35.505189",
+      "category": "교육비",
+      "detailcategory": "세금",
+      "amount": 618998,
+      "memo": "정기결제"
+    },
+    {
+      "id": "0835",
+      "type": "expense",
+      "date": "2024-12-11T05:21:18.732988",
+      "category": "경조사비",
+      "detailcategory": "수업",
+      "amount": 1935269,
+      "memo": "현금지급"
+    },
+    {
+      "id": "f574",
+      "type": "income",
+      "date": "2024-09-29T21:30:31.914807",
+      "category": "이자",
+      "detailcategory": "콘서트",
+      "amount": 1528541,
+      "memo": "기타"
+    },
+    {
+      "id": "86ed",
+      "type": "income",
+      "date": "2025-02-28T05:06:56.773564",
+      "category": "용돈",
+      "detailcategory": "넷플릭스",
+      "amount": 274101,
+      "memo": "테스트"
+    },
+    {
+      "id": "9076",
+      "type": "income",
+      "date": "2025-12-23T11:57:09.481069",
+      "category": "용돈",
+      "detailcategory": "보험료",
+      "amount": 477030,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "d7da",
+      "type": "expense",
+      "date": "2025-12-01T04:38:26.983090",
+      "category": "교통비",
+      "detailcategory": "세금",
+      "amount": 1404862,
+      "memo": "정기결제"
+    },
+    {
+      "id": "ad47",
+      "type": "expense",
+      "date": "2024-11-26T16:30:22.156033",
+      "category": "교육비",
+      "detailcategory": "스타벅스",
+      "amount": 1869384,
+      "memo": "신용카드"
+    },
+    {
+      "id": "f3fd",
+      "type": "expense",
+      "date": "2024-03-27T11:18:06.430004",
+      "category": "경조사비",
+      "detailcategory": "지하철",
+      "amount": 530006,
+      "memo": "현금지급"
+    },
+    {
+      "id": "142d",
+      "type": "income",
+      "date": "2024-03-16T14:32:26.743182",
+      "category": "월급",
+      "detailcategory": "콘서트",
+      "amount": 186546,
+      "memo": "정기결제"
+    },
+    {
+      "id": "bd0e",
+      "type": "expense",
+      "date": "2024-01-11T02:36:01.120213",
+      "category": "보험료",
+      "detailcategory": "세금",
+      "amount": 1687598,
+      "memo": "기타"
+    },
+    {
+      "id": "58df",
+      "type": "expense",
+      "date": "2025-08-29T13:57:54.475781",
+      "category": "통신료",
+      "detailcategory": "콘서트",
+      "amount": 1939065,
+      "memo": "자동이체"
+    },
+    {
+      "id": "3fe9",
+      "type": "income",
+      "date": "2025-09-05T23:22:12.955471",
+      "category": "이자",
+      "detailcategory": "병원",
+      "amount": 725710,
+      "memo": "자동이체"
+    },
+    {
+      "id": "828b",
+      "type": "income",
+      "date": "2025-09-30T04:19:24.437408",
+      "category": "이자",
+      "detailcategory": "수업",
+      "amount": 1473648,
+      "memo": "자동이체"
+    },
+    {
+      "id": "bbae",
+      "type": "expense",
+      "date": "2024-02-20T13:39:38.812203",
+      "category": "기타",
+      "detailcategory": "세금",
+      "amount": 1810632,
+      "memo": "정기결제"
+    },
+    {
+      "id": "4be2",
+      "type": "income",
+      "date": "2024-07-28T02:32:15.536890",
+      "category": "월급",
+      "detailcategory": "데이터요금",
+      "amount": 1076755,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "b10e",
+      "type": "income",
+      "date": "2025-11-15T01:23:08.080634",
+      "category": "용돈",
+      "detailcategory": "데이터요금",
+      "amount": 1081441,
+      "memo": "기념일"
+    },
+    {
+      "id": "4759",
+      "type": "income",
+      "date": "2024-12-30T12:55:15.829404",
+      "category": "기타",
+      "detailcategory": "수업",
+      "amount": 353397,
+      "memo": "더치페이"
+    },
+    {
+      "id": "3062",
+      "type": "income",
+      "date": "2024-10-21T04:01:52.549749",
+      "category": "용돈",
+      "detailcategory": "넷플릭스",
+      "amount": 1429065,
+      "memo": "정기결제"
+    },
+    {
+      "id": "d1ec",
+      "type": "income",
+      "date": "2025-09-03T02:59:33.848291",
+      "category": "기타",
+      "detailcategory": "기타내용",
+      "amount": 1384945,
+      "memo": "정기결제"
+    },
+    {
+      "id": "3a7b",
+      "type": "expense",
+      "date": "2025-01-27T22:37:07.736123",
+      "category": "경조사비",
+      "detailcategory": "수업",
+      "amount": 1726512,
+      "memo": "기념일"
+    },
+    {
+      "id": "54f1",
+      "type": "expense",
+      "date": "2024-01-29T08:34:28.830472",
+      "category": "보험료",
+      "detailcategory": "기타내용",
+      "amount": 1515219,
+      "memo": "현금지급"
+    },
+    {
+      "id": "016d",
+      "type": "income",
+      "date": "2025-08-14T14:56:28.996476",
+      "category": "월급",
+      "detailcategory": "스타벅스",
+      "amount": 460108,
+      "memo": "기타"
+    },
+    {
+      "id": "0e25",
+      "type": "expense",
+      "date": "2025-08-03T13:32:19.566847",
+      "category": "보험료",
+      "detailcategory": "기타내용",
+      "amount": 1386280,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "d5b1",
+      "type": "income",
+      "date": "2025-05-22T02:34:14.607445",
+      "category": "용돈",
+      "detailcategory": "데이터요금",
+      "amount": 1606689,
+      "memo": "현금지급"
+    },
+    {
+      "id": "ce3a",
+      "type": "income",
+      "date": "2025-12-20T12:19:48.026824",
+      "category": "이자",
+      "detailcategory": "보험료",
+      "amount": 828376,
+      "memo": "자동이체"
+    },
+    {
+      "id": "f6fc",
+      "type": "expense",
+      "date": "2024-09-22T12:35:07.793256",
+      "category": "의료비",
+      "detailcategory": "콘서트",
+      "amount": 1275206,
+      "memo": "테스트"
+    },
+    {
+      "id": "2157",
+      "type": "income",
+      "date": "2025-09-27T16:20:56.396358",
+      "category": "용돈",
+      "detailcategory": "세금",
+      "amount": 1012178,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "a5f4",
+      "type": "expense",
+      "date": "2024-12-25T04:51:14.274575",
+      "category": "저축",
+      "detailcategory": "수업",
+      "amount": 28833,
+      "memo": "자동이체"
+    },
+    {
+      "id": "736f",
+      "type": "income",
+      "date": "2025-05-11T05:09:08.868979",
+      "category": "월급",
+      "detailcategory": "세금",
+      "amount": 279589,
+      "memo": "현금지급"
+    },
+    {
+      "id": "d046",
+      "type": "income",
+      "date": "2025-03-28T03:30:31.227403",
+      "category": "용돈",
+      "detailcategory": "데이터요금",
+      "amount": 1900104,
+      "memo": "테스트"
+    },
+    {
+      "id": "371e",
+      "type": "income",
+      "date": "2024-11-26T18:49:30.298612",
+      "category": "용돈",
+      "detailcategory": "보험료",
+      "amount": 1769835,
+      "memo": "자동이체"
+    },
+    {
+      "id": "d397",
+      "type": "expense",
+      "date": "2025-04-19T03:15:12.529735",
+      "category": "경조사비",
+      "detailcategory": "지하철",
+      "amount": 27979,
+      "memo": "신용카드"
+    },
+    {
+      "id": "b18b",
+      "type": "expense",
+      "date": "2025-03-24T00:16:26.609319",
+      "category": "보험료",
+      "detailcategory": "보험료",
+      "amount": 1957227,
+      "memo": "테스트"
+    },
+    {
+      "id": "992e",
+      "type": "income",
+      "date": "2025-05-09T08:25:29.866827",
+      "category": "기타",
+      "detailcategory": "데이터요금",
+      "amount": 324162,
+      "memo": "테스트"
+    },
+    {
+      "id": "bff9",
+      "type": "income",
+      "date": "2025-11-05T10:14:36.962177",
+      "category": "용돈",
+      "detailcategory": "세금",
+      "amount": 362906,
+      "memo": "기타"
+    },
+    {
+      "id": "a169",
+      "type": "expense",
+      "date": "2024-08-11T11:10:39.822219",
+      "category": "통신료",
+      "detailcategory": "스타벅스",
+      "amount": 1179903,
+      "memo": "기념일"
+    },
+    {
+      "id": "38a9",
+      "type": "expense",
+      "date": "2025-12-12T03:48:16.989829",
+      "category": "교통비",
+      "detailcategory": "병원",
+      "amount": 927057,
+      "memo": "현금지급"
+    },
+    {
+      "id": "d3a8",
+      "type": "income",
+      "date": "2024-06-19T01:01:16.104106",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 1345172,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "a7cb",
+      "type": "expense",
+      "date": "2025-07-28T11:33:04.529725",
+      "category": "공과금",
+      "detailcategory": "콘서트",
+      "amount": 619369,
+      "memo": "정기결제"
+    },
+    {
+      "id": "4a0c",
+      "type": "income",
+      "date": "2025-06-17T05:26:21.689600",
+      "category": "월급",
+      "detailcategory": "데이터요금",
+      "amount": 1431584,
+      "memo": "테스트"
+    },
+    {
+      "id": "2db1",
+      "type": "income",
+      "date": "2024-09-20T09:16:16.285601",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 1672318,
+      "memo": "테스트"
+    },
+    {
+      "id": "11ab",
+      "type": "expense",
+      "date": "2025-05-18T02:36:32.179493",
+      "category": "교육비",
+      "detailcategory": "기타내용",
+      "amount": 1081778,
+      "memo": "정기결제"
+    },
+    {
+      "id": "3179",
+      "type": "expense",
+      "date": "2025-07-17T23:47:29.236487",
+      "category": "통신료",
+      "detailcategory": "세금",
+      "amount": 940336,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "8a4b",
+      "type": "expense",
+      "date": "2025-11-08T14:27:47.816816",
+      "category": "경조사비",
+      "detailcategory": "병원",
+      "amount": 1391140,
+      "memo": "정기결제"
+    },
+    {
+      "id": "f6e6",
+      "type": "expense",
+      "date": "2024-03-25T18:45:36.363166",
+      "category": "식비",
+      "detailcategory": "기타내용",
+      "amount": 648516,
+      "memo": "자동이체"
+    },
+    {
+      "id": "82a2",
+      "type": "expense",
+      "date": "2025-02-22T19:53:54.628780",
+      "category": "기타",
+      "detailcategory": "병원",
+      "amount": 1393800,
+      "memo": "더치페이"
+    },
+    {
+      "id": "0b52",
+      "type": "income",
+      "date": "2025-07-18T01:58:53.989112",
+      "category": "용돈",
+      "detailcategory": "넷플릭스",
+      "amount": 976169,
+      "memo": "더치페이"
+    },
+    {
+      "id": "f53d",
+      "type": "income",
+      "date": "2025-09-03T05:34:23.350140",
+      "category": "이자",
+      "detailcategory": "기타내용",
+      "amount": 1243954,
+      "memo": "자동이체"
+    },
+    {
+      "id": "989f",
+      "type": "income",
+      "date": "2024-08-22T07:27:01.150098",
+      "category": "용돈",
+      "detailcategory": "지하철",
+      "amount": 1099221,
+      "memo": "더치페이"
+    },
+    {
+      "id": "f9ef",
+      "type": "expense",
+      "date": "2025-11-23T17:48:22.374975",
+      "category": "기타",
+      "detailcategory": "스타벅스",
+      "amount": 496819,
+      "memo": "정기결제"
+    },
+    {
+      "id": "82d9",
+      "type": "income",
+      "date": "2024-08-14T11:46:52.488698",
+      "category": "이자",
+      "detailcategory": "스타벅스",
+      "amount": 857557,
+      "memo": "더치페이"
+    },
+    {
+      "id": "542a",
+      "type": "income",
+      "date": "2025-06-27T23:22:33.382535",
+      "category": "이자",
+      "detailcategory": "지하철",
+      "amount": 928546,
+      "memo": "기타"
+    },
+    {
+      "id": "287b",
+      "type": "expense",
+      "date": "2025-01-15T13:13:14.544383",
+      "category": "보험료",
+      "detailcategory": "데이터요금",
+      "amount": 1274254,
+      "memo": "현금지급"
+    },
+    {
+      "id": "f876",
+      "type": "expense",
+      "date": "2024-10-23T18:09:50.396376",
+      "category": "통신료",
+      "detailcategory": "콘서트",
+      "amount": 1908086,
+      "memo": "더치페이"
+    },
+    {
+      "id": "1199",
+      "type": "income",
+      "date": "2024-11-06T19:00:13.766490",
+      "category": "월급",
+      "detailcategory": "병원",
+      "amount": 65342,
+      "memo": "테스트"
+    },
+    {
+      "id": "8338",
+      "type": "expense",
+      "date": "2025-10-11T03:23:45.437458",
+      "category": "통신료",
+      "detailcategory": "보험료",
+      "amount": 1881493,
+      "memo": "자동이체"
+    },
+    {
+      "id": "e8e2",
+      "type": "income",
+      "date": "2025-10-10T10:25:11.986489",
+      "category": "기타",
+      "detailcategory": "콘서트",
+      "amount": 83342,
+      "memo": "현금지급"
+    },
+    {
+      "id": "3177",
+      "type": "expense",
+      "date": "2024-12-24T13:03:16.761583",
+      "category": "경조사비",
+      "detailcategory": "보험료",
+      "amount": 1000025,
+      "memo": "자동이체"
+    },
+    {
+      "id": "555d",
+      "type": "income",
+      "date": "2024-09-13T14:34:30.640304",
+      "category": "이자",
+      "detailcategory": "보험료",
+      "amount": 1452392,
+      "memo": "테스트"
+    },
+    {
+      "id": "c8bd",
+      "type": "income",
+      "date": "2025-02-24T06:04:02.306777",
+      "category": "기타",
+      "detailcategory": "수업",
+      "amount": 1723426,
+      "memo": "현금지급"
+    },
+    {
+      "id": "a3b5",
+      "type": "expense",
+      "date": "2025-06-29T20:19:41.634223",
+      "category": "교육비",
+      "detailcategory": "보험료",
+      "amount": 1899830,
+      "memo": "기념일"
+    },
+    {
+      "id": "9eda",
+      "type": "income",
+      "date": "2025-04-07T02:42:49.605437",
+      "category": "용돈",
+      "detailcategory": "버스",
+      "amount": 302038,
+      "memo": "자동이체"
+    },
+    {
+      "id": "8940",
+      "type": "income",
+      "date": "2024-10-08T05:24:07.320202",
+      "category": "이자",
+      "detailcategory": "콘서트",
+      "amount": 320080,
+      "memo": "신용카드"
+    },
+    {
+      "id": "deef",
+      "type": "income",
+      "date": "2024-07-30T15:59:30.880572",
+      "category": "용돈",
+      "detailcategory": "세금",
+      "amount": 505283,
+      "memo": "신용카드"
+    },
+    {
+      "id": "84e6",
+      "type": "income",
+      "date": "2024-11-14T20:38:26.667784",
+      "category": "용돈",
+      "detailcategory": "기타내용",
+      "amount": 496917,
+      "memo": "정기결제"
+    },
+    {
+      "id": "4ac7",
+      "type": "expense",
+      "date": "2024-06-12T13:44:56.499923",
+      "category": "공과금",
+      "detailcategory": "데이터요금",
+      "amount": 1888785,
+      "memo": "신용카드"
+    },
+    {
+      "id": "410c",
+      "type": "expense",
+      "date": "2024-03-22T11:21:30.708613",
+      "category": "교육비",
+      "detailcategory": "세금",
+      "amount": 1766990,
+      "memo": "테스트"
+    },
+    {
+      "id": "aeb2",
+      "type": "expense",
+      "date": "2024-04-01T14:07:48.915311",
+      "category": "교육비",
+      "detailcategory": "데이터요금",
+      "amount": 1877283,
+      "memo": "신용카드"
+    },
+    {
+      "id": "7f5c",
+      "type": "expense",
+      "date": "2024-12-06T02:53:20.922422",
+      "category": "공과금",
+      "detailcategory": "넷플릭스",
+      "amount": 661899,
+      "memo": "현금지급"
+    },
+    {
+      "id": "aba1",
+      "type": "income",
+      "date": "2024-04-06T13:50:32.968109",
+      "category": "용돈",
+      "detailcategory": "지하철",
+      "amount": 309928,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "38f0",
+      "type": "expense",
+      "date": "2024-04-27T23:51:14.349533",
+      "category": "통신료",
+      "detailcategory": "넷플릭스",
+      "amount": 1079842,
+      "memo": "정기결제"
+    },
+    {
+      "id": "99de",
+      "type": "expense",
+      "date": "2025-12-11T22:46:01.533004",
+      "category": "저축",
+      "detailcategory": "콘서트",
+      "amount": 773787,
+      "memo": "신용카드"
+    },
+    {
+      "id": "71c4",
+      "type": "income",
+      "date": "2025-04-20T14:26:05.198223",
+      "category": "월급",
+      "detailcategory": "보험료",
+      "amount": 754674,
+      "memo": "기념일"
+    },
+    {
+      "id": "e8c0",
+      "type": "expense",
+      "date": "2024-04-10T23:41:03.296662",
+      "category": "보험료",
+      "detailcategory": "넷플릭스",
+      "amount": 1553614,
+      "memo": "자동이체"
+    },
+    {
+      "id": "fd70",
+      "type": "income",
+      "date": "2025-09-08T21:43:38.060871",
+      "category": "기타",
+      "detailcategory": "콘서트",
+      "amount": 936854,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "723f",
+      "type": "expense",
+      "date": "2025-03-23T12:51:29.111077",
+      "category": "의료비",
+      "detailcategory": "데이터요금",
+      "amount": 1781573,
+      "memo": "신용카드"
+    },
+    {
+      "id": "3181",
+      "type": "income",
+      "date": "2025-01-24T09:27:49.766642",
+      "category": "용돈",
+      "detailcategory": "보험료",
+      "amount": 1520619,
+      "memo": "신용카드"
+    },
+    {
+      "id": "f66c",
+      "type": "expense",
+      "date": "2024-04-04T07:50:39.586255",
+      "category": "식비",
+      "detailcategory": "스타벅스",
+      "amount": 246565,
+      "memo": "정기결제"
+    },
+    {
+      "id": "e1a9",
+      "type": "expense",
+      "date": "2024-08-04T09:05:22.220575",
+      "category": "저축",
+      "detailcategory": "버스",
+      "amount": 532624,
+      "memo": "정기결제"
+    },
+    {
+      "id": "0386",
+      "type": "income",
+      "date": "2025-04-30T23:10:22.872799",
+      "category": "용돈",
+      "detailcategory": "기타내용",
+      "amount": 1262853,
+      "memo": "신용카드"
+    },
+    {
+      "id": "7be6",
+      "type": "income",
+      "date": "2024-11-08T10:30:45.468110",
+      "category": "이자",
+      "detailcategory": "세금",
+      "amount": 681471,
+      "memo": "정기결제"
+    },
+    {
+      "id": "52ee",
+      "type": "expense",
+      "date": "2025-11-19T14:43:31.337062",
+      "category": "보험료",
+      "detailcategory": "보험료",
+      "amount": 1536802,
+      "memo": "테스트"
+    },
+    {
+      "id": "4a49",
+      "type": "expense",
+      "date": "2025-08-05T06:22:45.545981",
+      "category": "문화생활",
+      "detailcategory": "데이터요금",
+      "amount": 800740,
+      "memo": "더치페이"
+    },
+    {
+      "id": "df8b",
+      "type": "income",
+      "date": "2025-11-13T08:17:24.879753",
+      "category": "이자",
+      "detailcategory": "병원",
+      "amount": 1519204,
+      "memo": "정기결제"
+    },
+    {
+      "id": "7540",
+      "type": "income",
+      "date": "2025-03-15T16:04:24.529576",
+      "category": "이자",
+      "detailcategory": "세금",
+      "amount": 414569,
+      "memo": "기타"
+    },
+    {
+      "id": "6696",
+      "type": "expense",
+      "date": "2025-07-17T16:18:18.926782",
+      "category": "공과금",
+      "detailcategory": "스타벅스",
+      "amount": 1316925,
+      "memo": "기념일"
+    },
+    {
+      "id": "f170",
+      "type": "expense",
+      "date": "2025-04-09T19:07:42.314015",
+      "category": "교통비",
+      "detailcategory": "보험료",
+      "amount": 1966546,
+      "memo": "기념일"
+    },
+    {
+      "id": "5695",
+      "type": "income",
+      "date": "2024-05-17T20:59:19.238501",
+      "category": "이자",
+      "detailcategory": "보험료",
+      "amount": 312301,
+      "memo": "기념일"
+    },
+    {
+      "id": "dd30",
+      "type": "expense",
+      "date": "2025-01-25T01:15:29.333924",
+      "category": "의료비",
+      "detailcategory": "넷플릭스",
+      "amount": 289415,
+      "memo": "자동이체"
+    },
+    {
+      "id": "76d8",
+      "type": "income",
+      "date": "2025-05-20T03:07:30.245051",
+      "category": "이자",
+      "detailcategory": "스타벅스",
+      "amount": 1402817,
+      "memo": "신용카드"
+    },
+    {
+      "id": "993f",
+      "type": "expense",
+      "date": "2025-03-01T23:20:34.737108",
+      "category": "식비",
+      "detailcategory": "기타내용",
+      "amount": 9298,
+      "memo": "신용카드"
+    },
+    {
+      "id": "ec6a",
+      "type": "expense",
+      "date": "2025-06-03T18:05:08.947709",
+      "category": "문화생활",
+      "detailcategory": "데이터요금",
+      "amount": 421635,
+      "memo": "기념일"
+    },
+    {
+      "id": "63fc",
+      "type": "expense",
+      "date": "2025-11-11T10:39:33.617565",
+      "category": "보험료",
+      "detailcategory": "보험료",
+      "amount": 1416962,
+      "memo": "자동이체"
+    },
+    {
+      "id": "490e",
+      "type": "expense",
+      "date": "2025-03-07T18:56:55.869128",
+      "category": "경조사비",
+      "detailcategory": "데이터요금",
+      "amount": 129388,
+      "memo": "현금지급"
+    },
+    {
+      "id": "5a9b",
+      "type": "income",
+      "date": "2024-12-23T23:33:06.285409",
+      "category": "월급",
+      "detailcategory": "버스",
+      "amount": 546086,
+      "memo": "기타"
+    },
+    {
+      "id": "259c",
+      "type": "income",
+      "date": "2024-07-28T18:03:25.788733",
+      "category": "이자",
+      "detailcategory": "버스",
+      "amount": 159207,
+      "memo": "현금지급"
+    },
+    {
+      "id": "6b61",
+      "type": "income",
+      "date": "2024-01-19T04:50:41.419459",
+      "category": "용돈",
+      "detailcategory": "세금",
+      "amount": 1499904,
+      "memo": "신용카드"
+    },
+    {
+      "id": "546e",
+      "type": "expense",
+      "date": "2024-03-23T19:02:23.675256",
+      "category": "공과금",
+      "detailcategory": "스타벅스",
+      "amount": 1729774,
+      "memo": "더치페이"
+    },
+    {
+      "id": "d9ff",
+      "type": "expense",
+      "date": "2024-06-29T03:46:07.200491",
+      "category": "식비",
+      "detailcategory": "데이터요금",
+      "amount": 996338,
+      "memo": "기념일"
+    },
+    {
+      "id": "0b92",
+      "type": "income",
+      "date": "2025-06-07T04:07:01.044044",
+      "category": "이자",
+      "detailcategory": "보험료",
+      "amount": 457685,
+      "memo": "더치페이"
+    },
+    {
+      "id": "0db1",
+      "type": "expense",
+      "date": "2024-12-09T17:56:37.379239",
+      "category": "저축",
+      "detailcategory": "기타내용",
+      "amount": 919371,
+      "memo": "정기결제"
+    },
+    {
+      "id": "5f90",
+      "type": "expense",
+      "date": "2025-11-25T21:10:20.141861",
+      "category": "교육비",
+      "detailcategory": "스타벅스",
+      "amount": 1005727,
+      "memo": "현금지급"
+    },
+    {
+      "id": "7005",
+      "type": "income",
+      "date": "2025-12-23T04:19:26.893450",
+      "category": "기타",
+      "detailcategory": "데이터요금",
+      "amount": 18650,
+      "memo": "현금지급"
+    },
+    {
+      "id": "c733",
+      "type": "expense",
+      "date": "2025-03-31T02:21:53.251952",
+      "category": "공과금",
+      "detailcategory": "콘서트",
+      "amount": 331304,
+      "memo": "자동이체"
+    },
+    {
+      "id": "2352",
+      "type": "expense",
+      "date": "2024-07-21T11:21:21.821302",
+      "category": "저축",
+      "detailcategory": "기타내용",
+      "amount": 953211,
+      "memo": "기타"
+    },
+    {
+      "id": "db2c",
+      "type": "income",
+      "date": "2024-11-28T00:30:19.036142",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 444620,
+      "memo": "현금지급"
+    },
+    {
+      "id": "eb05",
+      "type": "income",
+      "date": "2025-08-23T07:11:44.693354",
+      "category": "이자",
+      "detailcategory": "데이터요금",
+      "amount": 1905521,
+      "memo": "기념일"
+    },
+    {
+      "id": "2162",
+      "type": "income",
+      "date": "2025-07-29T08:41:46.142683",
+      "category": "월급",
+      "detailcategory": "넷플릭스",
+      "amount": 970654,
+      "memo": "신용카드"
+    },
+    {
+      "id": "02d6",
+      "type": "expense",
+      "date": "2025-08-20T14:35:34.745651",
+      "category": "의료비",
+      "detailcategory": "수업",
+      "amount": 432064,
+      "memo": "기념일"
+    },
+    {
+      "id": "f5c0",
+      "type": "income",
+      "date": "2024-03-28T03:03:00.403044",
+      "category": "기타",
+      "detailcategory": "수업",
+      "amount": 1382831,
+      "memo": "테스트"
+    },
+    {
+      "id": "e882",
+      "type": "income",
+      "date": "2024-04-26T07:31:51.700476",
+      "category": "용돈",
+      "detailcategory": "세금",
+      "amount": 930149,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "a579",
+      "type": "expense",
+      "date": "2024-11-09T15:30:21.582706",
+      "category": "교육비",
+      "detailcategory": "병원",
+      "amount": 1860997,
+      "memo": "신용카드"
+    },
+    {
+      "id": "bf8d",
+      "type": "income",
+      "date": "2025-12-17T10:58:43.612697",
+      "category": "이자",
+      "detailcategory": "콘서트",
+      "amount": 1356538,
+      "memo": "신용카드"
+    },
+    {
+      "id": "3e83",
+      "type": "income",
+      "date": "2025-04-13T03:46:33.014484",
+      "category": "기타",
+      "detailcategory": "수업",
+      "amount": 1866668,
+      "memo": "더치페이"
+    },
+    {
+      "id": "29f7",
+      "type": "expense",
+      "date": "2025-03-21T22:48:11.602010",
+      "category": "저축",
+      "detailcategory": "수업",
+      "amount": 721061,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "44d4",
+      "type": "income",
+      "date": "2024-12-11T17:06:22.589113",
+      "category": "월급",
+      "detailcategory": "보험료",
+      "amount": 1435950,
+      "memo": "테스트"
+    },
+    {
+      "id": "7683",
+      "type": "income",
+      "date": "2024-10-09T06:31:03.925411",
+      "category": "용돈",
+      "detailcategory": "버스",
+      "amount": 311202,
+      "memo": "자동이체"
+    },
+    {
+      "id": "d17a",
+      "type": "income",
+      "date": "2025-05-23T18:27:19.808485",
+      "category": "용돈",
+      "detailcategory": "버스",
+      "amount": 567441,
+      "memo": "기타"
+    },
+    {
+      "id": "8233",
+      "type": "expense",
+      "date": "2025-02-02T06:14:25.160414",
+      "category": "통신료",
+      "detailcategory": "데이터요금",
+      "amount": 1920197,
+      "memo": "신용카드"
+    },
+    {
+      "id": "7e33",
+      "type": "expense",
+      "date": "2025-07-29T21:35:50.216398",
+      "category": "기타",
+      "detailcategory": "데이터요금",
+      "amount": 699428,
+      "memo": "신용카드"
+    },
+    {
+      "id": "da8f",
+      "type": "income",
+      "date": "2024-12-06T22:58:54.910818",
+      "category": "월급",
+      "detailcategory": "보험료",
+      "amount": 122059,
+      "memo": "현금지급"
+    },
+    {
+      "id": "87cb",
+      "type": "income",
+      "date": "2024-10-21T18:51:52.349606",
+      "category": "이자",
+      "detailcategory": "데이터요금",
+      "amount": 64103,
+      "memo": "더치페이"
+    },
+    {
+      "id": "a53b",
+      "type": "expense",
+      "date": "2025-12-19T05:52:29.078032",
+      "category": "교통비",
+      "detailcategory": "세금",
+      "amount": 1521055,
+      "memo": "신용카드"
+    },
+    {
+      "id": "c092",
+      "type": "expense",
+      "date": "2025-07-25T01:16:00.989954",
+      "category": "기타",
+      "detailcategory": "보험료",
+      "amount": 1001492,
+      "memo": "신용카드"
+    },
+    {
+      "id": "f8d2",
+      "type": "income",
+      "date": "2025-08-27T14:52:54.192687",
+      "category": "이자",
+      "detailcategory": "기타내용",
+      "amount": 861881,
+      "memo": "자동이체"
+    },
+    {
+      "id": "d3fb",
+      "type": "income",
+      "date": "2024-10-30T09:24:09.400177",
+      "category": "월급",
+      "detailcategory": "수업",
+      "amount": 725098,
+      "memo": "신용카드"
+    },
+    {
+      "id": "b05e",
+      "type": "expense",
+      "date": "2025-04-20T17:52:05.290870",
+      "category": "공과금",
+      "detailcategory": "수업",
+      "amount": 1777037,
+      "memo": "신용카드"
+    },
+    {
+      "id": "5c2e",
+      "type": "expense",
+      "date": "2024-07-10T09:10:57.476327",
+      "category": "공과금",
+      "detailcategory": "콘서트",
+      "amount": 1460902,
+      "memo": "현금지급"
+    },
+    {
+      "id": "b181",
+      "type": "expense",
+      "date": "2024-12-24T13:14:53.159967",
+      "category": "기타",
+      "detailcategory": "지하철",
+      "amount": 585949,
+      "memo": "자동이체"
+    },
+    {
+      "id": "e31c",
+      "type": "expense",
+      "date": "2024-08-31T22:32:12.658106",
+      "category": "교통비",
+      "detailcategory": "병원",
+      "amount": 795531,
+      "memo": "더치페이"
+    },
+    {
+      "id": "09d8",
+      "type": "income",
+      "date": "2024-06-12T03:00:05.450240",
+      "category": "용돈",
+      "detailcategory": "버스",
+      "amount": 8811,
+      "memo": "테스트"
+    },
+    {
+      "id": "9331",
+      "type": "expense",
+      "date": "2024-07-18T07:58:46.539599",
+      "category": "저축",
+      "detailcategory": "콘서트",
+      "amount": 1272061,
+      "memo": "정기결제"
+    },
+    {
+      "id": "4d4b",
+      "type": "expense",
+      "date": "2025-08-21T03:36:48.307322",
+      "category": "문화생활",
+      "detailcategory": "세금",
+      "amount": 1514982,
+      "memo": "계좌이체"
+    },
+    {
+      "id": "0031",
+      "type": "income",
+      "date": "2024-09-16T19:35:20.148994",
+      "category": "이자",
+      "detailcategory": "버스",
+      "amount": 1523527,
+      "memo": "기타"
+    },
+    {
+      "id": "9398",
+      "type": "expense",
+      "date": "2025-01-13T21:54:08.551904",
+      "category": "문화생활",
+      "detailcategory": "보험료",
+      "amount": 1039426,
+      "memo": "신용카드"
+    },
+    {
+      "id": "dcf5",
+      "type": "income",
+      "date": "2025-09-07T06:16:12.364862",
+      "category": "월급",
+      "detailcategory": "데이터요금",
+      "amount": 1286305,
+      "memo": "신용카드"
+    },
+    {
+      "id": "6b99",
+      "type": "expense",
+      "date": "2024-05-12T11:38:49.253433",
+      "category": "교통비",
+      "detailcategory": "넷플릭스",
+      "amount": 456906,
+      "memo": "기념일"
+    },
+    {
+      "id": "4f27",
+      "type": "income",
+      "date": "2025-07-28T11:36:49.902906",
+      "category": "용돈",
+      "detailcategory": "데이터요금",
+      "amount": 644916,
+      "memo": "기타"
     }
   ],
   "incomecategory": [

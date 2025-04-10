@@ -2,8 +2,8 @@
   <div class="transaction-page font-hakgyo">
     <div class="filter-bar font-hakgyo">
       <div class="day-title">
-        {{ dayjs(dateRange[0]).format('YYYY.MM.DD') }} ~
-        {{ dayjs(dateRange[1]).format('YYYY.MM.DD') }} / 총
+        {{ dayjs(dateRange[0]).format("YYYY.MM.DD") }} ~
+        {{ dayjs(dateRange[1]).format("YYYY.MM.DD") }} / 총
         {{ transactionStore.filteredBudgets.length }}건
       </div>
 
@@ -27,35 +27,16 @@
             <i class="fa fa-chevron-right"></i>
           </button>
         </div>
-
-        <!-- 카테고리 -->
         <div class="category-filter">
-          <select v-model="selectedCategory" @change="updateCategory">
-            <option value="">전체 카테고리</option>
-            <optgroup label="수입">
-              <option
-                v-for="income in incomeCategories"
-                :key="income.id"
-                :value="income.name"
-              >
-                {{ income.name }}
-              </option>
-            </optgroup>
-            <optgroup label="지출">
-              <option
-                v-for="expense in expenseCategories"
-                :key="expense.id"
-                :value="expense.name"
-              >
-                {{ expense.name }}
-              </option>
-            </optgroup>
-          </select>
+          <button class="btn btn-blue" @click="openCategoryModal">
+            {{ selectedCategory || "카테고리 선택" }}
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- 요약 -->
+    <div class="category-box font-hakgyo" v-if="selectedCategories.length">
+      {{ selectedCategoryLabel }}
+    </div>
     <div class="summary font-hakgyo">
       <div class="summary-box">
         <p>수입</p>
@@ -110,34 +91,44 @@
             transactionStore.updateBudgets(updatedBudget.id, updatedBudget)
         "
       />
+      <CategoryFilterModal
+        v-if="categoryModalVisible"
+        :modelValue="selectedCategories"
+        @selected="onCategorySelected"
+      />
     </Teleport>
   </div>
 </template>
 
 <script setup>
-import { useTransactionStore } from '@/store/transactionStore';
-import { useCategoryStore } from '@/store/categoryStore';
-import TransactionList from '@/components/Transaction/TransactionList.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
-import { ref, computed, onMounted } from 'vue';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import * as bootstrap from 'bootstrap';
-import dayjs from 'dayjs';
+import { useTransactionStore } from "@/store/transactionStore";
+import { useCategoryStore } from "@/store/categoryStore";
+import TransactionList from "@/components/Transaction/TransactionList.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
+import CategoryFilterModal from "@/components/Transaction/CategoryFilterModal.vue";
+import { ref, computed, onMounted } from "vue";
+import dayjs from "dayjs";
+import * as bootstrap from "bootstrap";
 
 // 스토어
 const transactionStore = useTransactionStore();
 const categoryStore = useCategoryStore();
+const selectedCategoryLabel = computed(() =>
+  selectedCategories.value.map((c) => c.name).join(" | ")
+);
 
 // 날짜 초기값
 const dateRange = ref([
-  dayjs().startOf('month').toDate(),
-  dayjs().endOf('month').toDate(),
+  dayjs().startOf("month").toDate(),
+  dayjs().endOf("month").toDate(),
 ]);
 
 const modalVisible = ref(false);
 const selectedBudget = ref(null);
-const selectedCategory = ref('');
+const selectedCategories = ref([]);
+
+const categoryModalVisible = ref(false);
 
 // 계산된 값
 const groupedBudgets = computed(() => transactionStore.groupByDate);
@@ -159,7 +150,7 @@ function openAddModal() {
 }
 function openEditModal(budget) {
   selectedBudget.value = budget;
-  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
+  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
   modal.show();
   modalVisible.value = true;
 }
@@ -170,8 +161,8 @@ async function deleteBudget(id) {
 }
 function moveMonth(offset) {
   const currentStart = dayjs(dateRange.value[0]);
-  const newStart = currentStart.add(offset, 'month').startOf('month');
-  const newEnd = newStart.endOf('month');
+  const newStart = currentStart.add(offset, "month").startOf("month");
+  const newEnd = newStart.endOf("month");
   dateRange.value = [newStart.toDate(), newEnd.toDate()];
   applyFilters();
 }
@@ -182,20 +173,42 @@ function applyFilters() {
   const [start, end] = dateRange.value;
   if (!start || !end) return;
   transactionStore.setDateRange(
-    dayjs(start).format('YYYY-MM-DD'),
-    dayjs(end).format('YYYY-MM-DD')
+    dayjs(start).format("YYYY-MM-DD"),
+    dayjs(end).format("YYYY-MM-DD")
   );
   transactionStore.setCategoryFilter(selectedCategory.value);
 }
 function format(value) {
-  return parseInt(value).toLocaleString() + '원';
+  return parseInt(value).toLocaleString() + "원";
+}
+function openCategoryModal() {
+  categoryModalVisible.value = true;
+}
+
+function onCategorySelected(categories) {
+  selectedCategories.value = categories;
+  categoryModalVisible.value = false;
+  transactionStore.setCategoryFilter(categories);
 }
 </script>
 
 <style scoped>
+.btn-blue {
+  border: 2px solid #b4daff;
+  border-radius: 12px;
+  background-color: white;
+  color: #000;
+}
+
+.btn-blue:hover {
+  border: 2px solid #b4daff;
+  background-color: #e6f3ff;
+  color: #000;
+}
+
 .transaction-page {
   padding: 20px;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   background-color: #fff;
 }
 
@@ -295,5 +308,18 @@ function format(value) {
 .summary-box p {
   margin-bottom: 6px;
   font-size: 14px;
+}
+.summary-box span {
+  font-size: 18px;
+}
+.category-box {
+  margin: 12px auto 20px auto;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  max-width: 80%;
+  font-size: 16px;
 }
 </style>
