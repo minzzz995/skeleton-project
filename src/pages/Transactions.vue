@@ -3,8 +3,8 @@
     <!-- 날짜 및 필터 -->
     <div class="filter-bar font-hakgyo">
       <div class="day-title">
-        {{ dayjs(dateRange[0]).format("YYYY.MM.DD") }} ~
-        {{ dayjs(dateRange[1]).format("YYYY.MM.DD") }} / 총
+        {{ dayjs(dateRange[0]).format('YYYY.MM.DD') }} ~
+        {{ dayjs(dateRange[1]).format('YYYY.MM.DD') }} / 총
         {{ transactionStore.filteredBudgets.length }}건
       </div>
 
@@ -119,18 +119,18 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
-import dayjs from "dayjs";
-import * as bootstrap from "bootstrap";
+import { ref, computed, onMounted } from 'vue';
+import dayjs from 'dayjs';
+import * as bootstrap from 'bootstrap';
 
-import { useTransactionStore } from "@/store/transactionStore";
-import { useCategoryStore } from "@/store/categoryStore";
+import { useTransactionStore } from '@/store/transactionStore';
+import { useCategoryStore } from '@/store/categoryStore';
 
-import VueDatePicker from "@vuepic/vue-datepicker";
-import TransactionList from "@/components/Transaction/TransactionList.vue";
-import TransactionModal from "@/components/Transaction/TransactionModal.vue";
-import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
-import CategoryFilterModal from "@/components/Transaction/CategoryFilterModal.vue";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import TransactionList from '@/components/Transaction/TransactionList.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
+import CategoryFilterModal from '@/components/Transaction/CategoryFilterModal.vue';
 
 // 스토어
 const transactionStore = useTransactionStore();
@@ -138,8 +138,8 @@ const categoryStore = useCategoryStore();
 
 // 날짜 필터 초기값
 const dateRange = ref([
-  dayjs().startOf("month").toDate(),
-  dayjs().endOf("month").toDate(),
+  dayjs().startOf('month').toDate(),
+  dayjs().endOf('month').toDate(),
 ]);
 
 const modalVisible = ref(false);
@@ -153,16 +153,17 @@ const summary = computed(() => transactionStore.summary);
 const sortedSelectedCategories = computed(() => {
   return [...selectedCategories.value].sort((a, b) => {
     if (a.type === b.type) return 0;
-    return a.type === "income" ? -1 : 1;
+    return a.type === 'income' ? -1 : 1;
   });
 });
 
 const selectedCategoryLabel = computed(() =>
-  selectedCategories.value.map((c) => c.name).join(" | ")
+  selectedCategories.value.map((c) => c.name).join(' | ')
 );
 
 // 초기 데이터 로딩
 onMounted(async () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   await transactionStore.fetchBudgets();
   await categoryStore.fetchCategories();
   applyFilters();
@@ -176,21 +177,21 @@ function openAddModal() {
 
 function openEditModal(budget) {
   selectedBudget.value = budget;
-  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
+  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
   modal.show();
   modalVisible.value = true;
 }
 
 async function deleteBudget(id) {
-  const confirmed = window.confirm("삭제하시겠습니까?");
+  const confirmed = window.confirm('삭제하시겠습니까?');
   if (!confirmed) return;
   await transactionStore.deleteBudget(id);
 }
 
 function moveMonth(offset) {
   const currentStart = dayjs(dateRange.value[0]);
-  const newStart = currentStart.add(offset, "month").startOf("month");
-  const newEnd = newStart.endOf("month");
+  const newStart = currentStart.add(offset, 'month').startOf('month');
+  const newEnd = newStart.endOf('month');
   dateRange.value = [newStart.toDate(), newEnd.toDate()];
   applyFilters();
 }
@@ -199,14 +200,14 @@ function applyFilters() {
   const [start, end] = dateRange.value;
   if (!start || !end) return;
   transactionStore.setDateRange(
-    dayjs(start).format("YYYY-MM-DD"),
-    dayjs(end).format("YYYY-MM-DD")
+    dayjs(start).format('YYYY-MM-DD'),
+    dayjs(end).format('YYYY-MM-DD')
   );
   transactionStore.setCategoryFilter([...selectedCategories.value]);
 }
 
 function format(value) {
-  return parseInt(value).toLocaleString() + "원";
+  return parseInt(value).toLocaleString() + '원';
 }
 
 function openCategoryModal() {
@@ -235,7 +236,7 @@ function onCategorySelected(categories) {
 
 .transaction-page {
   padding: 20px;
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   background-color: #fff;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-light bg-sidebar px-3 d-md-none position-relative font-hakgyo"
+    class="navbar navbar-light bg-sidebar px-3 d-md-none font-hakgyo mobile-navbar"
   >
     <!-- 브랜드 -->
     <router-link to="/" class="text-decoration-none text-dark">
@@ -43,19 +43,19 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 const $route = useRoute();
 
 const items = [
-  { path: "/", label: "대시보드", icon: "fa-solid fa-house" },
+  { path: '/', label: '대시보드', icon: 'fa-solid fa-house' },
   {
-    path: "/transaction",
-    label: "거래내역",
-    icon: "fa-regular fa-money-bill-1",
+    path: '/transaction',
+    label: '거래내역',
+    icon: 'fa-regular fa-money-bill-1',
   },
-  { path: "/calendar", label: "캘린더", icon: "fa-regular fa-calendar" },
-  { path: "/profile", label: "프로필", icon: "fa-regular fa-circle-user" },
+  { path: '/calendar', label: '캘린더', icon: 'fa-regular fa-calendar' },
+  { path: '/profile', label: '프로필', icon: 'fa-regular fa-circle-user' },
 ];
 
 onMounted(() => {
@@ -65,14 +65,13 @@ onMounted(() => {
     const dropdown = new window.bootstrap.Dropdown(toggleButton);
 
     // 클릭 이벤트에 드롭다운 토글 연결 (이게 핵심!)
-    toggleButton.addEventListener("click", (e) => {
+    toggleButton.addEventListener('click', (e) => {
       e.preventDefault(); // 기본 동작 방지
       dropdown.toggle(); // 수동으로 토글
     });
   }
 });
 </script>
-
 <style scoped>
 .bg-sidebar {
   background-color: #b3e5fc;
@@ -91,5 +90,13 @@ onMounted(() => {
 .no-hover:hover {
   background-color: transparent !important;
   color: inherit !important;
+}
+
+.mobile-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
 }
 </style>
