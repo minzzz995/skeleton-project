@@ -41,15 +41,15 @@
 </template>
 
 <script setup>
-import { defineProps, computed, ref } from 'vue';
+import { defineProps, computed, ref } from "vue";
 import {
   Chart as ChartJS,
   DoughnutController,
   ArcElement,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Chart } from 'vue-chartjs';
+} from "chart.js";
+import { Chart } from "vue-chartjs";
 
 ChartJS.register(DoughnutController, ArcElement, Tooltip, Legend);
 
@@ -59,9 +59,9 @@ const props = defineProps({
 });
 
 const hoverData = ref({
-  label: '',
-  value: '',
-  percentage: '',
+  label: "",
+  value: "",
+  percentage: "",
   rank: null,
 });
 
@@ -70,14 +70,14 @@ const externalTooltipHandler = (context) => {
   const dataIndex = tooltipModel.dataPoints?.[0]?.dataIndex;
   if (dataIndex == null) return;
 
-  const label = props.chartData.labels?.[dataIndex] || '';
+  const label = props.chartData.labels?.[dataIndex] || "";
   const value = props.chartData.datasets[0]?.data?.[dataIndex] || 0;
   const allData = props.chartData.datasets[0]?.data || [];
   const allLabels = props.chartData.labels || [];
 
   const filtered = allData
     .map((val, idx) => ({ val, idx, label: allLabels[idx] }))
-    .filter((item) => item.label !== '기타')
+    .filter((item) => item.label !== "기타")
     .sort((a, b) => b.val - a.val);
 
   const rank = filtered.findIndex((item) => item.idx === dataIndex) + 1;
@@ -88,25 +88,27 @@ const externalTooltipHandler = (context) => {
     label,
     value: `${Number(value).toLocaleString()}원`,
     percentage: `${percent}%`,
-    rank: label === '기타' ? null : rank,
+    rank: label === "기타" ? null : rank,
   };
 };
 
 const rankColor = computed(() => {
   switch (hoverData.value.rank) {
     case 1:
-      return '#039BE5';
+      return "#039BE5";
     case 2:
-      return '#29B6F6';
+      return "#29B6F6";
     case 3:
-      return '#4fc3f7';
+      return "#4fc3f7";
     default:
-      return '#666';
+      return "#666";
   }
 });
 
 const optionsWithLegendHidden = computed(() => ({
   ...props.options,
+  responsive: true,
+  maintainAspectRatio: true,
   plugins: {
     ...(props.options?.plugins || {}),
     legend: { display: false },
@@ -142,16 +144,19 @@ const optionsWithLegendHidden = computed(() => ({
 
 .chart-container {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1; /* 정사각형 유지 */
   margin: 0 auto;
   display: grid;
   place-items: center;
 }
 
 .chart-container canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
   display: block;
-  margin: 0 auto;
 }
 
 .center-label {
@@ -198,5 +203,11 @@ const optionsWithLegendHidden = computed(() => ({
 .legend-text {
   font-size: 0.9rem;
   color: #444;
+}
+
+@media (max-width: 640px) {
+  .chart-label {
+    font-size: 1.25rem; /* 모바일에서는 작게 */
+  }
 }
 </style>

@@ -15,10 +15,10 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed, watch } from 'vue';
-import { useTransactionStore } from '@/store/transactionStore';
-import { useCategoryStore } from '@/store/categoryStore';
-import dayjs from 'dayjs';
+import { onMounted, ref, computed, watch } from "vue";
+import { useTransactionStore } from "@/store/transactionStore";
+import { useCategoryStore } from "@/store/categoryStore";
+import dayjs from "dayjs";
 
 const props = defineProps({
   type: String, // 'saved' or 'overspent'
@@ -31,18 +31,18 @@ const loading = ref(true);
 const categoryData = ref(null);
 
 const now = dayjs();
-const startOfThisMonth = now.startOf('month');
-const startOfLastMonth = now.subtract(1, 'month').startOf('month');
-const endOfLastMonth = startOfThisMonth.subtract(1, 'day');
+const startOfThisMonth = now.startOf("month");
+const startOfLastMonth = now.subtract(1, "month").startOf("month");
+const endOfLastMonth = startOfThisMonth.subtract(1, "day");
 
 function getCategorySumByMonth(start, end) {
   const result = {};
   transactionStore.budgets.forEach((t) => {
     const date = dayjs(t.date);
     if (
-      t.type === 'expense' &&
-      date.isAfter(start.clone().subtract(1, 'day')) &&
-      date.isBefore(end.clone().add(1, 'day'))
+      t.type === "expense" &&
+      date.isAfter(start.clone().subtract(1, "day")) &&
+      date.isBefore(end.clone().add(1, "day"))
     ) {
       result[t.category] = (result[t.category] || 0) + Number(t.amount);
     }
@@ -65,7 +65,7 @@ function calculateComparison() {
     return { category, diff: thisMonth - lastMonth };
   });
 
-  if (props.type === 'saved') {
+  if (props.type === "saved") {
     categoryData.value =
       diffs.filter((d) => d.diff < 0).sort((a, b) => a.diff - b.diff)[0] ||
       null;
@@ -99,14 +99,14 @@ watch(
 );
 
 const categoryName = computed(() =>
-  loading.value ? '로딩 중...' : categoryData.value?.category || '알 수 없음'
+  loading.value ? "로딩 중..." : categoryData.value?.category || "알 수 없음"
 );
 
 const description = computed(() => {
-  if (loading.value) return '잠시만 기다려주세요...';
+  if (loading.value) return "잠시만 기다려주세요...";
 
   const diff = Math.abs(categoryData.value?.diff || 0);
-  const verb = props.type === 'saved' ? '절약했어요!' : '더 많이 썼어요!';
+  const verb = props.type === "saved" ? "절약했어요!" : "더 많이 썼어요!";
   return `${diff.toLocaleString()}원 ${verb}`;
 });
 
@@ -114,7 +114,7 @@ const iconClass = computed(() => {
   const match = categoryStore.expenseCategories.find(
     (c) => c.name === categoryName.value
   );
-  return match?.imgpath || 'fa-solid fa-circle-question';
+  return match?.imgpath || "fa-solid fa-circle-question";
 });
 </script>
 
@@ -150,7 +150,7 @@ const iconClass = computed(() => {
 }
 
 .category-icon {
-  font-size: 5vw;
+  font-size: clamp(2rem, 5vw, 4rem);
   color: #0077c2;
 }
 

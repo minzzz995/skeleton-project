@@ -1,20 +1,19 @@
 <template>
   <div class="font-dahaeng">
-    <apexchart type="bar" height="200" />
     <div class="flex-grow-1 p-4 bg-light">
       <div class="profile-page">
         <!-- 사용자 정보 -->
         <h2 class="section-title">나의 정보</h2>
-        <section class="user-info" v-if="userStore.name">
+        <section class="user-info" v-if="userStore.id">
           <div class="profile-info">
             <img
               :src="userStore.profileImage || defaultProfile"
               alt="프로필 사진"
             />
             <div class="text-info">
-              <p class="username">{{ userStore.name || '닉네임 없음' }}</p>
+              <p class="username">{{ userStore.name || "닉네임 없음" }}</p>
               <p class="tel">
-                연락처 : {{ userStore.phone || '000-0000-0000' }}
+                연락처 : {{ userStore.phone || "000-0000-0000" }}
               </p>
             </div>
           </div>
@@ -46,14 +45,14 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useUserStore } from '@/store/userStore';
-import CategoryChart from '@/components/Profile/CategoryChart.vue';
-import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
-import defaultProfile from '@/assets/profile_default.png';
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/store/userStore";
+import CategoryChart from "@/components/Profile/CategoryChart.vue";
+import TopCategoryCard from "@/components/Profile/TopCategoryCard.vue";
+import defaultProfile from "@/assets/profile_default.png";
 
 const userStore = useUserStore();
-const user = ref({});
+//const user = ref({});
 
 onMounted(async () => {
   await userStore.fetchUserInfo();
@@ -141,6 +140,7 @@ img {
 .spending-analysis {
   font-size: 1.5rem;
   font-weight: bold;
+  margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -165,6 +165,67 @@ img {
   }
   .comparison-cards > * {
     width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-page {
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .user-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  img {
+    width: 72px;
+    height: 72px;
+  }
+
+  .username {
+    font-size: 1.1rem;
+  }
+
+  .tel {
+    font-size: 0.9rem;
+  }
+
+  .edit-btn {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+
+  .spending-analysis {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .chart-graph {
+    margin-top: 1rem;
+  }
+
+  .comparison-cards {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .comparison-cards > * {
+    width: 100%;
+    flex: 1 1 auto;
   }
 }
 </style>
