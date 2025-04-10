@@ -1,15 +1,15 @@
 <template>
   <div class="font-dahaeng">
-    <apexchart
-      type="bar"
-      height="200"
-      :options="chartOptions"
-      :series="series"
-    />
+    <apexchart type="bar" height="200" :series="series" />
     <div class="top-category-card">
-      <!-- <img :src="imagePath" alt="카테고리 이미지" /> -->
-      <h3>{{ categoryName }}</h3>
-      <p>{{ description }}</p>
+      <div class="icon">
+        <i :class="iconClass" class="category-icon" aria-hidden="true"></i>
+      </div>
+      <div class="text">
+        <h3>{{ categoryName }}</h3>
+        <p>카테고리에서 지난 달보다</p>
+        <p>{{ description }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -82,6 +82,9 @@ onMounted(async () => {
   if (!transactionStore.budgets.length) {
     await transactionStore.fetchBudgets();
   }
+  if (!categoryStore.expenseCategories.length) {
+    await categoryStore.fetchCategories();
+  }
   calculateComparison();
 });
 
@@ -104,7 +107,14 @@ const description = computed(() => {
 
   const diff = Math.abs(categoryData.value?.diff || 0);
   const verb = props.type === 'saved' ? '절약했어요!' : '더 많이 썼어요!';
-  return `카테고리에서 ${diff.toLocaleString()}원 ${verb}`;
+  return `${diff.toLocaleString()}원 ${verb}`;
+});
+
+const iconClass = computed(() => {
+  const match = categoryStore.expenseCategories.find(
+    (c) => c.name === categoryName.value
+  );
+  return match?.imgpath || 'fa-solid fa-circle-question';
 });
 </script>
 
@@ -117,16 +127,31 @@ const description = computed(() => {
   border-radius: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   text-align: center;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.top-category-card img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  margin-bottom: 0.75rem;
+.icon {
+  flex: 1;
+  width: 50%;
+}
+
+.text {
+  flex: 1;
+  width: 50%;
+}
+
+.icon-and-title {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.category-icon {
+  font-size: 5vw;
+  color: #0077c2;
 }
 
 .top-category-card h3 {

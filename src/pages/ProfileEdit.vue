@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex vh-100">
-    <main class="flex-grow-1 overflow-auto">
-      <div class="mx-auto w-75" style="max-width: 900px">
-        <h1 style="margin-top: 5rem">회원 정보 수정</h1>
+    <main class="flex-grow-1">
+      <div class="mx-auto px-3" style="max-width: 900px">
+        <h1 class="fs-3" style="margin: 2rem 0">회원 정보 수정</h1>
       </div>
       <form
         @submit.prevent="handleSubmit"
-        class="mx-auto w-75"
+        class="mx-auto px-3"
         style="max-width: 900px"
       >
         <hr />
@@ -155,7 +155,7 @@
         <hr />
         <div
           class="d-flex justify-content-center gap-3"
-          style="margin-top: 4rem"
+          style="margin-top: 2rem"
         >
           <button type="submit" class="btn btn-blue">수정하기</button>
           <button @click.prevent="router.push('/profile')" class="btn btn-red">
@@ -168,9 +168,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useUserStore } from '@/store/userStore';
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/userStore";
 
 const showPw = ref(false);
 const showPwConfirm = ref(false);
@@ -188,42 +188,42 @@ const router = useRouter();
 const userStore = useUserStore();
 
 const form = ref({
-  id: '',
-  name: '',
-  password: '',
-  passwordConfirm: '',
-  phone1: '',
-  phone2: '',
-  phone3: '',
+  id: "",
+  name: "",
+  password: "",
+  passwordConfirm: "",
+  phone1: "",
+  phone2: "",
+  phone3: "",
   profileImage: null,
 });
 
 onMounted(async () => {
   try {
     await userStore.fetchUserInfo();
-    form.value.name = userStore.name || '';
-    form.value.id = userStore.id || '';
-    form.value.password = userStore.password || '';
-    form.value.passwordConfirm = userStore.password || '';
-    const [p1, p2, p3] = (userStore.phone || '').split('-');
-    form.value.phone1 = p1 || '';
-    form.value.phone2 = p2 || '';
-    form.value.phone3 = p3 || '';
+    form.value.name = userStore.name || "";
+    form.value.id = userStore.id || "";
+    form.value.password = userStore.password || "";
+    form.value.passwordConfirm = userStore.password || "";
+    const [p1, p2, p3] = (userStore.phone || "").split("-");
+    form.value.phone1 = p1 || "";
+    form.value.phone2 = p2 || "";
+    form.value.phone3 = p3 || "";
     form.value.profileImage = userStore.profileImage || predefinedImages[0];
 
     validatePassword(form.value.password);
   } catch (e) {
-    alert('사용자 정보를 불러오는 데 실패했습니다.');
+    alert("사용자 정보를 불러오는 데 실패했습니다.");
   }
 });
 
 function onlyNumber(field) {
-  form.value[field] = form.value[field].replace(/\D/g, '');
+  form.value[field] = form.value[field].replace(/\D/g, "");
 }
 
 async function handleSubmit() {
   if (!form.value.name.trim()) {
-    alert('이름을 입력해주세요.');
+    alert("이름을 입력해주세요.");
     return;
   }
   if (
@@ -231,15 +231,15 @@ async function handleSubmit() {
     !/^\d{4}$/.test(form.value.phone2) ||
     !/^\d{4}$/.test(form.value.phone3)
   ) {
-    alert('올바른 휴대전화 번호를 입력해주세요.');
+    alert("올바른 휴대전화 번호를 입력해주세요.");
     return;
   }
   if (!passwordValid.value) {
-    alert('비밀번호 형식을 확인해주세요.');
+    alert("비밀번호 형식을 확인해주세요.");
     return;
   }
   if (form.value.password !== form.value.passwordConfirm) {
-    alert('비밀번호가 일치하지 않습니다.');
+    alert("비밀번호가 일치하지 않습니다.");
     return;
   }
 
@@ -256,25 +256,25 @@ async function handleSubmit() {
     profileImage: form.value.profileImage,
   };
   if (JSON.stringify(original) === JSON.stringify(changed)) {
-    alert('변경된 내용이 없습니다.');
+    alert("변경된 내용이 없습니다.");
     return;
   }
 
   try {
     await userStore.updateUserInfo(form.value);
-    alert('수정 완료!');
-    router.push('/profile');
+    alert("수정 완료!");
+    router.push("/profile");
   } catch (e) {
-    alert('수정 실패');
+    alert("수정 실패");
   }
 }
 
 // 미리보기 이미지 리스트
 const predefinedImages = [
-  new URL('/image/profile1.png', import.meta.url).href,
-  new URL('/image/profile2.png', import.meta.url).href,
-  new URL('/image/profile3.png', import.meta.url).href,
-  new URL('/image/profile4.png', import.meta.url).href,
+  new URL("/image/profile1.png", import.meta.url).href,
+  new URL("/image/profile2.png", import.meta.url).href,
+  new URL("/image/profile3.png", import.meta.url).href,
+  new URL("/image/profile4.png", import.meta.url).href,
 ];
 
 // 이미지 선택 핸들러
@@ -283,8 +283,8 @@ function selectProfileImage(imageUrl) {
 }
 
 function normalize(url) {
-  if (!url) return '';
-  return url.split('/').slice(-2).join('/'); // "image/profile1.png"처럼 비교
+  if (!url) return "";
+  return url.split("/").slice(-2).join("/"); // "image/profile1.png"처럼 비교
 }
 
 function validatePassword(password) {

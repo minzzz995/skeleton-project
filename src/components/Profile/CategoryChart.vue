@@ -20,7 +20,6 @@ import { useTransactionStore } from '@/store/transactionStore';
 import DoughnutChart from './Chart/DoughnutChart.vue';
 import BarChart from './Chart/Profile_BarChart.vue';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { compileScript } from 'vue/compiler-sfc';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -29,9 +28,8 @@ const transactionStore = useTransactionStore();
 const monthlyExpenses = ref([]);
 const barChartTopCategory = ref('N/A');
 
-// 월별 지출 필터
 onMounted(async () => {
-  await transactionStore.fetchBudgets(); // ✅ budgets 채우기
+  await transactionStore.fetchBudgets();
   if (transactionStore.budgets && Array.isArray(transactionStore.budgets)) {
     const now = new Date();
     monthlyExpenses.value = transactionStore.budgets.filter((e) => {
@@ -42,12 +40,9 @@ onMounted(async () => {
         date.getMonth() === now.getMonth()
       );
     });
-  } else {
-    console.warn('transactionStore.budgets is empty or undefined');
   }
 });
 
-// 차트 데이터 생성
 const chartData = computed(() => {
   const categoryMap = {};
 
@@ -79,7 +74,6 @@ const chartData = computed(() => {
   };
 });
 
-// 가장 많이 사용된 카테고리 추출
 const topCategory = computed(() => {
   const sorted = Object.entries(
     monthlyExpenses.value.reduce((acc, exp) => {
@@ -97,6 +91,25 @@ const chartOptions = {
     legend: {
       position: 'bottom',
     },
+    tooltip: {
+      callbacks: {
+        label: (context) => {
+          const label = context.label || '';
+          const value = context.parsed;
+          return `${label}: ${value.toLocaleString()}원 지출`;
+        },
+      },
+    },
+  },
+  hover: {
+    mode: 'nearest',
+    onHover: (event, chartElement) => {
+      if (chartElement.length) {
+        event.native.target.style.cursor = 'pointer';
+      } else {
+        event.native.target.style.cursor = 'default';
+      }
+    },
   },
 };
 </script>
@@ -106,35 +119,38 @@ const chartOptions = {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   background-color: #f2faff;
   padding: 20px;
   border-radius: 16px;
-  flex-wrap: wrap; /* 줄바꿈 허용 */
-  border: 1px solid #d0e5f0; /* ✅ 테두리 추가 */
+  flex-wrap: wrap;
+  border: 1px solid #d0e5f0;
+  gap: 2rem;
 }
 
 /* 왼쪽 도넛 차트 영역 */
 .chart-left {
-  flex: 1;
-  width: 50%;
-  aspect-ratio: 1 / 1;
-  min-width: 200px;
-  max-width: 400px; /* ✅ 최대 크기 제한 */
-  margin-right: 1rem; /* ✅ 오른쪽 여백 */
+  flex: 1 1 300px;
+  max-width: 400px;
+  min-width: 250px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 340px; 
 }
 
-/* 오른쪽 막대 차트 영역 */
+/* 오른쪽 바 차트 영역 */
 .chart-right {
-  flex: 1;
-  width: 50%;
-  max-width: 500px; /* ✅ 최대 크기 제한 */
+  flex: 1 1 300px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* 상단 텍스트 카드 */
+/* 상단 텍스트 */
 .top-text {
   background-color: #d6f3fe;
   padding: 12px 16px;
@@ -146,30 +162,20 @@ const chartOptions = {
   text-align: center;
 }
 
-/* ✅ 반응형 처리 */
+/* 반응형 */
 @media (max-width: 900px) {
   .category-analysis {
     flex-direction: column;
-    align-items: stretch;
-  }
-
-  .chart-left,
-  .chart-right {
-    width: 95%;
-    max-width: none; /* ✅ 모바일에선 max-width 해제 */
+    align-items: center;
   }
 
   .chart-left {
-    margin-top: 1.5rem;
-    margin-right: 0; /* ✅ 여백 제거 */
+    width: 100%;
+    margin-bottom: 1.5rem;
   }
 
   .chart-right {
-    margin-top: 2.5rem;
-  }
-
-  .top-text {
-    text-align: center;
+    width: 100%;
   }
 }
 </style>

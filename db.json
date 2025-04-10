@@ -12,10 +12,10 @@
     {
       "id": "2",
       "type": "income",
-      "date": "2025-04-01T09:00:00",
+      "date": "2025-04-02T00:00:00.000Z",
       "category": "월급",
       "detailcategory": "KB알바",
-      "amount": "1200000",
+      "amount": 1200000,
       "memo": "4월 월급"
     },
     {
@@ -194,70 +194,70 @@
     {
       "id": "1",
       "name": "식비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-utensils"
     },
     {
       "id": "2",
       "name": "교통비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-bus"
     },
     {
       "id": "3",
       "name": "유흥비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-cocktail"
     },
     {
       "id": "4",
       "name": "공과금",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-bolt"
     },
     {
       "id": "5",
       "name": "저축",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-piggy-bank"
     },
     {
       "id": "6",
       "name": "문화생활",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-film"
     },
     {
       "id": "7",
       "name": "경조사비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-gift"
     },
     {
       "id": "8",
       "name": "의료비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-notes-medical"
     },
     {
       "id": "9",
       "name": "교육비",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-graduation-cap"
     },
     {
       "id": "10",
       "name": "보험료",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-shield-heart"
     },
     {
       "id": "11",
       "name": "통신료",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-wifi"
     },
     {
       "id": "12",
       "name": "기타",
-      "imgpath": ""
+      "imgpath": "fa-solid fa-ellipsis"
     }
   ],
   "user": [
     {
-      "name": "김김나",
+      "name": "김김나나",
       "password": "addfD3!sdf",
-      "tel": "010-2442-5678",
-      "imgpath": "http://localhost:5173/image/profile2.png",
+      "tel": "010-2443-5678",
+      "imgpath": "http://localhost:5173/image/profile4.png",
       "id": "test"
     }
   ]

@@ -1,16 +1,18 @@
 <template>
   <div
     class="d-none d-md-flex flex-column justify-content-between bg-sidebar text-dark"
-    style="width: 250px; height: 100vh"
+    style="width: 250px; height: 100%"
   >
     <!-- 상단 메뉴 -->
     <div>
-      <h5
-        class="mb-4 fw-bold px-3 pt-3"
-        style="font-family: 'NanumDahaeng', sans-serif"
-      >
-        폭싹 썼수다
-      </h5>
+      <router-link to="/" class="text-decoration-none text-dark">
+        <h5
+          class="mb-4 fw-bold px-3 pt-3 fs-3"
+          style="font-family: 'NanumDahaeng', sans-serif"
+        >
+          폭싹 썼수다
+        </h5>
+      </router-link>
       <ul class="list-unstyled px-3 font-hakgyo">
         <li class="mb-3">
           <router-link
@@ -64,26 +66,25 @@
         style="width: 40px; height: 40px; object-fit: cover"
       />
 
-      <div class="ms-2">{{ userStore.name || 'Guest' }}</div>
+      <div class="ms-2">{{ userStore.name || "Guest" }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import * as api from '../services/api';
-import { useUserStore } from '@/store/userStore';
-
+import { ref, onMounted } from "vue";
+import * as api from "../services/api";
+import { useUserStore } from "@/store/userStore";
 
 const userStore = useUserStore();
 const user = ref();
 
 onMounted(async () => {
   try {
-    const res = await api.get('user');
+    const res = await api.get("user");
     user.value = res[0];
   } catch (err) {
-    console.error('사용자 정보를 불러오지 못했습니다.');
+    console.error("사용자 정보를 불러오지 못했습니다.");
   }
 });
 </script>

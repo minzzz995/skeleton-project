@@ -1,6 +1,8 @@
 <template>
   <div class="bar-chart-container">
     <Bar :data="barChartData" :options="chartOptions" />
+
+    <!-- 비율 텍스트 -->
     <div class="labels">
       <div
         v-for="(item, index) in topCategories"
@@ -11,6 +13,23 @@
         <p class="percentage">{{ item.percentage.toFixed(0) }}%</p>
       </div>
     </div>
+
+    <!-- ✅ 범례 추가 -->
+    <ul class="custom-legend mt-3">
+      <li
+        v-for="(item, index) in topCategories"
+        :key="index"
+        class="legend-item"
+      >
+        <span
+          class="color-box"
+          :style="{
+            backgroundColor: barChartData.datasets[0].backgroundColor[index],
+          }"
+        ></span>
+        <span class="legend-text">{{ item.category }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -134,9 +153,10 @@ const chartOptions = {
 }
 
 .labels {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* topCategories 수만큼 */
   margin-top: 16px;
+  gap: 0; /* 막대와 정확히 붙이려면 gap 없애기 */
 }
 
 .label-item {
@@ -150,5 +170,33 @@ const chartOptions = {
 .percentage {
   font-size: 0.9rem;
   color: #555;
+}
+
+.custom-legend {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.color-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.legend-text {
+  font-size: 0.9rem;
+  color: #444;
 }
 </style>

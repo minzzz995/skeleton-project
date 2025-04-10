@@ -16,6 +16,9 @@ const router = createRouter({
     { path: '/profile/edit', component: ProfileEdit },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 };
+  },
 });
 
 export default router;
