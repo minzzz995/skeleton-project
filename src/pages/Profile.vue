@@ -1,11 +1,6 @@
 <template>
   <div class="font-dahaeng">
-    <apexchart
-      type="bar"
-      height="200"
-      :options="chartOptions"
-      :series="series"
-    />
+    <apexchart type="bar" height="200" />
     <div class="d-flex vh-100">
       <div class="flex-grow-1 p-4 bg-light overflow-auto">
         <div class="profile-page">
