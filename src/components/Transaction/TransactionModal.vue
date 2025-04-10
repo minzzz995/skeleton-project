@@ -71,6 +71,7 @@
                 id="detailcategory"
                 placeholder="예: 스타벅스"
                 required
+                v-model="detailCategory"
               />
             </div>
             <div class="mb-3">
@@ -82,6 +83,7 @@
                 placeholder="예: 5500"
                 min="0"
                 required
+                v-model="amount"
               />
             </div>
             <div class="mb-3">
@@ -91,6 +93,7 @@
                 id="memo"
                 rows="2"
                 placeholder="선택 사항"
+                v-model="memo"
               ></textarea>
             </div>
           </form>
@@ -127,11 +130,22 @@ const d = ref(new Date());
 // 수입 or 지출 라디오 선택값
 const selectedType = ref("income");
 const selectedCategory = ref("");
+const detailCategory = ref("");
+const amount = ref(0);
+const memo = ref("");
 
 const categoryStore = useCategoryStore();
 
 const incomeCategories = computed(() => categoryStore.incomeCategories);
 const expenseCategories = computed(() => categoryStore.expenseCategories);
+
+onMounted(() => {
+  const modalEl = document.getElementById("addModal");
+  // 인스턴스가 이미 있다면 생성하지 않음
+  if (!window.bootstrap.Modal.getInstance(modalEl)) {
+    new window.bootstrap.Modal(modalEl);
+  }
+});
 
 onMounted(async () => {
   await categoryStore.fetchCategories();
@@ -140,6 +154,9 @@ onMounted(async () => {
 const onClose = () => {
   Reset();
   selectedType.value = "income";
+  detailCategory.value = "";
+  amount.value = "";
+  memo.value = "";
 };
 
 const Reset = () => {
@@ -183,7 +200,18 @@ const onSubmit = async () => {
   }
   // 모달 닫기
   const modalEl = document.getElementById("addModal");
-  bootstrap.Modal.getInstance(modalEl)?.hide();
+  const modal =
+    window.bootstrap.Modal.getInstance(modalEl) ||
+    new window.bootstrap.Modal(modalEl);
+  modal.hide();
+
+  // 💥 백드롭 수동 제거
+  const backdrop = document.querySelector(".modal-backdrop");
+  if (backdrop) backdrop.remove();
+
+  // 💥 body 클래스 초기화 (스크롤 막힘 방지)
+  document.body.classList.remove("modal-open");
+  document.body.style = "";
 
   // 폼 초기화 -> 안하면 폼 닫고 초기화 안 되어있다!
   onClose();
