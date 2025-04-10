@@ -97,6 +97,25 @@ const chartOptions = {
     legend: {
       position: 'bottom',
     },
+    tooltip: {
+      callbacks: {
+        label: (context) => {
+          const label = context.label || '';
+          const value = context.parsed;
+          return `${label}: ${value.toLocaleString()}원 지출`;
+        },
+      },
+    },
+  },
+  hover: {
+    mode: 'nearest',
+    onHover: (event, chartElement) => {
+      if (chartElement.length) {
+        event.native.target.style.cursor = 'pointer';
+      } else {
+        event.native.target.style.cursor = 'default';
+      }
+    },
   },
 };
 </script>

@@ -1,12 +1,6 @@
 <template>
   <div class="font-dahaeng">
-    <apexchart
-      type="bar"
-      height="200"
-      :options="chartOptions"
-      :series="series"
-    />
-
+    <apexchart type="bar" height="200" />
     <div class="flex-grow-1 p-4 bg-light">
       <div class="profile-page">
         <!-- 사용자 정보 -->
@@ -18,16 +12,16 @@
               alt="프로필 사진"
             />
             <div class="text-info">
-              <p class="username">{{ userStore.name || "닉네임 없음" }}</p>
+              <p class="username">{{ userStore.name || '닉네임 없음' }}</p>
               <p class="tel">
-                연락처 : {{ userStore.phone || "000-0000-0000" }}
+                연락처 : {{ userStore.phone || '000-0000-0000' }}
               </p>
             </div>
-            <div class="btn-wrapper">
-              <router-link to="/profile/edit" class="edit-btn">
-                회원 정보 수정
-              </router-link>
-            </div>
+          </div>
+          <div class="btn-wrapper">
+            <router-link to="/profile/edit" class="edit-btn">
+              회원 정보 수정
+            </router-link>
           </div>
         </section>
         <section v-else>
@@ -37,9 +31,10 @@
         <!-- 소비 패턴 분석 -->
         <section class="spending-analysis">
           <h2>나의 소비 패턴 분석</h2>
-
           <!-- 카테고리별 지출 원형 그래프 -->
-          <CategoryChart />
+          <div class="chart-graph">
+            <CategoryChart />
+          </div>
           <!-- 절약/과소비 분석 카드, type별로 2개 보여줌. -->
           <div class="comparison-cards">
             <TopCategoryCard type="saved" />
@@ -51,10 +46,10 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
-import { useUserStore } from "@/store/userStore";
-import CategoryChart from "@/components/Profile/CategoryChart.vue";
-import TopCategoryCard from "@/components/Profile/TopCategoryCard.vue";
+import { ref, onMounted } from 'vue';
+import { useUserStore } from '@/store/userStore';
+import CategoryChart from '@/components/Profile/CategoryChart.vue';
+import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
 
 const userStore = useUserStore();
 const user = ref({});
@@ -140,6 +135,16 @@ img {
 .edit-btn:hover {
   background-color: #8cdbff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 👈 그림자 추가 */
+}
+
+.spending-analysis {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.chart-graph {
+  margin-top: 1.5rem;
 }
 
 .comparison-cards {

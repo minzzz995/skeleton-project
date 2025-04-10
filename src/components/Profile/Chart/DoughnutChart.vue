@@ -28,14 +28,13 @@ const props = defineProps({
   options: Object,
 });
 
-// 기존 options에서 legend를 끄는 설정을 병합
 const optionsWithLegendHidden = computed(() => {
   return {
     ...props.options,
     plugins: {
       ...(props.options?.plugins || {}),
       legend: {
-        display: false,
+        display: true,
         ...(props.options?.plugins?.legend || {}),
       },
     },
