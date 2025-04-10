@@ -36,11 +36,28 @@
         >
           <div class="fw-bold">{{ date.date.getDate() }}</div>
           <div v-if="hasData(date.date)" class="mt-1 text-center">
-            <div v-if="getIncome(date.date)" class="text-success small">
-              +{{ getIncome(date.date).toLocaleString() }}
+            <!-- 큰 화면일 때: 금액 표시 -->
+            <div class="d-none d-sm-block">
+              <div v-if="getIncome(date.date)" class="text-success small">
+                +{{ getIncome(date.date).toLocaleString() }}
+              </div>
+              <div v-if="getExpense(date.date)" class="text-danger small">
+                -{{ getExpense(date.date).toLocaleString() }}
+              </div>
             </div>
-            <div v-if="getExpense(date.date)" class="text-danger small">
-              -{{ getExpense(date.date).toLocaleString() }}
+
+            <!-- 작은 화면일 때: 점만 표시 -->
+            <div class="d-block d-sm-none">
+              <span
+                v-if="getIncome(date.date)"
+                class="dot dot-income"
+                title="수입 있음"
+              ></span>
+              <span
+                v-if="getExpense(date.date)"
+                class="dot dot-expense"
+                title="지출 있음"
+              ></span>
             </div>
           </div>
         </div>
@@ -235,6 +252,26 @@ const hasData = (date) => getIncome(date) > 0 || getExpense(date) > 0;
 
 .transaction-box {
   width: 100%;
+}
+
+.transaction-box ul li {
+  margin-bottom: 10px; /* 👈 각 줄 간격 */
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin: 0 2px;
+}
+
+.dot-income {
+  background-color: #28a745; /* 초록색 점 */
+}
+
+.dot-expense {
+  background-color: #dc3545; /* 빨간색 점 */
 }
 
 @media (min-width: 1200px) {
