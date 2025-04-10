@@ -1,7 +1,13 @@
 <template>
-  <nav class="navbar navbar-light bg-sidebar px-3 d-md-none position-relative">
+  <nav
+    class="navbar navbar-light bg-sidebar px-3 d-md-none position-relative font-hakgyo"
+  >
     <!-- 브랜드 -->
-    <span class="navbar-brand fw-bold">폭싹 썼수다</span>
+    <span
+      class="navbar-brand fw-bold"
+      style="font-family: 'NanumDahaeng', sans-serif"
+      >폭싹 썼수다</span
+    >
 
     <!-- 햄버거 + 드롭다운 메뉴 -->
     <div class="dropdown">
