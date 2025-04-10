@@ -1,10 +1,11 @@
 <script setup>
-import { useTransactionStore } from '@/store/transactionStore';
-import { useCategoryStore } from '@/store/categoryStore';
-import TransactionList from '@/components/Transaction/TransactionList.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import { ref, computed, onMounted } from 'vue';
-import dayjs from 'dayjs';
+import { useTransactionStore } from "@/store/transactionStore";
+import { useCategoryStore } from "@/store/categoryStore";
+import TransactionList from "@/components/Transaction/TransactionList.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
+import { ref, computed, onMounted } from "vue";
+import dayjs from "dayjs";
 
 // Store 연결
 const transactionStore = useTransactionStore();
@@ -13,16 +14,16 @@ const categoryStore = useCategoryStore();
 // 날짜 초기값 설정
 const now = dayjs();
 const dateRange = ref({
-  start: now.startOf('month').format('YYYY-MM-DD'),
-  end: now.format('YYYY-MM-DD'),
+  start: now.startOf("month").format("YYYY-MM-DD"),
+  end: now.format("YYYY-MM-DD"),
 });
 
 // 상태 변수
 const modalVisible = ref(false);
 const selectedBudget = ref(null);
-const selectedCategory = ref('');
-const showStartPicker = ref(false);
-const showEndPicker = ref(false);
+const selectedCategory = ref("");
+// const showStartPicker = ref(false);
+// const showEndPicker = ref(false);
 
 // 계산된 값
 const groupedBudgets = computed(() => transactionStore.groupByDate);
@@ -30,10 +31,10 @@ const summary = computed(() => transactionStore.summary);
 const incomeCategories = computed(() => categoryStore.incomeCategories);
 const expenseCategories = computed(() => categoryStore.expenseCategories);
 const formattedStart = computed(() =>
-  dayjs(dateRange.value.start).format('M월 D일')
+  dayjs(dateRange.value.start).format("M월 D일")
 );
 const formattedEnd = computed(() =>
-  dayjs(dateRange.value.end).format('M월 D일')
+  dayjs(dateRange.value.end).format("M월 D일")
 );
 
 // 초기 데이터 로딩
@@ -51,20 +52,23 @@ function openAddModal() {
 
 function openEditModal(budget) {
   selectedBudget.value = budget;
+  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
+  modal.show();
   modalVisible.value = true;
 }
 
 async function deleteBudget(id) {
   await transactionStore.deleteBudget(id);
+  console.log("삭제 요청 ID:", id);
 }
 
 function moveMonth(offset) {
   const newStart = dayjs(dateRange.value.start)
-    .add(offset, 'month')
-    .startOf('month');
-  const newEnd = newStart.endOf('month');
-  dateRange.value.start = newStart.format('YYYY-MM-DD');
-  dateRange.value.end = newEnd.format('YYYY-MM-DD');
+    .add(offset, "month")
+    .startOf("month");
+  const newEnd = newStart.endOf("month");
+  dateRange.value.start = newStart.format("YYYY-MM-DD");
+  dateRange.value.end = newEnd.format("YYYY-MM-DD");
   applyFilters();
 }
 
@@ -90,13 +94,13 @@ function applyFilters() {
 }
 
 function format(value) {
-  return parseInt(value).toLocaleString() + '원';
+  return parseInt(value).toLocaleString() + "원";
 }
 </script>
 
 <template>
-  <div class="transaction-page">
-    <div class="filter-bar">
+  <div class="transaction-page font-hakgyo">
+    <div class="filter-bar font-hakgyo">
       <div class="day-filer">
         <button @click="moveMonth(-1)">
           <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -132,7 +136,7 @@ function format(value) {
         </select>
       </div>
     </div>
-    <div class="summary">
+    <div class="summary font-hakgyo">
       <div class="summary-box">
         <p>수입</p>
         {{ format(summary.income) }}
@@ -151,12 +155,37 @@ function format(value) {
       @edit="openEditModal"
       @delete="deleteBudget"
     />
-    <button class="add-btn" @click="openAddModal">거래 추가</button>
-    <TransactionModal
-      v-if="modalVisible"
-      :editTarget="selectedBudget"
-      @close="modalVisible = false"
-    />
+    <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
+    <button
+      type="button"
+      class="btn rounded-pill px-4 py-2 text-black d-flex align-items-center gap-2"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background-color: #b3e5fc;
+      "
+      data-bs-toggle="modal"
+      data-bs-target="#addModal"
+    >
+      <i class="fa-solid fa-pen-to-square"></i> 거래 추가
+    </button>
+
+    <Teleport to="body">
+      <TransactionModal
+        @close="modalVisible = false"
+        @added="transactionStore.fetchBudgets()"
+      />
+      <TransactionEditModal
+        :selectedBudget="selectedBudget"
+        @close="modalVisible = false"
+        @updated="
+          (updatedBudget) =>
+            transactionStore.updateBudgets(updatedBudget.id, updatedBudget)
+        "
+      />
+    </Teleport>
   </div>
 </template>
 
@@ -164,17 +193,9 @@ function format(value) {
 /* 전체 */
 .transaction-page {
   padding: 20px;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   background-color: #fff;
 }
-
-/* 필터 */
-/* .filter-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-} */
 
 /* 날짜 */
 .day-filer {
@@ -244,16 +265,10 @@ function format(value) {
 
 .add-btn {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: #cbe4ff;
-  border: none;
-  border-radius: 32px;
-  padding: 12px 20px;
-  font-weight: bold;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #b3e5fc;
 }
 
 .add-btn:hover {

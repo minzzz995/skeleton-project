@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import { get, post, put, remove } from "@/services/api";
 import dayjs from "dayjs";
 
 export const useTransactionStore = defineStore("transaction", {
@@ -11,23 +11,22 @@ export const useTransactionStore = defineStore("transaction", {
   actions: {
     async fetchBudgets() {
       // db.json에서 불러옴
-      const res = await axios.get("http://localhost:3000/budget");
-      this.budgets = res.data;
+      this.budgets = await get("budget");
     },
     async addBudgets(data) {
       // 거래 추가
-      const res = await axios.post("/budget", data);
-      this.budgets.push(res.data);
+      const newItem = await post("budget", data);
+      this.budgets.push(newItem);
     },
     async updateBudgets(id, updatedData) {
       // 거래 내역 수정
-      await axios.put(`/budget/${id}`, updatedData);
+      await put(`budget/${id}`, updatedData);
       const idx = this.budgets.findIndex((t) => t.id === id);
       if (idx !== -1) this.budgets[idx] = updatedData;
     },
-    async deleteBudgets(id) {
+    async deleteBudget(id) {
       // 거래 삭제
-      await axios.delete(`/budget/${id}`);
+      await remove(`budget/${id}`);
       this.budgets = this.budgets.filter((t) => t.id !== id);
     },
     setCategoryFilter(category) {

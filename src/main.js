@@ -10,8 +10,9 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 import VueApexCharts from 'vue3-apexcharts';
-import '@/assets/styles/fonts.css';  
-import './assets/main.css';       
+import '@/assets/styles/fonts.css';
+import './assets/main.css';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 const app = createApp(App);
 

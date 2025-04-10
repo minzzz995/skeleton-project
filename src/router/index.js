@@ -4,12 +4,14 @@ import Transactions from '@/pages/Transactions.vue';
 import Profile from '@/pages/Profile.vue';
 import ProfileEdit from '@/pages/ProfileEdit.vue';
 import NotFound from '@/pages/NotFound.vue';
+import Calendar from '@/pages/Calendar.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', component: Home },
     { path: '/transaction', component: Transactions },
+    { path: '/calendar', component: Calendar },
     { path: '/profile', component: Profile },
     { path: '/profile/edit', component: ProfileEdit },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },

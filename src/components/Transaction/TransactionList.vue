@@ -50,7 +50,7 @@ function getWeekday(dateStr) {
 </script>
 
 <template>
-  <div class="transaction-list">
+  <div class="transaction-list font-hakgyo">
     <div
       class="transaction-group"
       v-for="group in transactionsWithTotal"
@@ -68,14 +68,14 @@ function getWeekday(dateStr) {
           v-for="item in group.transactions"
           :key="item.id"
         >
-          <span class="type" :class="item.type">{{
-            item.type == "income" ? "수입" : "지출"
-          }}</span>
+          <span class="type" :class="item.type">
+            {{ item.type == "income" ? "수입" : "지출" }}
+          </span>
           <span class="category">{{ item.category }}</span>
           <span class="detail">{{ item.detailcategory }}</span>
-          <span class="amount" :class="item.type">{{
-            format(item.amount)
-          }}</span>
+          <span class="amount" :class="item.type">
+            {{ format(item.amount) }}
+          </span>
           <span class="memo">{{ item.memo }}</span>
           <div class="actions">
             <button @click="$emit('edit', item)">수정</button>
