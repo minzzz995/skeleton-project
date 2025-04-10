@@ -5,12 +5,14 @@
   >
     <!-- 상단 메뉴 -->
     <div>
-      <h5
-        class="mb-4 fw-bold px-3 pt-3"
-        style="font-family: 'NanumDahaeng', sans-serif"
-      >
-        폭싹 썼수다
-      </h5>
+      <router-link to="/" class="text-decoration-none text-dark">
+        <h5
+          class="mb-4 fw-bold px-3 pt-3 fs-3"
+          style="font-family: 'NanumDahaeng', sans-serif"
+        >
+          폭싹 썼수다
+        </h5>
+      </router-link>
       <ul class="list-unstyled px-3 font-hakgyo">
         <li class="mb-3">
           <router-link

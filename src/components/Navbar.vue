@@ -3,11 +3,13 @@
     class="navbar navbar-light bg-sidebar px-3 d-md-none position-relative font-hakgyo"
   >
     <!-- 브랜드 -->
-    <span
-      class="navbar-brand fw-bold"
-      style="font-family: 'NanumDahaeng', sans-serif"
-      >폭싹 썼수다</span
-    >
+    <router-link to="/" class="text-decoration-none text-dark">
+      <span
+        class="navbar-brand fw-bold"
+        style="font-family: 'NanumDahaeng', sans-serif"
+        >폭싹 썼수다</span
+      >
+    </router-link>
 
     <!-- 햄버거 + 드롭다운 메뉴 -->
     <div class="dropdown">
@@ -41,20 +43,18 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 const $route = useRoute();
 
 const items = [
-  { path: '/', label: '대시보드', icon: 'fa-solid fa-house' },
+  { path: "/", label: "대시보드", icon: "fa-solid fa-house" },
   {
-    path: '/transaction',
-    label: '거래내역',
-    icon: 'fa-regular fa-money-bill-1',
+    path: "/transaction",
+    label: "거래내역",
+    icon: "fa-regular fa-money-bill-1",
   },
-
-  { path: "/profile", label: "프로필", icon: "fa-regular fa-circle-user" },
   { path: "/calendar", label: "캘린더", icon: "fa-regular fa-calendar" },
-
+  { path: "/profile", label: "프로필", icon: "fa-regular fa-circle-user" },
 ];
 </script>
 

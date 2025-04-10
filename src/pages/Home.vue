@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex" style="height: 100vh; position: relative">
-    <div class="flex-grow-1 bg-white p-5 overflow-auto">
+    <div class="flex-grow-1 bg-white p-5">
       <!-- 해당 월 수입/지출/순이익 카드 -->
       <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
         <div class="col">
@@ -70,7 +70,7 @@
                   'text-danger': item.type === 'expense',
                 }"
               >
-                {{ item.type === 'income' ? '+' : '-' }}
+                {{ item.type === "income" ? "+" : "-" }}
                 {{ parseInt(item.amount).toLocaleString() }}
               </td>
               <td>{{ item.category }}</td>
@@ -108,12 +108,12 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import BarChart from '@/components/Home_BarChart.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import { formatDate } from '@/utils/formatDate';
-import { useTransactionStore } from '@/store/transactionStore';
+import { onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+import BarChart from "@/components/Home_BarChart.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import { formatDate } from "@/utils/formatDate";
+import { useTransactionStore } from "@/store/transactionStore";
 
 const router = useRouter();
 const store = useTransactionStore();
@@ -126,7 +126,7 @@ const monthlySummary = computed(() => store.monthlySummary);
 const latestTransactions = computed(() => store.latestFive);
 
 const goToTransactions = () => {
-  router.push('/transaction');
+  router.push("/transaction");
 };
 </script>
 
