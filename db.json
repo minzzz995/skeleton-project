@@ -3068,6 +3068,24 @@
       "detailcategory": "데이터요금",
       "amount": 644916,
       "memo": "기타"
+    },
+    {
+      "id": "3014",
+      "type": "expense",
+      "date": "2025-04-10T08:47:40.926Z",
+      "category": "교통비",
+      "detailcategory": "버스",
+      "amount": 12345,
+      "memo": "개비싸네 ㄹㅇㅋㅋ"
+    },
+    {
+      "id": "7ae7",
+      "type": "income",
+      "date": "2025-04-10T08:50:15.012Z",
+      "category": "월급",
+      "detailcategory": "dk안되는데?",
+      "amount": 1000000,
+      "memo": "asdfasdf"
     }
   ],
   "incomecategory": [
@@ -3152,7 +3170,7 @@
   ],
   "user": [
     {
-      "name": "제임스",
+      "name": "애순",
       "password": "addfD3!sdf",
       "tel": "010-2443-5678",
       "imgpath": "http://localhost:5173/image/profile1.png",
