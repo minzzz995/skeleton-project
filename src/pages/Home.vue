@@ -1,7 +1,13 @@
 <template>
-  <div class="d-flex" style="height: 100vh; position: relative">
+  <div
+    class="d-flex flex-column w-100"
+    style="min-height: 100vh; overflow-x: hidden"
+  >
     <div class="flex-grow-1 bg-light p-4">
-      <div class="home-wrapper shadow-sm bg-white rounded-4 p-4">
+      <div
+        class="home-wrapper shadow-sm bg-white rounded-4 p-4 mx-auto"
+        style="max-width: 100%; width: 100%"
+      >
         <!-- 해당 월 수입/지출/순이익 카드 -->
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
           <div class="col">
@@ -36,7 +42,7 @@
         </div>
 
         <!-- 월 별 차트 보여주기 -->
-        <div class="rounded-4 border p-4 mb-5" style="border: 1px solid #ccc">
+        <div class="rounded-4 border p-4 mb-5 chart-wrapper">
           <h6 class="fw-semibold mb-3">월 별 수입/지출</h6>
           <BarChart :data="monthlySummary" />
         </div>
@@ -53,32 +59,34 @@
               + 더보기
             </button>
           </div>
-          <table class="table align-middle">
-            <thead>
-              <tr class="table-light">
-                <th>날짜</th>
-                <th>금액</th>
-                <th>카테고리</th>
-                <th>세부 카테고리</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in latestTransactions" :key="item.id">
-                <td>{{ formatDate(item.date) }}</td>
-                <td
-                  :class="{
-                    'text-success': item.type === 'income',
-                    'text-danger': item.type === 'expense',
-                  }"
-                >
-                  {{ item.type === 'income' ? '+' : '-' }}
-                  {{ parseInt(item.amount).toLocaleString() }}
-                </td>
-                <td>{{ item.category }}</td>
-                <td>{{ item.detailcategory }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr class="table-light">
+                  <th>날짜</th>
+                  <th>금액</th>
+                  <th>카테고리</th>
+                  <th>세부 카테고리</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in latestTransactions" :key="item.id">
+                  <td>{{ formatDate(item.date) }}</td>
+                  <td
+                    :class="{
+                      'text-success': item.type === 'income',
+                      'text-danger': item.type === 'expense',
+                    }"
+                  >
+                    {{ item.type === 'income' ? '+' : '-' }}
+                    {{ parseInt(item.amount).toLocaleString() }}
+                  </td>
+                  <td>{{ item.category }}</td>
+                  <td>{{ item.detailcategory }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
@@ -142,5 +150,10 @@ const goToTransactions = () => {
   white-space: normal; /* 줄바꿈 허용하기 */
   overflow-wrap: break-word; /* 너무 긴 숫자나 텍스트는 줄바꿈 허용하기 */
   text-align: center; /* 가운데 정렬 유지 */
+}
+.chart-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
 }
 </style>

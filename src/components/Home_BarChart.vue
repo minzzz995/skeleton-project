@@ -10,17 +10,31 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
 import { useTransactionStore } from '@/store/transactionStore';
 import ApexCharts from 'vue3-apexcharts';
 
 const store = useTransactionStore();
+const isMobile = ref(window.innerWidth < 768);
 
-// 최근 12개월 목록 생성
-const recent12Months = computed(() => {
+const handleResize = () => {
+  isMobile.value = window.innerWidth < 768;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize);
+});
+
+// 최근 12개월 또는 4개월 목록 생성
+const recentMonths = computed(() => {
+  const count = isMobile.value ? 4 : 12;
   const months = [];
   const today = new Date();
-  for (let i = 11; i >= 0; i--) {
+  for (let i = count - 1; i >= 0; i--) {
     const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
     const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
       2,
@@ -41,7 +55,7 @@ const normalizedSummary = computed(() => {
     summaryMap[item.month] = item;
   });
 
-  return recent12Months.value.map((month) => {
+  return recentMonths.value.map((month) => {
     const matched = summaryMap[month.key];
     return {
       month: month.label,
