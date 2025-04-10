@@ -34,6 +34,16 @@
         </li>
         <li class="mb-3">
           <router-link
+            to="/calendar"
+            class="text-decoration-none text-dark d-flex align-items-center gap-2"
+            :class="{ 'bg-active': $route.path === '/calendar' }"
+          >
+            <i class="fa-regular fa-calendar"></i>
+            <span>캘린더</span>
+          </router-link>
+        </li>
+        <li class="mb-3">
+          <router-link
             to="/profile"
             class="text-decoration-none text-dark d-flex align-items-center gap-2"
             :class="{ 'bg-active': $route.path === '/profile' }"
@@ -53,6 +63,7 @@
         class="rounded-circle"
         style="width: 40px; height: 40px; object-fit: cover"
       />
+
       <div class="ms-2">{{ userStore.name || 'Guest' }}</div>
     </div>
   </div>
@@ -62,6 +73,7 @@
 import { ref, onMounted } from 'vue';
 import * as api from '../services/api';
 import { useUserStore } from '@/store/userStore';
+
 
 const userStore = useUserStore();
 const user = ref();
