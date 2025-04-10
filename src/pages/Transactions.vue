@@ -1,114 +1,22 @@
-<script setup>
-import { useTransactionStore } from '@/store/transactionStore';
-import { useCategoryStore } from '@/store/categoryStore';
-import TransactionList from '@/components/Transaction/TransactionList.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
-import { ref, computed, onMounted } from 'vue';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import * as bootstrap from 'bootstrap';
-import dayjs from 'dayjs';
-
-// Store 연결
-const transactionStore = useTransactionStore();
-const categoryStore = useCategoryStore();
-
-// 날짜 초기값 설정
-const dateRange = ref([
-  dayjs().startOf('month').toDate(),
-  dayjs().endOf('month').toDate(),
-]);
-
-// 상태 변수
-const modalVisible = ref(false);
-const selectedBudget = ref(null);
-const selectedCategory = ref('');
-
-// 계산된 값
-const groupedBudgets = computed(() => transactionStore.groupByDate);
-const summary = computed(() => transactionStore.summary);
-const incomeCategories = computed(() => categoryStore.incomeCategories);
-const expenseCategories = computed(() => categoryStore.expenseCategories);
-
-// 초기 데이터 로딩
-onMounted(async () => {
-  await transactionStore.fetchBudgets();
-  await categoryStore.fetchCategories();
-  applyFilters();
-});
-
-// 메서드 정의
-function openAddModal() {
-  selectedBudget.value = null;
-  modalVisible.value = true;
-}
-
-function openEditModal(budget) {
-  selectedBudget.value = budget;
-  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
-  modal.show();
-  modalVisible.value = true;
-}
-
-async function deleteBudget(id) {
-  await transactionStore.deleteBudget(id);
-  console.log('삭제 요청 ID:', id);
-}
-
-function moveMonth(offset) {
-  const currentStart = dayjs(dateRange.value[0]);
-  const newStart = currentStart.add(offset, 'month').startOf('month');
-  const newEnd = newStart.endOf('month');
-
-  dateRange.value = [newStart.toDate(), newEnd.toDate()];
-  applyFilters();
-}
-
-function updateCategory() {
-  transactionStore.setCategoryFilter(selectedCategory.value);
-}
-
-function applyFilters() {
-  const [start, end] = dateRange.value;
-  if (!start || !end) return;
-
-  transactionStore.setDateRange(
-    dayjs(start).format('YYYY-MM-DD'),
-    dayjs(end).format('YYYY-MM-DD')
-  );
-  transactionStore.setCategoryFilter(selectedCategory.value);
-}
-
-function format(value) {
-  return parseInt(value).toLocaleString() + '원';
-}
-</script>
-
 <template>
   <div class="transaction-page font-hakgyo">
     <div class="filter-bar font-hakgyo">
       <div class="day-title">
-        {{ dayjs(dateRange[0]).format("YYYY.MM.DD") }} ~
-        {{ dayjs(dateRange[1]).format("YYYY.MM.DD") }} / 총
+        {{ dayjs(dateRange[0]).format('YYYY.MM.DD') }} ~
+        {{ dayjs(dateRange[1]).format('YYYY.MM.DD') }} / 총
         {{ transactionStore.filteredBudgets.length }}건
       </div>
       <div class="filters">
-        <div class="day-filter">
-          <button @click="moveMonth(-1)">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        <div class="custom-date-container">
+          <button @click="moveMonth(-1)" class="arrow-btn">
+            <i class="fa fa-chevron-left"></i>
           </button>
-          <VueDatePicker
-            v-model="dateRange"
-            range
-            format="yyyy-MM-dd"
-            :teleport="true"
-            :clearable="false"
-            :enable-time-picker="false"
-            @update:model-value="applyFilters"
-            class="date-picker"
-          />
-          <button @click="moveMonth(1)">
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <div class="custom-date-display">
+            {{ dayjs(dateRange[0]).format('YYYY-MM-DD') }} -
+            {{ dayjs(dateRange[1]).format('YYYY-MM-DD') }}
+          </div>
+          <button @click="moveMonth(1)" class="arrow-btn">
+            <i class="fa fa-chevron-right"></i>
           </button>
         </div>
 
@@ -156,7 +64,6 @@ function format(value) {
       @edit="openEditModal"
       @delete="deleteBudget"
     />
-    <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
     <button
       type="button"
       class="btn rounded-pill px-4 py-2 text-black d-flex align-items-center gap-2"
@@ -191,17 +98,101 @@ function format(value) {
   </div>
 </template>
 
+<script setup>
+import { useTransactionStore } from '@/store/transactionStore';
+import { useCategoryStore } from '@/store/categoryStore';
+import TransactionList from '@/components/Transaction/TransactionList.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
+import { ref, computed, onMounted } from 'vue';
+import dayjs from 'dayjs';
+import * as bootstrap from 'bootstrap';
+
+const transactionStore = useTransactionStore();
+const categoryStore = useCategoryStore();
+
+const dateRange = ref([
+  dayjs().startOf('month').toDate(),
+  dayjs().endOf('month').toDate(),
+]);
+
+const modalVisible = ref(false);
+const selectedBudget = ref(null);
+const selectedCategory = ref('');
+
+const groupedBudgets = computed(() => transactionStore.groupByDate);
+const summary = computed(() => transactionStore.summary);
+const incomeCategories = computed(() => categoryStore.incomeCategories);
+const expenseCategories = computed(() => categoryStore.expenseCategories);
+
+onMounted(async () => {
+  await transactionStore.fetchBudgets();
+  await categoryStore.fetchCategories();
+  applyFilters();
+});
+
+function openAddModal() {
+  selectedBudget.value = null;
+  modalVisible.value = true;
+}
+
+function openEditModal(budget) {
+  selectedBudget.value = budget;
+  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
+  modal.show();
+  modalVisible.value = true;
+}
+
+async function deleteBudget(id) {
+  await transactionStore.deleteBudget(id);
+  console.log('삭제 요청 ID:', id);
+}
+
+function moveMonth(offset) {
+  const currentStart = dayjs(dateRange.value[0]);
+  const newStart = currentStart.add(offset, 'month').startOf('month');
+  const newEnd = newStart.endOf('month');
+
+  dateRange.value = [newStart.toDate(), newEnd.toDate()];
+  applyFilters();
+}
+
+function updateCategory() {
+  transactionStore.setCategoryFilter(selectedCategory.value);
+}
+
+function applyFilters() {
+  const [start, end] = dateRange.value;
+  if (!start || !end) return;
+
+  transactionStore.setDateRange(
+    dayjs(start).format('YYYY-MM-DD'),
+    dayjs(end).format('YYYY-MM-DD')
+  );
+  transactionStore.setCategoryFilter(selectedCategory.value);
+}
+
+function format(value) {
+  return parseInt(value).toLocaleString() + '원';
+}
+</script>
+
 <style scoped>
-/* 전체 */
 .transaction-page {
   padding: 20px;
   font-family: 'Pretendard', sans-serif;
   background-color: #fff;
 }
 
-/* 필터 */
+.day-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 10px;
+}
+
 .filters {
-  /* 화면이 640px 이하 - 세로정렬 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -210,44 +201,36 @@ function format(value) {
 }
 
 @media (min-width: 640px) {
-  /* 화면이 640px 이상 - 가로정렬 */
   .filters {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
 }
 
-/* 날짜 */
-.day-title {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 500;
-  color: #444;
-  margin-bottom: 10px;
-}
-.day-filter {
+.custom-date-container {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 18px;
-  font-weight: bold;
-}
-.day-filter button {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-.date-picker {
-  max-width: 340px;
-  font-size: 16px;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid #cce7ff;
+  border-radius: 12px;
+  padding: 8px 16px;
+  gap: 12px;
 }
 
-/* category */
-.category-filter {
-  display: flex;
-  align-items: center;
+.custom-date-display {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.arrow-btn {
+  background: none;
+  border: none;
+  color: #4285f4;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .category-filter select {
@@ -257,7 +240,6 @@ function format(value) {
   font-size: 14px;
 }
 
-/* summary */
 .summary {
   display: flex;
   justify-content: space-between;
