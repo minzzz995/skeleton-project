@@ -256,13 +256,8 @@
     {
       "name": "김김나나",
       "password": "addfD3!sdf",
-<<<<<<< HEAD
       "tel": "010-2443-5678",
       "imgpath": "http://localhost:5173/image/profile4.png",
-=======
-      "tel": "010-2442-5678",
-      "imgpath": "http://localhost:5173/image/profile1.png",
->>>>>>> main
       "id": "test"
     }
   ]
