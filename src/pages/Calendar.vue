@@ -15,8 +15,8 @@
           :class="item.type === 'income' ? 'text-success' : 'text-danger'"
         >
           {{ item.type === 'income' ? '입금' : '출금' }} - {{ item.category }}:
-          ₩{{ parseInt(item.amount).toLocaleString() }} ({ { item.detailcategory
-          || '' } })
+          ₩{{ parseInt(item.amount).toLocaleString() }} (
+          {{ item.detailcategory || '' }} )
         </li>
       </ul>
       <p v-else class="text-muted">내역이 없습니다.</p>
