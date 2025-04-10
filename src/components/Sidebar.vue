@@ -63,6 +63,7 @@
         class="rounded-circle"
         style="width: 40px; height: 40px; object-fit: cover"
       />
+
       <div class="ms-2">{{ userStore.name || 'Guest' }}</div>
     </div>
   </div>
@@ -72,6 +73,7 @@
 import { ref, onMounted } from 'vue';
 import * as api from '../services/api';
 import { useUserStore } from '@/store/userStore';
+
 
 const userStore = useUserStore();
 const user = ref();
