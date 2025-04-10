@@ -12,9 +12,9 @@
               alt="프로필 사진"
             />
             <div class="text-info">
-              <p class="username">{{ userStore.name || '닉네임 없음' }}</p>
+              <p class="username">{{ userStore.name || "닉네임 없음" }}</p>
               <p class="tel">
-                연락처 : {{ userStore.phone || '000-0000-0000' }}
+                연락처 : {{ userStore.phone || "000-0000-0000" }}
               </p>
             </div>
           </div>
@@ -46,10 +46,10 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useUserStore } from '@/store/userStore';
-import CategoryChart from '@/components/Profile/CategoryChart.vue';
-import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/store/userStore";
+import CategoryChart from "@/components/Profile/CategoryChart.vue";
+import TopCategoryCard from "@/components/Profile/TopCategoryCard.vue";
 
 const userStore = useUserStore();
 const user = ref({});
@@ -71,7 +71,7 @@ onMounted(async () => {
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 3rem;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
 }
 
 .section-title {
