@@ -22,8 +22,8 @@ import SideBar from '@/components/Sidebar.vue';
 
 <style scoped>
 .layout-wrapper {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .sidebar-wrapper {
@@ -36,14 +36,16 @@ import SideBar from '@/components/Sidebar.vue';
 }
 
 .main-content-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   overflow-y: auto;
   padding-left: 0;
+  padding-top: 40px;
 }
 
 @media (min-width: 768px) {
   .main-content-wrapper {
     margin-left: 250px;
+    padding-top: 0;
   }
 }
 </style>

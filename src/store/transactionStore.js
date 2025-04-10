@@ -64,10 +64,13 @@ export const useTransactionStore = defineStore('transaction', {
         .reduce((acc, cur) => acc + parseInt(cur.amount), 0);
     },
 
-    latestFive: (state) =>
-      [...state.budgets]
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 5),
+    latestFive: (state) => {
+      const now = new Date();
+      return [...state.budgets]
+        .filter((item) => new Date(item.date) <= now) // 현재 날짜보다 과거 또는 같은 날짜만 포함
+        .sort((a, b) => new Date(b.date) - new Date(a.date)) // 최신 순 정렬
+        .slice(0, 5); // 상위 5개만 반환
+    },
 
     monthlySummary: (state) => {
       const grouped = {};
