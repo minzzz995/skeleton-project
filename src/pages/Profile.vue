@@ -140,6 +140,12 @@ img {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 👈 그림자 추가 */
 }
 
+.spending-analysis {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
 .comparison-cards {
   display: flex;
   gap: 1rem;
