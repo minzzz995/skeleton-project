@@ -14,7 +14,7 @@
           class="center-label"
           :style="{ color: rankColor }"
         >
-          <div>{{ hoverData.label }}</div>
+          <div style="color: black">{{ hoverData.label }}</div>
           <div class="center-value">{{ hoverData.value }}</div>
           <div>{{ hoverData.percentage }}</div>
         </div>

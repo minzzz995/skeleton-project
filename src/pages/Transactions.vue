@@ -91,27 +91,21 @@ function format(value) {
   <div class="transaction-page font-hakgyo">
     <div class="filter-bar font-hakgyo">
       <div class="day-title">
-        {{ dayjs(dateRange[0]).format("YYYY.MM.DD") }} ~
-        {{ dayjs(dateRange[1]).format("YYYY.MM.DD") }} / 총
+        {{ dayjs(dateRange[0]).format('YYYY.MM.DD') }} ~
+        {{ dayjs(dateRange[1]).format('YYYY.MM.DD') }} / 총
         {{ transactionStore.filteredBudgets.length }}건
       </div>
       <div class="filters">
-        <div class="day-filter">
-          <button @click="moveMonth(-1)">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        <div class="custom-date-container">
+          <button @click="moveMonth(-1)" class="arrow-btn">
+            <i class="fa fa-chevron-left"></i>
           </button>
-          <VueDatePicker
-            v-model="dateRange"
-            range
-            format="yyyy-MM-dd"
-            :teleport="true"
-            :clearable="false"
-            :enable-time-picker="false"
-            @update:model-value="applyFilters"
-            class="date-picker"
-          />
-          <button @click="moveMonth(1)">
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <div class="custom-date-display">
+            {{ dayjs(dateRange[0]).format('YYYY-MM-DD') }} -
+            {{ dayjs(dateRange[1]).format('YYYY-MM-DD') }}
+          </div>
+          <button @click="moveMonth(1)" class="arrow-btn">
+            <i class="fa fa-chevron-right"></i>
           </button>
         </div>
 
@@ -159,7 +153,6 @@ function format(value) {
       @edit="openEditModal"
       @delete="deleteBudget"
     />
-    <!-- 거래 추가 버튼(항상 같은 위치에 고정시키기) -->
     <button
       type="button"
       class="btn rounded-pill px-4 py-2 text-black d-flex align-items-center gap-2"
@@ -195,16 +188,21 @@ function format(value) {
 </template>
 
 <style scoped>
-/* 전체 */
 .transaction-page {
   padding: 20px;
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   background-color: #fff;
 }
 
-/* 필터 */
+.day-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 10px;
+}
+
 .filters {
-  /* 화면이 640px 이하 - 세로정렬 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -213,44 +211,36 @@ function format(value) {
 }
 
 @media (min-width: 640px) {
-  /* 화면이 640px 이상 - 가로정렬 */
   .filters {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
 }
 
-/* 날짜 */
-.day-title {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 500;
-  color: #444;
-  margin-bottom: 10px;
-}
-.day-filter {
+.custom-date-container {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 18px;
-  font-weight: bold;
-}
-.day-filter button {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-.date-picker {
-  max-width: 340px;
-  font-size: 16px;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid #cce7ff;
+  border-radius: 12px;
+  padding: 8px 16px;
+  gap: 12px;
 }
 
-/* category */
-.category-filter {
-  display: flex;
-  align-items: center;
+.custom-date-display {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.arrow-btn {
+  background: none;
+  border: none;
+  color: #4285f4;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .category-filter select {
@@ -260,7 +250,6 @@ function format(value) {
   font-size: 14px;
 }
 
-/* summary */
 .summary {
   display: flex;
   justify-content: space-between;
