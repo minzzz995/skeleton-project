@@ -8,13 +8,13 @@
         <section class="user-info" v-if="userStore.name">
           <div class="profile-info">
             <img
-              :src="userStore.profileImage || 'https://via.placeholder.com/40'"
+              :src="userStore.profileImage || defaultProfile"
               alt="프로필 사진"
             />
             <div class="text-info">
-              <p class="username">{{ userStore.name || "닉네임 없음" }}</p>
+              <p class="username">{{ userStore.name || '닉네임 없음' }}</p>
               <p class="tel">
-                연락처 : {{ userStore.phone || "000-0000-0000" }}
+                연락처 : {{ userStore.phone || '000-0000-0000' }}
               </p>
             </div>
           </div>
@@ -46,10 +46,11 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
-import { useUserStore } from "@/store/userStore";
-import CategoryChart from "@/components/Profile/CategoryChart.vue";
-import TopCategoryCard from "@/components/Profile/TopCategoryCard.vue";
+import { ref, onMounted } from 'vue';
+import { useUserStore } from '@/store/userStore';
+import CategoryChart from '@/components/Profile/CategoryChart.vue';
+import TopCategoryCard from '@/components/Profile/TopCategoryCard.vue';
+import defaultProfile from '@/assets/profile_default.png';
 
 const userStore = useUserStore();
 const user = ref({});
