@@ -32,6 +32,9 @@
             <label for="password" class="form-label mb-0">비밀번호</label>
           </div>
           <div class="col-9">
+            <p class="text-danger small mb-4">
+              ※ 회원 정보 수정을 위해 비밀번호를 다시 입력해주세요.
+            </p>
             <div class="input-group">
               <input
                 id="password"
@@ -49,16 +52,20 @@
               </span>
             </div>
             <ul class="password-checklist mt-2">
-              <li :class="{ pass: passwordConditions.length }">✅ 8자 이상</li>
-              <li :class="{ pass: passwordConditions.upper }">
-                ✅ 대문자 포함
+              <li :class="checkClass(passwordConditions.length)">
+                {{ getIcon(passwordConditions.length) }} 8자 이상
               </li>
-              <li :class="{ pass: passwordConditions.lower }">
-                ✅ 소문자 포함
+              <li :class="checkClass(passwordConditions.upper)">
+                {{ getIcon(passwordConditions.upper) }} 대문자 포함
               </li>
-              <li :class="{ pass: passwordConditions.digit }">✅ 숫자 포함</li>
-              <li :class="{ pass: passwordConditions.special }">
-                ✅ 특수문자 포함
+              <li :class="checkClass(passwordConditions.lower)">
+                {{ getIcon(passwordConditions.lower) }} 소문자 포함
+              </li>
+              <li :class="checkClass(passwordConditions.digit)">
+                {{ getIcon(passwordConditions.digit) }} 숫자 포함
+              </li>
+              <li :class="checkClass(passwordConditions.special)">
+                {{ getIcon(passwordConditions.special) }} 특수문자 포함
               </li>
             </ul>
           </div>
@@ -203,8 +210,8 @@ onMounted(async () => {
     await userStore.fetchUserInfo();
     form.value.name = userStore.name || "";
     form.value.id = userStore.id || "";
-    form.value.password = userStore.password || "";
-    form.value.passwordConfirm = userStore.password || "";
+    form.value.password = "";
+    form.value.passwordConfirm = "";
     const [p1, p2, p3] = (userStore.phone || "").split("-");
     form.value.phone1 = p1 || "";
     form.value.phone2 = p2 || "";
@@ -234,10 +241,19 @@ async function handleSubmit() {
     alert("올바른 휴대전화 번호를 입력해주세요.");
     return;
   }
+  // 👉 비밀번호 미입력 체크
+  if (!form.value.password || !form.value.passwordConfirm) {
+    alert("비밀번호를 입력해주세요.");
+    return;
+  }
+
+  // 👉 형식 검사
   if (!passwordValid.value) {
     alert("비밀번호 형식을 확인해주세요.");
     return;
   }
+
+  // 👉 일치 여부 확인
   if (form.value.password !== form.value.passwordConfirm) {
     alert("비밀번호가 일치하지 않습니다.");
     return;
@@ -299,6 +315,13 @@ function validatePassword(password) {
   // 최종 유효 여부
   passwordValid.value = Object.values(passwordConditions.value).every((v) => v);
 }
+function checkClass(valid) {
+  return valid ? "pass" : "fail";
+}
+
+function getIcon(valid) {
+  return valid ? "✅" : "❌";
+}
 </script>
 
 <style scoped>
@@ -331,6 +354,10 @@ function validatePassword(password) {
 }
 .password-checklist li.pass {
   color: green;
+  font-weight: bold;
+}
+.password-checklist li {
+  margin-bottom: 0.2rem;
   font-weight: bold;
 }
 </style>

@@ -3152,10 +3152,10 @@
   ],
   "user": [
     {
-      "name": "김김나나",
+      "name": "제임스",
       "password": "addfD3!sdf",
       "tel": "010-2443-5678",
-      "imgpath": "http://localhost:5173/image/profile4.png",
+      "imgpath": "http://localhost:5173/image/profile1.png",
       "id": "test"
     }
   ]
