@@ -139,7 +139,7 @@ const iconClass = computed(() => {
 }
 
 .text {
-  flex: 1;
+  flex: 2;
   width: 50%;
 }
 
