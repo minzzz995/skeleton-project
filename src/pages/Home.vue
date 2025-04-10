@@ -70,7 +70,7 @@
                   'text-danger': item.type === 'expense',
                 }"
               >
-                {{ item.type === "income" ? "+" : "-" }}
+                {{ item.type === 'income' ? '+' : '-' }}
                 {{ parseInt(item.amount).toLocaleString() }}
               </td>
               <td>{{ item.category }}</td>
@@ -108,12 +108,12 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
-import BarChart from "@/components/Home_BarChart.vue";
-import TransactionModal from "@/components/Transaction/TransactionModal.vue";
-import { formatDate } from "@/utils/formatDate";
-import { useTransactionStore } from "@/store/transactionStore";
+import { onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import BarChart from '@/components/Home_BarChart.vue';
+import TransactionModal from '@/components/Transaction/TransactionModal.vue';
+import { formatDate } from '@/utils/formatDate';
+import { useTransactionStore } from '@/store/transactionStore';
 
 const router = useRouter();
 const store = useTransactionStore();
@@ -126,7 +126,7 @@ const monthlySummary = computed(() => store.monthlySummary);
 const latestTransactions = computed(() => store.latestFive);
 
 const goToTransactions = () => {
-  router.push("/transaction");
+  router.push('/transaction');
 };
 </script>
 
@@ -137,5 +137,9 @@ const goToTransactions = () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  word-break: keep-all; /* 단어 중간에 끊지 않도록 하기 */
+  white-space: normal; /* 줄바꿈 허용하기 */
+  overflow-wrap: break-word; /* 너무 긴 숫자나 텍스트는 줄바꿈 허용하기 */
+  text-align: center; /* 가운데 정렬 유지 */
 }
 </style>
