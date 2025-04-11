@@ -462,7 +462,7 @@ function scrollToTop() {
   right: 20px;
   z-index: 999;
   background-color: #b3e5fc;
-  color: white;
+  color: black;
   border: none;
   padding: 10px 16px;
   border-radius: 50%;
@@ -472,6 +472,6 @@ function scrollToTop() {
 }
 .scroll-top-btn:hover {
   background-color: #8cdbff;
-  color: #000;
+  color: white;
 }
 </style>
