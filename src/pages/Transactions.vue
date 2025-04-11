@@ -3,8 +3,8 @@
     <!-- 날짜 및 필터 -->
     <div class="filter-bar font-hakgyo">
       <div class="day-title">
-        {{ dayjs(dateRange[0]).format('YYYY.MM.DD') }} ~
-        {{ dayjs(dateRange[1]).format('YYYY.MM.DD') }} / 총
+        {{ dayjs(dateRange[0]).format("YYYY.MM.DD") }} ~
+        {{ dayjs(dateRange[1]).format("YYYY.MM.DD") }} / 총
         {{ transactionStore.filteredBudgets.length }}건
       </div>
       <div class="filters">
@@ -132,22 +132,22 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, nextTick } from 'vue';
-import dayjs from 'dayjs';
-import * as bootstrap from 'bootstrap';
-import { useTransactionStore } from '@/store/transactionStore';
-import { useCategoryStore } from '@/store/categoryStore';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import TransactionList from '@/components/Transaction/TransactionList.vue';
-import TransactionModal from '@/components/Transaction/TransactionModal.vue';
-import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
-import CategoryFilterModal from '@/components/Transaction/CategoryFilterModal.vue';
+import { ref, computed, onMounted, nextTick } from "vue";
+import dayjs from "dayjs";
+import * as bootstrap from "bootstrap";
+import { useTransactionStore } from "@/store/transactionStore";
+import { useCategoryStore } from "@/store/categoryStore";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import TransactionList from "@/components/Transaction/TransactionList.vue";
+import TransactionModal from "@/components/Transaction/TransactionModal.vue";
+import TransactionEditModal from "@/components/Transaction/TransactionEditModal.vue";
+import CategoryFilterModal from "@/components/Transaction/CategoryFilterModal.vue";
 
 const transactionStore = useTransactionStore();
 const categoryStore = useCategoryStore();
 const dateRange = ref([
-  dayjs().startOf('month').toDate(),
-  dayjs().endOf('month').toDate(),
+  dayjs().startOf("month").toDate(),
+  dayjs().endOf("month").toDate(),
 ]);
 
 const modalVisible = ref(false);
@@ -160,7 +160,7 @@ const itemsPerLoad = 10;
 const sortedSelectedCategories = computed(() => {
   return [...selectedCategories.value].sort((a, b) => {
     if (a.type === b.type) return 0;
-    return a.type === 'income' ? -1 : 1;
+    return a.type === "income" ? -1 : 1;
   });
 });
 
@@ -196,8 +196,8 @@ onMounted(async () => {
 function applyFilters() {
   const [start, end] = dateRange.value;
   if (!start || !end) return;
-  const startDay = dayjs(start).startOf('day').format('YYYY-MM-DD');
-  const endDay = dayjs(end).endOf('day').format('YYYY-MM-DD');
+  const startDay = dayjs(start).startOf("day").format("YYYY-MM-DD");
+  const endDay = dayjs(end).endOf("day").format("YYYY-MM-DD");
   transactionStore.setDateRange(startDay, endDay);
   transactionStore.setCategoryFilter([...selectedCategories.value]);
   loadCount.value = 1;
@@ -210,19 +210,21 @@ function openAddModal() {
 
 function openEditModal(budget) {
   selectedBudget.value = budget;
+  const modal = new bootstrap.Modal(document.getElementById("modifyModal"));
+  modal.show();
   modalVisible.value = true;
 }
 
 async function deleteBudget(id) {
-  const confirmed = window.confirm('삭제하시겠습니까?');
+  const confirmed = window.confirm("삭제하시겠습니까?");
   if (!confirmed) return;
   await transactionStore.deleteBudget(id);
 }
 
 function moveMonth(offset) {
   const currentStart = dayjs(dateRange.value[0]);
-  const newStart = currentStart.add(offset, 'month').startOf('month');
-  const newEnd = newStart.endOf('month');
+  const newStart = currentStart.add(offset, "month").startOf("month");
+  const newEnd = newStart.endOf("month");
   dateRange.value = [newStart.toDate(), newEnd.toDate()];
   applyFilters();
 }
@@ -247,7 +249,7 @@ function removeCategory(category) {
 }
 
 function format(value) {
-  return parseInt(value).toLocaleString() + '원';
+  return parseInt(value).toLocaleString() + "원";
 }
 
 async function loadMore() {
@@ -258,7 +260,7 @@ async function loadMore() {
 }
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 </script>
 
@@ -277,7 +279,7 @@ function scrollToTop() {
 
 .transaction-page {
   padding: 20px;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   background-color: #fff;
 }
 
