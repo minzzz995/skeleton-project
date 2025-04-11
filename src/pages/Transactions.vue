@@ -165,7 +165,12 @@ const sortedSelectedCategories = computed(() => {
 });
 
 const groupedBudgets = computed(() => transactionStore.groupByDate);
-const allDates = computed(() => Object.keys(groupedBudgets.value));
+const allDates = computed(() => {
+  return Object.keys(groupedBudgets.value).sort(
+    (a, b) => dayjs(b).diff(dayjs(a)) 
+  );
+});
+
 const visibleGroupedBudgets = computed(() => {
   const shownDates = allDates.value.slice(
     0,
