@@ -111,7 +111,7 @@ export const useTransactionStore = defineStore('transaction', {
       const grouped = {};
       const data = state.filteredBudgets;
       data.forEach((t) => {
-        const key = dayjs(t.date).format('MM/DD');
+        const key = dayjs(t.date).format('YYYY/MM/DD');
         if (!grouped[key]) grouped[key] = [];
         grouped[key].push(t);
       });
