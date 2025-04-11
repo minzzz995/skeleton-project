@@ -66,15 +66,17 @@
     </div>
 
     <!-- 하단 프로필 -->
-    <div class="d-flex align-items-center p-3 font-hakgyo">
-      <img
-        :src="userStore.profileImage || '/assets/profile_default.png'"
-        alt="프로필"
-        class="rounded-circle"
-        style="width: 40px; height: 40px; object-fit: cover"
-      />
-      <div class="ms-2">{{ userStore.name || 'Guest' }}</div>
-    </div>
+    <router-link to="/profile" class="text-decoration-none text-dark">
+      <div class="d-flex align-items-center p-3 font-hakgyo">
+        <img
+          :src="userStore.profileImage || '/assets/profile_default.png'"
+          alt="프로필"
+          class="rounded-circle"
+          style="width: 40px; height: 40px; object-fit: cover"
+        />
+        <div class="ms-2">{{ userStore.name || 'Guest' }}</div>
+      </div>
+    </router-link>
   </div>
 </template>
 

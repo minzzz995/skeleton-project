@@ -1,6 +1,6 @@
 <script setup>
-import { defineProps, defineEmits, computed } from "vue";
-import dayjs from "dayjs";
+import { defineProps, defineEmits, computed } from 'vue';
+import dayjs from 'dayjs';
 
 const props = defineProps({
   transactions: {
@@ -9,11 +9,11 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["edit", "delete"]);
+const emit = defineEmits(['edit', 'delete']);
 
 const transactionsWithTotal = computed(() => {
   return Object.entries(props.transactions)
-    .sort(([a], [b]) => (dayjs(a, "MM/DD").isAfter(dayjs(b, "MM/DD")) ? 1 : -1))
+    .sort(([a], [b]) => (dayjs(a, 'MM/DD').isAfter(dayjs(b, 'MM/DD')) ? 1 : -1))
     .map(([date, list]) => {
       const sorted = [...list].sort((a, b) => {
         const timeA = dayjs(a.date);
@@ -27,7 +27,7 @@ const transactionsWithTotal = computed(() => {
 
       const total = sorted.reduce((sum, t) => {
         const amt = parseInt(t.amount);
-        return t.type === "income" ? sum + amt : sum - amt;
+        return t.type === 'income' ? sum + amt : sum - amt;
       }, 0);
 
       return {
@@ -39,12 +39,12 @@ const transactionsWithTotal = computed(() => {
 });
 
 function format(value) {
-  return parseInt(value).toLocaleString() + "원";
+  return parseInt(value).toLocaleString() + '원';
 }
 
 function getWeekday(dateStr) {
-  const day = dayjs(dateStr, "MM/DD").day();
-  const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+  const day = dayjs(dateStr, 'YYYY/MM/DD').day();
+  const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
   return weekdays[day];
 }
 </script>
@@ -69,7 +69,7 @@ function getWeekday(dateStr) {
           :key="item.id"
         >
           <span class="type" :class="item.type">
-            {{ item.type == "income" ? "수입" : "지출" }}
+            {{ item.type == 'income' ? '수입' : '지출' }}
           </span>
           <span class="category">{{ item.category }}</span>
           <span class="detail">{{ item.detailcategory }}</span>
