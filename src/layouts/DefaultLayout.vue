@@ -37,7 +37,6 @@ import SideBar from '@/components/Sidebar.vue';
 
 .main-content-wrapper {
   min-height: 100vh;
-  overflow-y: auto;
   padding-left: 0;
   padding-top: 40px;
 }

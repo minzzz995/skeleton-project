@@ -7,9 +7,7 @@
         {{ dayjs(dateRange[1]).format('YYYY.MM.DD') }} / 총
         {{ transactionStore.filteredBudgets.length }}건
       </div>
-
       <div class="filters">
-        <!-- ✅ 날짜 선택 -->
         <div class="custom-date-container">
           <button @click="moveMonth(-1)" class="arrow-btn">
             <i class="fa fa-chevron-left"></i>
@@ -28,8 +26,6 @@
             <i class="fa fa-chevron-right"></i>
           </button>
         </div>
-
-        <!-- ✅ 카테고리 필터 -->
         <div class="category-filter">
           <button class="btn btn-blue" @click="openCategoryModal">
             카테고리 선택
@@ -38,7 +34,7 @@
       </div>
     </div>
 
-    <!-- ✅ 선택된 카테고리 뱃지 -->
+    <!-- 선택된 카테고리 뱃지 -->
     <div class="category-box font-hakgyo" v-if="selectedCategories.length">
       <div class="category-badge-wrapper">
         <span
@@ -50,6 +46,9 @@
           ]"
         >
           {{ category.name }}
+          <button class="remove-btn" @click="removeCategory(category)">
+            x
+          </button>
         </span>
       </div>
     </div>
@@ -71,11 +70,25 @@
     </div>
 
     <!-- 거래 리스트 -->
-    <TransactionList
-      :transactions="groupedBudgets"
-      @edit="openEditModal"
-      @delete="deleteBudget"
-    />
+    <transition-group name="fade-slide" tag="div">
+      <TransactionList
+        :transactions="visibleGroupedBudgets"
+        @edit="openEditModal"
+        @delete="deleteBudget"
+      />
+    </transition-group>
+
+    <!-- 더보기 버튼 -->
+    <div v-if="hasMore" class="text-center mt-4">
+      <button class="load-more-btn" @click="loadMore">
+        <i class="fa-regular fa-circle-down"></i> 더보기
+      </button>
+    </div>
+
+    <!-- 스크롤 최상단 이동 버튼 -->
+    <button class="scroll-top-btn" @click="scrollToTop">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
     <!-- 거래 추가 버튼 -->
     <button
@@ -119,24 +132,19 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import dayjs from 'dayjs';
 import * as bootstrap from 'bootstrap';
-
 import { useTransactionStore } from '@/store/transactionStore';
 import { useCategoryStore } from '@/store/categoryStore';
-
 import VueDatePicker from '@vuepic/vue-datepicker';
 import TransactionList from '@/components/Transaction/TransactionList.vue';
 import TransactionModal from '@/components/Transaction/TransactionModal.vue';
 import TransactionEditModal from '@/components/Transaction/TransactionEditModal.vue';
 import CategoryFilterModal from '@/components/Transaction/CategoryFilterModal.vue';
 
-// 스토어
 const transactionStore = useTransactionStore();
 const categoryStore = useCategoryStore();
-
-// 날짜 필터 초기값
 const dateRange = ref([
   dayjs().startOf('month').toDate(),
   dayjs().endOf('month').toDate(),
@@ -146,10 +154,9 @@ const modalVisible = ref(false);
 const selectedBudget = ref(null);
 const selectedCategories = ref([]);
 const categoryModalVisible = ref(false);
+const loadCount = ref(1);
+const itemsPerLoad = 10;
 
-// 계산된 값
-const groupedBudgets = computed(() => transactionStore.groupByDate);
-const summary = computed(() => transactionStore.summary);
 const sortedSelectedCategories = computed(() => {
   return [...selectedCategories.value].sort((a, b) => {
     if (a.type === b.type) return 0;
@@ -157,19 +164,40 @@ const sortedSelectedCategories = computed(() => {
   });
 });
 
-const selectedCategoryLabel = computed(() =>
-  selectedCategories.value.map((c) => c.name).join(' | ')
-);
+const groupedBudgets = computed(() => transactionStore.groupByDate);
+const allDates = computed(() => Object.keys(groupedBudgets.value));
+const visibleGroupedBudgets = computed(() => {
+  const shownDates = allDates.value.slice(
+    0,
+    10 + (loadCount.value - 1) * itemsPerLoad
+  );
+  const result = {};
+  shownDates.forEach((date) => {
+    result[date] = groupedBudgets.value[date];
+  });
+  return result;
+});
+const summary = computed(() => transactionStore.summary);
+const hasMore = computed(() => {
+  return 10 + (loadCount.value - 1) * itemsPerLoad < allDates.value.length;
+});
 
-// 초기 데이터 로딩
 onMounted(async () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   await transactionStore.fetchBudgets();
   await categoryStore.fetchCategories();
   applyFilters();
 });
 
-// 메서드 정의
+function applyFilters() {
+  const [start, end] = dateRange.value;
+  if (!start || !end) return;
+  const startDay = dayjs(start).startOf('day').format('YYYY-MM-DD');
+  const endDay = dayjs(end).endOf('day').format('YYYY-MM-DD');
+  transactionStore.setDateRange(startDay, endDay);
+  transactionStore.setCategoryFilter([...selectedCategories.value]);
+  loadCount.value = 1;
+}
+
 function openAddModal() {
   selectedBudget.value = null;
   modalVisible.value = true;
@@ -177,8 +205,6 @@ function openAddModal() {
 
 function openEditModal(budget) {
   selectedBudget.value = budget;
-  const modal = new bootstrap.Modal(document.getElementById('modifyModal'));
-  modal.show();
   modalVisible.value = true;
 }
 
@@ -196,21 +222,6 @@ function moveMonth(offset) {
   applyFilters();
 }
 
-function applyFilters() {
-  const [start, end] = dateRange.value;
-  if (!start || !end) return;
-
-  const startDay = dayjs(start).startOf('day').format('YYYY-MM-DD');
-  const endDay = dayjs(end).endOf('day').format('YYYY-MM-DD');
-
-  transactionStore.setDateRange(startDay, endDay);
-  transactionStore.setCategoryFilter([...selectedCategories.value]);
-}
-
-function format(value) {
-  return parseInt(value).toLocaleString() + '원';
-}
-
 function openCategoryModal() {
   categoryModalVisible.value = true;
 }
@@ -219,6 +230,30 @@ function onCategorySelected(categories) {
   selectedCategories.value = categories;
   categoryModalVisible.value = false;
   transactionStore.setCategoryFilter(categories);
+  loadCount.value = 1;
+}
+
+function removeCategory(category) {
+  selectedCategories.value = selectedCategories.value.filter(
+    (c) => !(c.name === category.name && c.type === category.type)
+  );
+  transactionStore.setCategoryFilter([...selectedCategories.value]);
+  loadCount.value = 1;
+}
+
+function format(value) {
+  return parseInt(value).toLocaleString() + '원';
+}
+
+async function loadMore() {
+  const scrollY = window.scrollY;
+  loadCount.value++;
+  await nextTick();
+  window.scrollTo({ top: scrollY });
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 
@@ -257,12 +292,10 @@ function onCategorySelected(categories) {
   margin-bottom: 16px;
 }
 
-/* 작은 화면 */
 @media (min-width: 640px) {
   .day-title {
     font-size: 22px;
   }
-
   .filters {
     flex-direction: row;
     justify-content: center;
@@ -336,13 +369,11 @@ function onCategorySelected(categories) {
   font-size: 18px;
 }
 
-/* 모바일(640px 이하)에서 summary를 세로 정렬 */
 @media (max-width: 640px) {
   .summary {
     flex-direction: column;
     align-items: center;
   }
-
   .summary-box {
     width: 100%;
     max-width: 360px;
@@ -384,5 +415,63 @@ function onCategorySelected(categories) {
   background-color: #fff1f0;
   color: #d4380d;
   border-color: #ffa39e;
+}
+.remove-btn {
+  margin-left: 6px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+}
+.remove-btn:hover {
+  color: #ff4d4f;
+}
+
+.load-more-btn {
+  background-color: #b3e5fc;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 15px;
+  border-radius: 24px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.load-more-btn:hover {
+  background-color: #8cdbff;
+  color: #000;
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.5s ease;
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-slide-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-top-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 999;
+  background-color: #b3e5fc;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 50%;
+  font-size: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+}
+.scroll-top-btn:hover {
+  background-color: #8cdbff;
+  color: #000;
 }
 </style>
