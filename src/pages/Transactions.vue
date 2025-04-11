@@ -80,7 +80,7 @@
 
     <!-- 더보기 버튼 -->
     <div v-if="hasMore" class="text-center mt-4">
-      <button class="load-more-btn" @click="loadMore">
+      <button class="load-more-btn font-hakgyo" @click="loadMore">
         <i class="fa-regular fa-circle-down"></i> 더보기
       </button>
     </div>
