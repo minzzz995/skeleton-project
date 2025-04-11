@@ -431,7 +431,7 @@ function scrollToTop() {
 
 .load-more-btn {
   background-color: #b3e5fc;
-  color: white;
+  color: black;
   border: none;
   padding: 10px 24px;
   font-size: 15px;
@@ -441,7 +441,7 @@ function scrollToTop() {
 }
 .load-more-btn:hover {
   background-color: #8cdbff;
-  color: #000;
+  color: white;
 }
 
 .fade-slide-enter-active,
